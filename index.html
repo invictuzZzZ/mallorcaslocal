@@ -258,6 +258,9 @@ html[dir="rtl"] .cat-inner{flex-direction:row-reverse}html[dir="rtl"] .trust{fle
 
 <script>
 const WA='34644075065';
+const BCM_TICKET_URL='https://top-3-prs-brand.sumupstore.com/product/bcm-pre-sale-ticket';
+const BOAT_PARTY_URL='https://top-3-prs-brand.sumupstore.com/product/sunset-heatwave-boat-party-deposit';
+
 let lang='es',cat='all',cart=[];
 const LANGS=['es','en','de','fr','it','ar','ru'];
 const RTL_LANGS=['ar'];
@@ -384,13 +387,23 @@ function renderCatBtns(){
 function renderFeatured(){
   document.getElementById('featScroll').innerHTML=V.filter(v=>v.feat).map(v=>{
     let href,tgt='target="_blank" rel="noopener"';
-    if(v.jetski){href='javascript:openJetSki()';tgt=''}
-    else if(v.bcm){href='https://top-3-prs-brand.sumupstore.com/product/bcm-pre-sale-ticket-with-re-entry'}
-    else{href=waLink(v)}
+    if(v.jetski){
+      href='javascript:openJetSki()';tgt=''
+    }
+    else if(v.bcm){
+      href=BCM_TICKET_URL
+    }
+    else if(v.id==='boat-party'){
+      href=BOAT_PARTY_URL
+    }
+    else{
+      href=waLink(v)
+    }
     return`<a class="feat-card" href="${href}" ${tgt}>
       <img src="${v.img}" alt="${loc(v.name)}" loading="lazy"><span class="feat-price">${loc(v.price)}</span>
       <div class="feat-info"><span class="feat-tag">${loc(v.bTxt)}</span><h3>${loc(v.name)}</h3><p>${loc(v.desc)}</p></div>
-    </a>`}).join('');
+    </a>`
+  }).join('');
 }
 
 function renderVenues(){
@@ -399,7 +412,9 @@ function renderVenues(){
   g.innerHTML=list.map((v,i)=>{
     let actions;
     if(v.bcm){
-      actions=`<a class="v-wa" href="https://top-3-prs-brand.sumupstore.com/product/bcm-pre-sale-ticket-with-re-entry" target="_blank" rel="noopener">${t('bcm_buy')}</a><a class="v-map" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola, consulta sobre BCM VIP / mesas')}" target="_blank" rel="noopener" title="VIP">VIP</a>`;
+      actions=`<a class="v-wa" href="${BCM_TICKET_URL}" target="_blank" rel="noopener">${t('bcm_buy')}</a><a class="v-map" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola, consulta sobre BCM VIP / mesas')}" target="_blank" rel="noopener" title="VIP">VIP</a>`;
+    }else if(v.id==='boat-party'){
+      actions=`<a class="v-wa" href="${BOAT_PARTY_URL}" target="_blank" rel="noopener">${t('bcm_buy')}</a>`;
     }else if(v.jetski){
       actions=`<a class="v-wa" href="javascript:openJetSki()">${t('book')}</a>`;
     }else{
@@ -410,7 +425,8 @@ function renderVenues(){
       <div class="v-body"><div class="v-top"><h3>${loc(v.name)}</h3><span class="v-pr">${loc(v.price)}</span></div>
       <div class="v-tags">${(loc(v.tags)||[]).map(t=>`<span class="v-tag">${t}</span>`).join('')}</div>
       <p class="v-desc">${loc(v.desc)}</p>
-      <div class="v-acts">${actions}</div></div></div>`}).join('');
+      <div class="v-acts">${actions}</div></div></div>`
+  }).join('');
   requestAnimationFrame(()=>{g.querySelectorAll('.rv').forEach((el,i)=>{setTimeout(()=>el.classList.add('vis'),i*25)})});
 }
 
@@ -422,19 +438,19 @@ function renderCollections(){
     </a>`).join('');
 }
 
-function renderPricing(){document.getElementById('pricingGrid').innerHTML=pricingData.map(p=>`<div class="p-card"><h4>${loc(p.title)}</h4><div class="p-sub">${loc(p.sub)}</div>${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}<div class="p-note">${loc(p.note)}</div></div>`).join('')}
+function renderPricing(){
+  document.getElementById('pricingGrid').innerHTML=pricingData.map(p=>`<div class="p-card"><h4>${loc(p.title)}</h4><div class="p-sub">${loc(p.sub)}</div>${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}<div class="p-note">${loc(p.note)}</div></div>`).join('')
+}
 function renderPartners(){document.getElementById('partnerRow').innerHTML=partners.map(p=>`<div class="p-logo" title="${p.n}"><img src="${p.img}" alt="${p.n}"></div>`).join('')}
 
 function populateSelect(){
-  document.getElementById('fA').innerHTML=V.filter(v=>!v.jetski&&!v.bcm).map(v=>`<option value="${v.id}">${loc(v.name)} — ${loc(v.price)}</option>`).join('');
+  document.getElementById('fA').innerHTML=V.filter(v=>!v.jetski).map(v=>`<option value="${v.id}">${loc(v.name)} — ${loc(v.price)}</option>`).join('');
   renderCheckboxes();
 }
 
 function renderCheckboxes(){
-  // Exclude BCM and Jet Ski from checkboxes, add individual Jet Ski tours instead
-  const items=V.filter(v=>!v.jetski&&!v.bcm);
+  const items=V.filter(v=>!v.jetski);
   let html=items.map(v=>`<div class="cb-item${cart.includes(v.id)?' sel':''}" onclick="toggleCb('${v.id}')"><span class="cb-ck">✓</span><span class="cb-lb">${loc(v.name)}<small>${loc(v.price)}</small></span></div>`).join('');
-  // Add Jet Ski tours individually
   html+=jetSkiTours.map(tr=>`<div class="cb-item${cart.includes('js-'+tr.id)?' sel':''}" onclick="toggleCb('js-${tr.id}')"><span class="cb-ck">✓</span><span class="cb-lb">${tr.name}<small>${tr.price} €  ·  ${tr.dur}</small></span></div>`).join('');
   document.getElementById('cbGrid').innerHTML=html;
   updateTotal();
@@ -445,8 +461,22 @@ function updateTotal(){
   if(!cart.length){el.style.display='none';return}el.style.display='flex';
   let sum=0,tbc=false;
   cart.forEach(vid=>{
-    if(vid.startsWith('js-')){const tr=jetSkiTours.find(t=>t.id===vid.slice(3));if(tr)sum+=tr.price}
-    else{const v=V.find(x=>x.id===vid);if(v){const n=parsePrice(v.price);if(n>0)sum+=n;else tbc=true}}
+    if(vid.startsWith('js-')){
+      const tr=jetSkiTours.find(t=>t.id===vid.slice(3));
+      if(tr)sum+=tr.price;
+    }else{
+      const v=V.find(x=>x.id===vid);
+      if(v){
+        if(v.bcm){
+          sum+=35;
+        }else if(v.id==='boat-party'){
+          sum+=69;
+        }else{
+          const n=parsePrice(v.price);
+          if(n>0)sum+=n;else tbc=true;
+        }
+      }
+    }
   });
   amt.textContent=sum>0?(tbc?sum+' € +':sum+' €'):t('qf_tbc');
 }
@@ -481,33 +511,77 @@ function submitJetSki(){
 function openModal(vid){document.getElementById('bkModal').classList.add('show');if(vid)document.getElementById('fA').value=vid}
 function closeModal(id){document.getElementById(id||'bkModal').classList.remove('show')}
 function submitBooking(e){
-  e.preventDefault();const n=document.getElementById('fN').value,v=V.find(x=>x.id===document.getElementById('fA').value);if(!v)return;
-  // BCM should not be here but just in case
-  if(v.bcm){window.open('https://top-3-prs-brand.sumupstore.com/product/bcm-pre-sale-ticket-with-re-entry','_blank');closeModal('bkModal');return}
-  if(v.jetski){openJetSki();closeModal('bkModal');return}
+  e.preventDefault();
+  const n=document.getElementById('fN').value,v=V.find(x=>x.id===document.getElementById('fA').value);
+  if(!v)return;
+
+  if(v.bcm){
+    window.open(BCM_TICKET_URL,'_blank');
+    closeModal('bkModal');
+    return;
+  }
+  if(v.id==='boat-party'){
+    window.open(BOAT_PARTY_URL,'_blank');
+    closeModal('bkModal');
+    return;
+  }
+  if(v.jetski){
+    openJetSki();
+    closeModal('bkModal');
+    return;
+  }
+
   const d=document.getElementById('fD').value,p=document.getElementById('fP').value,notes=document.getElementById('fNo').value;
   if(!d){alert('Please select a date');return}
   let m=`RESERVA MallorcasLocal\n\nNombre: ${n}\nActividad: ${loc(v.name)}\nFecha: ${d}\nPersonas: ${p}`;
   if(notes)m+=`\nNotas: ${notes}`;m+='\n\nConfirmais disponibilidad?';
-  showToast(t('toast'));setTimeout(()=>{window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');closeModal('bkModal')},400);
+  showToast(t('toast'));
+  setTimeout(()=>{window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');closeModal('bkModal')},400);
 }
 
 /* === QUICK FORM === */
 function submitQuick(){
-  const n=document.getElementById('qN').value;if(!n||!cart.length)return;
+  const n=document.getElementById('qN').value;
+  if(!n||!cart.length)return;
   const d=document.getElementById('qD').value,p=document.getElementById('qP').value,notes=document.getElementById('qNo').value;
   if(!d){alert('Please select a date');return}
+
+  const directLinks=cart.filter(vid=>vid==='bcm'||vid==='boat-party');
+  if(directLinks.length===1 && cart.length===1){
+    window.open(directLinks[0]==='bcm'?BCM_TICKET_URL:BOAT_PARTY_URL,'_blank');
+    return;
+  }
+
   let items=cart.map(vid=>{
-    if(vid.startsWith('js-')){const tr=jetSkiTours.find(t=>t.id===vid.slice(3));return tr?`- Jet Ski: ${tr.name}`:''}
-    const v=V.find(x=>x.id===vid);return v?`- ${loc(v.name)}`:''
+    if(vid.startsWith('js-')){
+      const tr=jetSkiTours.find(t=>t.id===vid.slice(3));
+      return tr?`- Jet Ski: ${tr.name}`:'';
+    }
+    const v=V.find(x=>x.id===vid);
+    return v?`- ${loc(v.name)}`:'';
   }).filter(Boolean).join('\n');
+
   let sum=cart.reduce((a,vid)=>{
-    if(vid.startsWith('js-')){const tr=jetSkiTours.find(t=>t.id===vid.slice(3));return a+(tr?tr.price:0)}
-    const v=V.find(x=>x.id===vid);return a+(v?parsePrice(v.price):0)
+    if(vid.startsWith('js-')){
+      const tr=jetSkiTours.find(t=>t.id===vid.slice(3));
+      return a+(tr?tr.price:0);
+    }
+    const v=V.find(x=>x.id===vid);
+    if(!v)return a;
+    if(v.bcm)return a+35;
+    if(v.id==='boat-party')return a+69;
+    return a+parsePrice(v.price);
   },0);
+
   let m=`RESERVA MallorcasLocal\n\nNombre: ${n}\nFecha: ${d}\nPersonas: ${p}\n\nExperiencias:\n${items}\n\nTotal estimado: ${sum>0?sum+' euro':'A confirmar'}`;
-  if(notes)m+=`\nNotas: ${notes}`;m+='\n\nConfirmais disponibilidad?';
-  showToast(t('toast'));setTimeout(()=>window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank'),400);
+  if(notes)m+=`\nNotas: ${notes}`;
+  if(directLinks.length){
+    m+=`\n\nImportante:\n- BCM ticket: ${directLinks.includes('bcm')?'Sí':'No'}\n- Boat Party deposit: ${directLinks.includes('boat-party')?'Sí':'No'}`;
+  }
+  m+='\n\nConfirmais disponibilidad?';
+
+  showToast(t('toast'));
+  setTimeout(()=>window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank'),400);
 }
 
 function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
