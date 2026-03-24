@@ -172,16 +172,17 @@ body.lm .collection-card .col-overlay{background:linear-gradient(to top,rgba(0,0
 .qf-card .fi select option{background:var(--bg2)}
 .qf-card .fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 /* Cart items */
-.cart-area{margin:14px 0}
-.cart-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--golddim);border:1px solid rgba(201,169,110,.15);margin-bottom:6px;font-size:13px;font-weight:500;animation:cartIn .2s ease}
-@keyframes cartIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.cart-item .ci-name{flex:1;margin-right:8px}
-.cart-item .ci-price{color:var(--gold);font-weight:700;margin-right:10px;font-size:12px}
-.cart-item .ci-rm{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text2);cursor:pointer;transition:all var(--ease);border:none;flex-shrink:0}.cart-item .ci-rm:hover{background:rgba(255,255,255,.15);color:var(--text)}
-.cart-total{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line2);margin-top:8px;font-size:14px;font-weight:700}
+.cb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+@media(max-width:480px){.cb-grid{grid-template-columns:1fr}}
+.cb-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--line2);cursor:pointer;transition:all var(--ease);user-select:none}
+.cb-item:hover{border-color:var(--line3);background:rgba(255,255,255,.05)}
+.cb-item.selected{background:var(--golddim);border-color:rgba(201,169,110,.3)}
+.cb-check{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:transparent;transition:all var(--ease)}
+.cb-item.selected .cb-check{background:var(--gold);border-color:var(--gold);color:var(--btn-text)}
+.cb-label{flex:1;font-size:12px;font-weight:500;line-height:1.3}
+.cb-label small{display:block;font-size:10px;color:var(--text2);font-weight:400}
+.cart-total{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line2);margin-top:4px;font-size:14px;font-weight:700}
 .cart-total span:last-child{color:var(--gold)}
-.cart-empty{text-align:center;padding:16px 0;font-size:12.5px;color:var(--text3);font-style:italic}
-.add-btn{width:100%;padding:10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--text2);font-size:12.5px;font-weight:600;margin-top:4px;transition:all var(--ease);cursor:pointer}.add-btn:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:var(--gold)}
 .qf-submit{width:100%;padding:14px;border-radius:var(--r);margin-top:16px;background:var(--gold);color:var(--btn-text);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all var(--ease);border:none;cursor:pointer;font-family:var(--ff)}.qf-submit:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 20px var(--goldglow)}
 
 /* ═══ FOOTER ═══ */
@@ -270,9 +271,8 @@ body.lm .collection-card .col-overlay{background:linear-gradient(to top,rgba(0,0
   <p class="qf-sub" data-i18n="qf_s">Selecciona las experiencias que quieres, revisa el total y envía tu reserva</p>
   <div class="qf-card">
     <div class="fi"><label data-i18n="f_name">Nombre</label><input type="text" id="qN" required placeholder="Tu nombre"></div>
-    <div class="fi"><label data-i18n="qf_add">Añadir experiencia</label><select id="qSel"></select></div>
-    <button type="button" class="add-btn" id="addBtn" data-i18n="qf_addBtn">+ Añadir al plan</button>
-    <div class="cart-area" id="cartArea"><div class="cart-empty" id="cartEmpty" data-i18n="qf_empty">Aún no has seleccionado experiencias</div></div>
+    <div class="fi"><label data-i18n="qf_add">Selecciona experiencias</label></div>
+    <div class="cb-grid" id="cbGrid"></div>
     <div class="cart-total" id="cartTotal" style="display:none"><span data-i18n="qf_total">Total estimado</span><span id="totalAmt">0 €</span></div>
     <div class="fi-row" style="margin-top:14px">
       <div class="fi"><label data-i18n="f_date">Fecha</label><input type="date" id="qD" required></div>
@@ -307,7 +307,7 @@ let lang='es',cat='all',cart=[];
 
 const V=[
   {id:'jet-ski',cat:'water',feat:true,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert'},name:'Jet Ski Tour',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107976/5_d0638s.png',price:'159 €',tags:{es:['1h Tour','1–2 pers','Transfer incl.'],en:['1h Tour','1–2 pax','Transfer incl.'],de:['1h Tour','1–2 Pers','Transfer inkl.'],fr:['1h Tour','1–2 pers','Transfert incl.']},desc:{es:'Tour de 1h en moto de agua. Depósito online 40 €, resto en destino. Transporte incluido.',en:'1-hour jet ski tour. 40 € deposit online, rest on site. Transport included.',de:'1h Jetski-Tour. 40 € Anzahlung online, Rest vor Ort. Transfer inklusive.',fr:'Tour 1h jet ski. Acompte 40 €, reste sur place. Transport inclus.'},wa:{es:'Hola! Somos %n para Jet Ski Tour el %d. ¿Dispo?',en:'Hi! %n for Jet Ski on %d. Available?',de:'Hallo! %n für Jet Ski am %d. Verfügbar?',fr:'Bonjour! %n pour Jet Ski le %d. Dispo?'}},
-  {id:'boat-rental',cat:'water',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:{es:'Barco sin Licencia',en:'Boat Rental',de:'Boot ohne Lizenz',fr:'Bateau sans Permis'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300395/8_gf0yft.png',price:{es:'Desde 130 €',en:'From 130 €',de:'Ab 130 €',fr:'Dès 130 €'},tags:{es:['2–6h','Hasta 5 pax'],en:['2–6h','Up to 5 pax'],de:['2–6h','Bis 5 Pers'],fr:['2–6h','Max 5 pers']},desc:{es:'Barco en Santa Ponça. Gas y snorkel incluido. Depósito 200 €. De 130 € (2h) a 260 € (6h).',en:'Boat from Santa Ponça. Gas & snorkel included. Deposit 200 €.',de:'Boot ab Santa Ponça. Benzin & Schnorchel inkl. Anzahlung 200 €.',fr:'Bateau depuis Santa Ponça. Essence & tuba inclus. Dépôt 200 €.'},wa:{es:'Hola, barco sin licencia el %d para %n. ¿Opciones?',en:'Hi, boat on %d for %n. Options?',de:'Hallo, Boot am %d für %n. Optionen?',fr:'Bonjour, bateau le %d pour %n. Options?'}},
+  {id:'boat-rental',cat:'water',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:{es:'Barco sin Licencia',en:'Boat Rental',de:'Boot ohne Lizenz',fr:'Bateau sans Permis'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300395/8_gf0yft.png',price:{es:'Desde 130 €',en:'From 130 €',de:'Ab 130 €',fr:'Dès 130 €'},tags:{es:['2–6h','Hasta 5 pax'],en:['2–6h','Up to 5 pax'],de:['2–6h','Bis 5 Pers'],fr:['2–6h','Max 5 pers']},desc:{es:'Barco sin licencia desde Santa Ponça. Gasolina y snorkel incluido. Depósito 200 €. Recogida: Ramón de Moncada 20.',en:'No-license boat from Santa Ponça. Gas & snorkel included. Deposit 200 €. Pick-up: Ramón de Moncada 20.',de:'Boot ohne Lizenz ab Santa Ponça. Benzin & Schnorchel inkl. Anzahlung 200 €. Abholung: Ramón de Moncada 20.',fr:'Bateau sans permis depuis Santa Ponça. Essence & tuba inclus. Dépôt 200 €. Retrait: Ramón de Moncada 20.'},wa:{es:'Hola, barco sin licencia el %d para %n. ¿Opciones?',en:'Hi, boat on %d for %n. Options?',de:'Hallo, Boot am %d für %n. Optionen?',fr:'Bonjour, bateau le %d pour %n. Options?'}},
   {id:'boat-party',cat:'water',feat:true,badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct'},name:'Sunsets Heatwave Boat',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107981/6_iivrjt.png',price:'69 €',tags:{es:['3h','Todo incluido'],en:['3h','All-in'],de:['3h','All-in'],fr:['3h','Tout inclus']},desc:{es:'Barco doble cubierta: DJs, bongo, swim stop, paella, fruta. After party + camiseta + shots gratis.',en:'Double-tier boat: DJs, bongo, swim stop, paella, fruit. Free after party + tee + shots.',de:'Doppelstock-Boot: DJs, Bongo, Badestopp, Paella. Gratis After-Party + T-Shirt.',fr:'Bateau double pont: DJs, bongo, baignade, paella. After party gratuite + t-shirt.'},wa:{es:'Hola! Sunsets Heatwave Boat el %d para %n. ¿Plazas?',en:'Hi! Heatwave Boat on %d for %n. Spots?',de:'Hallo! Heatwave Boat am %d für %n. Plätze?',fr:'Bonjour! Heatwave Boat le %d pour %n. Places?'}},
   {id:'barbuda',cat:'beach',feat:true,badge:'season',bTxt:{es:'Mar–Oct',en:'Mar–Oct',de:'Mär–Okt',fr:'Mar–Oct'},name:'Barbuda Beach',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302220/Screenshot_2026-03-23_at_22.43.25_i6psxa.png',price:'40–55 €',tags:{es:['Brunch','All inclusive'],en:['Brunch','All inclusive'],de:['Brunch','All inclusive'],fr:['Brunch','All inclusive']},desc:{es:'Brunch frente al mar con cócteles, ambiente premium y estética beach club.',en:'Seaside brunch with cocktails, premium beach club vibes.',de:'Brunch am Meer, Cocktails, Premium Beach Club.',fr:'Brunch face à la mer, cocktails, esthétique beach club.'},wa:{es:'Hola, somos %n para Barbuda el %d. ¿Reserva?',en:'Hi, %n for Barbuda on %d. Book?',de:'Hallo, %n für Barbuda am %d. Buchen?',fr:'Bonjour, %n pour Barbuda le %d. Réserver?'}},
   {id:'folies',cat:'beach',feat:true,premium:true,badge:'premium',bTxt:{es:'Premium',en:'Premium',de:'Premium',fr:'Premium'},name:'Beach Club Folies',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/15_rvbkq8.png',price:'€€€',tags:{es:['Cala Llamp','Exclusivo'],en:['Cala Llamp','Exclusive'],de:['Cala Llamp','Exklusiv'],fr:['Cala Llamp','Exclusif']},desc:{es:'Camas balinesas en Cala Llamp, experiencia de lujo con vistas al atardecer.',en:'Balinese beds at Cala Llamp, luxury with sunset views.',de:'Balinesische Betten in Cala Llamp, Luxuserlebnis.',fr:'Lits balinais à Cala Llamp, luxe face au coucher de soleil.'},wa:{es:'Hola, cama balinesa para %n en Folies el %d. ¿Coste?',en:'Hi, bed for %n at Folies on %d. Cost?',de:'Hallo, Bett für %n bei Folies am %d. Kosten?',fr:'Bonjour, lit pour %n à Folies le %d. Coût?'},map:'https://share.google/I2xJ1y2yYdBkT66jL'},
@@ -342,15 +342,15 @@ const partners=[
 ];
 
 const pricingData=[
-  {title:{es:'Alquiler Barco',en:'Boat Rental',de:'Bootsvermietung',fr:'Location Bateau'},sub:{es:'Santa Ponça · Hasta 5 pers · Dep. 200 €',en:'Santa Ponça · Up to 5 pax · Dep. 200 €',de:'Santa Ponça · Bis 5 Pers · Anz. 200 €',fr:'Santa Ponça · Max 5 pers · Dép. 200 €'},rows:[['2h','130 €'],['3h','170 €'],['4h','200 €'],['5h','230 €'],['6h','260 €']],note:{es:'Incluye gasolina y snorkel · +34 664 224 340',en:'Includes gas & snorkel · +34 664 224 340',de:'Inkl. Benzin & Schnorchel · +34 664 224 340',fr:'Essence & tuba inclus · +34 664 224 340'}},
+  {title:{es:'Alquiler Barco (sin licencia)',en:'Boat Rental (no license)',de:'Bootsvermietung (ohne Lizenz)',fr:'Location Bateau (sans permis)'},sub:{es:'Ramón de Moncada 20, Santa Ponça · Max 5 pax · Dep. 200 €',en:'Ramón de Moncada 20, Santa Ponça · Max 5 pax · Dep. 200 €',de:'Ramón de Moncada 20, Santa Ponça · Max 5 Pers · Anz. 200 €',fr:'Ramón de Moncada 20, Santa Ponça · Max 5 pers · Dép. 200 €'},rows:[['2h','130 €'],['3h','170 €'],['4h','200 €'],['5h','230 €'],['6h','260 €']],note:{es:'Incluye gasolina, snorkel. Sin licencia requerida. Punto de recogida: Ramón de Moncada 20, Santa Ponça.',en:'Includes gas, snorkel. No license required. Pick-up: Ramón de Moncada 20, Santa Ponça.',de:'Inkl. Benzin, Schnorchel. Kein Schein nötig. Abholung: Ramón de Moncada 20, Santa Ponça.',fr:'Essence, tuba inclus. Sans permis. Point de retrait: Ramón de Moncada 20, Santa Ponça.'}},
   {title:{es:'Nightlife Magaluf',en:'Magaluf Nightlife',de:'Magaluf Nachtleben',fr:'Nightlife Magaluf'},sub:{es:'Por persona · +18',en:'Per person · +18',de:'Pro Person · +18',fr:'Par personne · +18'},rows:[['BCM','35 €'],['MCP (3 clubs)','30 €'],['Social Club','25 €'],['Red Lion','30–40 €'],['Gringos Bingos','35–45 €'],['Panama Jack','15–20 €']],note:{es:'BCM: dep. 10 € + 25 €, camiseta gratis, +10 € tras 00:00. MCP: dep. 20 € + 10 €, shot gratis <1 AM.',en:'BCM: 10 € dep. + 25 €, free tee, +10 € after midnight. MCP: 20 € dep. + 10 €, free shot <1 AM.',de:'BCM: 10 € Anz. + 25 €, Gratis-Shirt, +10 € nach 00. MCP: 20 € + 10 €, Gratis-Shot <1 Uhr.',fr:'BCM: 10 € ac. + 25 €, t-shirt offert, +10 € après minuit. MCP: 20 € + 10 €, shot <1h.'}}
 ];
 
 const i18n={
-  es:{h_badge:'Temporada 2025 – 2026',h_h1:'Reserva Mallorca<br>como un <em>local</em>',h_p:'Fiestas, excursiones, boat parties y los mejores locales de la isla. Sin intermediarios — reserva directo por WhatsApp y paga al llegar.',h_cta1:'Ver todos los planes',h_cta2:'Reservar ahora',h_scroll:'Scroll',t1:'Experiencias',t2:'Valoración',t3:'Respuesta WA',t4:'Comisiones',feat_t:'Lo más <em>reservado</em>',feat_s:'Las experiencias que más repiten nuestros clientes',c_all:'Todos',c_water:'Agua',c_beach:'Playa & Día',c_night:'Nightlife',c_food:'Food',grid_t:'Todos los <em>planes</em>',col_t:'Descubre la <em>isla</em>',col_s:'Selecciones curadas para vivir Mallorca como nadie te la ha enseñado',pr_t:'Precios <em>detallados</em>',pr_s:'Info transparente — sin sorpresas al llegar',part_t:'Colaboradores oficiales',foot:'Reserva directa sin comisiones',m_t:'Reserva <em>rápida</em>',m_s:'Rellena y te contactamos por WhatsApp en menos de 1 hora',f_name:'Nombre',f_act:'Actividad',f_date:'Fecha',f_pax:'Personas',f_notes:'Notas',f_send:'Enviar por WhatsApp →',book:'Reservar',toast:'Abriendo WhatsApp...',qf_t:'Monta tu <em>plan</em>',qf_s:'Selecciona las experiencias que quieres, revisa el total y envía tu reserva',qf_add:'Añadir experiencia',qf_addBtn:'+ Añadir al plan',qf_empty:'Aún no has seleccionado experiencias',qf_total:'Total estimado',qf_send:'Enviar reserva por WhatsApp',qf_tbc:'A confirmar'},
-  en:{h_badge:'2025 – 2026 Season',h_h1:'Book Mallorca<br>like a <em>local</em>',h_p:'Parties, excursions, boat trips and the best spots. No middlemen — book via WhatsApp, pay on arrival.',h_cta1:'See all plans',h_cta2:'Book now',h_scroll:'Scroll',t1:'Experiences',t2:'Rating',t3:'WA Response',t4:'Fees',feat_t:'Most <em>booked</em>',feat_s:'Experiences our clients book again and again',c_all:'All',c_water:'Water',c_beach:'Beach & Day',c_night:'Nightlife',c_food:'Food',grid_t:'All <em>plans</em>',col_t:'Discover the <em>island</em>',col_s:'Curated selections to experience Mallorca like no one has shown you',pr_t:'Detailed <em>pricing</em>',pr_s:'Transparent info — no surprises',part_t:'Official partners',foot:'Direct booking, no fees',m_t:'Quick <em>booking</em>',m_s:"Fill in and we'll contact you via WhatsApp within 1 hour",f_name:'Name',f_act:'Activity',f_date:'Date',f_pax:'Guests',f_notes:'Notes',f_send:'Send via WhatsApp →',book:'Book',toast:'Opening WhatsApp...',qf_t:'Build your <em>plan</em>',qf_s:'Select experiences, review the total and send your booking',qf_add:'Add experience',qf_addBtn:'+ Add to plan',qf_empty:'No experiences selected yet',qf_total:'Estimated total',qf_send:'Send booking via WhatsApp',qf_tbc:'TBC'},
-  de:{h_badge:'Saison 2025 – 2026',h_h1:'Buche Mallorca<br>wie ein <em>Local</em>',h_p:'Partys, Ausflüge, Bootstouren und die besten Spots. Ohne Vermittler — per WhatsApp, vor Ort zahlen.',h_cta1:'Alle Pläne',h_cta2:'Jetzt buchen',h_scroll:'Scroll',t1:'Erlebnisse',t2:'Bewertung',t3:'WA Antwort',t4:'Gebühren',feat_t:'Am meisten <em>gebucht</em>',feat_s:'Erlebnisse die unsere Kunden immer wieder buchen',c_all:'Alle',c_water:'Wasser',c_beach:'Strand & Tag',c_night:'Nightlife',c_food:'Essen',grid_t:'Alle <em>Pläne</em>',col_t:'Entdecke die <em>Insel</em>',col_s:'Kuratierte Auswahl für ein einzigartiges Mallorca-Erlebnis',pr_t:'Detaillierte <em>Preise</em>',pr_s:'Transparente Info',part_t:'Offizielle Partner',foot:'Direktbuchung ohne Gebühren',m_t:'Schnell<em>buchung</em>',m_s:'Ausfüllen — WhatsApp in <1h',f_name:'Name',f_act:'Aktivität',f_date:'Datum',f_pax:'Personen',f_notes:'Notizen',f_send:'Per WhatsApp →',book:'Buchen',toast:'WhatsApp öffnet...',qf_t:'Stelle deinen <em>Plan</em> zusammen',qf_s:'Erlebnisse wählen, Gesamtpreis prüfen, Buchung senden',qf_add:'Erlebnis hinzufügen',qf_addBtn:'+ Hinzufügen',qf_empty:'Noch keine Erlebnisse gewählt',qf_total:'Geschätzter Gesamtpreis',qf_send:'Buchung per WhatsApp senden',qf_tbc:'Auf Anfrage'},
-  fr:{h_badge:'Saison 2025 – 2026',h_h1:'Réservez Majorque<br>comme un <em>local</em>',h_p:"Fêtes, excursions, boat parties et les meilleurs spots. Sans intermédiaire — WhatsApp, payez sur place.",h_cta1:'Voir les plans',h_cta2:'Réserver',h_scroll:'Scroll',t1:'Expériences',t2:'Note',t3:'Réponse WA',t4:'Frais',feat_t:'Les plus <em>réservés</em>',feat_s:'Les expériences préférées de nos clients',c_all:'Tous',c_water:'Eau',c_beach:'Plage & Jour',c_night:'Nightlife',c_food:'Food',grid_t:'Tous les <em>plans</em>',col_t:'Découvrez l\'<em>île</em>',col_s:'Sélections curatées pour vivre Majorque comme personne',pr_t:'Prix <em>détaillés</em>',pr_s:'Info transparente',part_t:'Partenaires officiels',foot:'Réservation directe sans frais',m_t:'Réservation <em>rapide</em>',m_s:'Remplissez — WhatsApp sous 1h',f_name:'Nom',f_act:'Activité',f_date:'Date',f_pax:'Personnes',f_notes:'Notes',f_send:'Par WhatsApp →',book:'Réserver',toast:'WhatsApp...',qf_t:'Composez votre <em>plan</em>',qf_s:'Sélectionnez, vérifiez le total et envoyez votre réservation',qf_add:'Ajouter une expérience',qf_addBtn:'+ Ajouter au plan',qf_empty:'Aucune expérience sélectionnée',qf_total:'Total estimé',qf_send:'Envoyer par WhatsApp',qf_tbc:'À confirmer'}
+  es:{h_badge:'Temporada 2025 – 2026',h_h1:'Reserva Mallorca<br>como un <em>local</em>',h_p:'Fiestas, excursiones, boat parties y los mejores locales de la isla. Sin intermediarios — reserva directo por WhatsApp y paga al llegar.',h_cta1:'Ver todos los planes',h_cta2:'Reservar ahora',h_scroll:'Scroll',t1:'Experiencias',t2:'Valoración',t3:'Respuesta WA',t4:'Comisiones',feat_t:'Lo más <em>reservado</em>',feat_s:'Las experiencias que más repiten nuestros clientes',c_all:'Todos',c_water:'Agua',c_beach:'Playa & Día',c_night:'Nightlife',c_food:'Food',grid_t:'Todos los <em>planes</em>',col_t:'Descubre la <em>isla</em>',col_s:'Selecciones curadas para vivir Mallorca como nadie te la ha enseñado',pr_t:'Precios <em>detallados</em>',pr_s:'Info transparente — sin sorpresas al llegar',part_t:'Colaboradores oficiales',foot:'Reserva directa sin comisiones',m_t:'Reserva <em>rápida</em>',m_s:'Rellena y te contactamos por WhatsApp en menos de 1 hora',f_name:'Nombre',f_act:'Actividad',f_date:'Fecha',f_pax:'Personas',f_notes:'Notas',f_send:'Enviar por WhatsApp →',book:'Reservar',toast:'Abriendo WhatsApp...',qf_t:'Monta tu <em>plan</em>',qf_s:'Selecciona las experiencias que quieres, revisa el total y envía tu reserva',qf_add:'Selecciona experiencias',qf_addBtn:'+ Añadir al plan',qf_empty:'Aún no has seleccionado experiencias',qf_total:'Total estimado',qf_send:'Enviar reserva por WhatsApp',qf_tbc:'A confirmar'},
+  en:{h_badge:'2025 – 2026 Season',h_h1:'Book Mallorca<br>like a <em>local</em>',h_p:'Parties, excursions, boat trips and the best spots. No middlemen — book via WhatsApp, pay on arrival.',h_cta1:'See all plans',h_cta2:'Book now',h_scroll:'Scroll',t1:'Experiences',t2:'Rating',t3:'WA Response',t4:'Fees',feat_t:'Most <em>booked</em>',feat_s:'Experiences our clients book again and again',c_all:'All',c_water:'Water',c_beach:'Beach & Day',c_night:'Nightlife',c_food:'Food',grid_t:'All <em>plans</em>',col_t:'Discover the <em>island</em>',col_s:'Curated selections to experience Mallorca like no one has shown you',pr_t:'Detailed <em>pricing</em>',pr_s:'Transparent info — no surprises',part_t:'Official partners',foot:'Direct booking, no fees',m_t:'Quick <em>booking</em>',m_s:"Fill in and we'll contact you via WhatsApp within 1 hour",f_name:'Name',f_act:'Activity',f_date:'Date',f_pax:'Guests',f_notes:'Notes',f_send:'Send via WhatsApp →',book:'Book',toast:'Opening WhatsApp...',qf_t:'Build your <em>plan</em>',qf_s:'Select experiences, review the total and send your booking',qf_add:'Select experiences',qf_addBtn:'+ Add to plan',qf_empty:'No experiences selected yet',qf_total:'Estimated total',qf_send:'Send booking via WhatsApp',qf_tbc:'TBC'},
+  de:{h_badge:'Saison 2025 – 2026',h_h1:'Buche Mallorca<br>wie ein <em>Local</em>',h_p:'Partys, Ausflüge, Bootstouren und die besten Spots. Ohne Vermittler — per WhatsApp, vor Ort zahlen.',h_cta1:'Alle Pläne',h_cta2:'Jetzt buchen',h_scroll:'Scroll',t1:'Erlebnisse',t2:'Bewertung',t3:'WA Antwort',t4:'Gebühren',feat_t:'Am meisten <em>gebucht</em>',feat_s:'Erlebnisse die unsere Kunden immer wieder buchen',c_all:'Alle',c_water:'Wasser',c_beach:'Strand & Tag',c_night:'Nightlife',c_food:'Essen',grid_t:'Alle <em>Pläne</em>',col_t:'Entdecke die <em>Insel</em>',col_s:'Kuratierte Auswahl für ein einzigartiges Mallorca-Erlebnis',pr_t:'Detaillierte <em>Preise</em>',pr_s:'Transparente Info',part_t:'Offizielle Partner',foot:'Direktbuchung ohne Gebühren',m_t:'Schnell<em>buchung</em>',m_s:'Ausfüllen — WhatsApp in <1h',f_name:'Name',f_act:'Aktivität',f_date:'Datum',f_pax:'Personen',f_notes:'Notizen',f_send:'Per WhatsApp →',book:'Buchen',toast:'WhatsApp öffnet...',qf_t:'Stelle deinen <em>Plan</em> zusammen',qf_s:'Erlebnisse wählen, Gesamtpreis prüfen, Buchung senden',qf_add:'Erlebnisse auswählen',qf_addBtn:'+ Hinzufügen',qf_empty:'Noch keine Erlebnisse gewählt',qf_total:'Geschätzter Gesamtpreis',qf_send:'Buchung per WhatsApp senden',qf_tbc:'Auf Anfrage'},
+  fr:{h_badge:'Saison 2025 – 2026',h_h1:'Réservez Majorque<br>comme un <em>local</em>',h_p:"Fêtes, excursions, boat parties et les meilleurs spots. Sans intermédiaire — WhatsApp, payez sur place.",h_cta1:'Voir les plans',h_cta2:'Réserver',h_scroll:'Scroll',t1:'Expériences',t2:'Note',t3:'Réponse WA',t4:'Frais',feat_t:'Les plus <em>réservés</em>',feat_s:'Les expériences préférées de nos clients',c_all:'Tous',c_water:'Eau',c_beach:'Plage & Jour',c_night:'Nightlife',c_food:'Food',grid_t:'Tous les <em>plans</em>',col_t:'Découvrez l\'<em>île</em>',col_s:'Sélections curatées pour vivre Majorque comme personne',pr_t:'Prix <em>détaillés</em>',pr_s:'Info transparente',part_t:'Partenaires officiels',foot:'Réservation directe sans frais',m_t:'Réservation <em>rapide</em>',m_s:'Remplissez — WhatsApp sous 1h',f_name:'Nom',f_act:'Activité',f_date:'Date',f_pax:'Personnes',f_notes:'Notes',f_send:'Par WhatsApp →',book:'Réserver',toast:'WhatsApp...',qf_t:'Composez votre <em>plan</em>',qf_s:'Sélectionnez, vérifiez le total et envoyez votre réservation',qf_add:'Sélectionner des expériences',qf_addBtn:'+ Ajouter au plan',qf_empty:'Aucune expérience sélectionnée',qf_total:'Total estimé',qf_send:'Envoyer par WhatsApp',qf_tbc:'À confirmer'}
 };
 
 function t(k){return i18n[lang]?.[k]||i18n.es[k]||k}
@@ -393,7 +393,7 @@ function renderVenues(){
 
 function renderCollections(){
   document.getElementById('colGrid').innerHTML=collections.map(c=>`
-    <a class="collection-card rv" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Me interesa '+loc(c.name)+'. ¿Info?')}" target="_blank" rel="noopener">
+    <a class="collection-card" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Me interesa '+loc(c.name)+'. ¿Info?')}" target="_blank" rel="noopener">
       <img src="${c.img}" alt="${loc(c.name)}" loading="lazy">
       <div class="col-overlay"></div>
       <div class="col-info">
@@ -405,46 +405,44 @@ function renderCollections(){
     </a>`).join('');
 }
 
-function renderPricing(){document.getElementById('pricingGrid').innerHTML=pricingData.map(p=>`<div class="p-card rv"><h4>${loc(p.title)}</h4><div class="p-sub">${loc(p.sub)}</div>${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}<div class="p-note">${loc(p.note)}</div></div>`).join('')}
+function renderPricing(){document.getElementById('pricingGrid').innerHTML=pricingData.map(p=>`<div class="p-card"><h4>${loc(p.title)}</h4><div class="p-sub">${loc(p.sub)}</div>${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}<div class="p-note">${loc(p.note)}</div></div>`).join('')}
 
 function renderPartners(){document.getElementById('partnerRow').innerHTML=partners.map(p=>`<div class="p-logo" title="${p.n}"><img src="${p.img}" alt="${p.n}"></div>`).join('')}
 
 function populateSelect(){
   const opts=V.map(v=>`<option value="${v.id}">${loc(v.name)} — ${loc(v.price)}</option>`).join('');
   document.getElementById('fA').innerHTML=opts;
-  document.getElementById('qSel').innerHTML=opts;
+  renderCheckboxes();
+}
+
+function renderCheckboxes(){
+  const grid=document.getElementById('cbGrid');
+  grid.innerHTML=V.map(v=>{
+    const sel=cart.includes(v.id)?'selected':'';
+    return`<div class="cb-item ${sel}" data-vid="${v.id}" onclick="toggleCb('${v.id}')"><span class="cb-check">✓</span><span class="cb-label">${loc(v.name)}<small>${loc(v.price)}</small></span></div>`;
+  }).join('');
+  updateTotal();
+}
+
+function toggleCb(vid){
+  const idx=cart.indexOf(vid);
+  if(idx>-1)cart.splice(idx,1);else cart.push(vid);
+  renderCheckboxes();
+}
+
+function updateTotal(){
+  const totalEl=document.getElementById('cartTotal');
+  const amtEl=document.getElementById('totalAmt');
+  if(!cart.length){totalEl.style.display='none';return}
+  totalEl.style.display='flex';
+  let sum=0,hasTbc=false;
+  cart.forEach(vid=>{const v=V.find(x=>x.id===vid);if(v){const n=parsePrice(v.price);if(n>0)sum+=n;else hasTbc=true}});
+  amtEl.textContent=sum>0?(hasTbc?`${sum} € +`:sum+' €'):t('qf_tbc');
 }
 
 function applyI18n(){document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t(el.getAttribute('data-i18n'));if(v)el.innerHTML=v})}
 
-/* ═══ CART LOGIC ═══ */
-function addToCart(){
-  const sel=document.getElementById('qSel');
-  const vid=sel.value;
-  const v=V.find(x=>x.id===vid);if(!v)return;
-  cart.push({id:v.id,name:loc(v.name),price:loc(v.price),num:parsePrice(v.price)});
-  renderCart();
-}
-
-function removeFromCart(idx){cart.splice(idx,1);renderCart()}
-
-function renderCart(){
-  const area=document.getElementById('cartArea');
-  const totalEl=document.getElementById('cartTotal');
-  const amtEl=document.getElementById('totalAmt');
-  const emptyEl=document.getElementById('cartEmpty');
-  if(!cart.length){
-    area.innerHTML=`<div class="cart-empty" id="cartEmpty">${t('qf_empty')}</div>`;
-    totalEl.style.display='none';return;
-  }
-  let sum=0,hasTbc=false;
-  area.innerHTML=cart.map((c,i)=>{
-    if(c.num>0)sum+=c.num;else hasTbc=true;
-    return`<div class="cart-item"><span class="ci-name">${c.name}</span><span class="ci-price">${c.num>0?c.price:t('qf_tbc')}</span><button class="ci-rm" onclick="removeFromCart(${i})">✕</button></div>`;
-  }).join('');
-  totalEl.style.display='flex';
-  amtEl.textContent=sum>0?(hasTbc?`${sum} € +`:sum+' €'):t('qf_tbc');
-}
+/* ═══ SUBMIT LOGIC ═══ */
 
 function submitQuick(){
   const n=document.getElementById('qN').value;
@@ -452,8 +450,8 @@ function submitQuick(){
   const d=document.getElementById('qD').value;
   const p=document.getElementById('qP').value;
   const notes=document.getElementById('qNo').value;
-  let items=cart.map(c=>`  • ${c.name} (${c.price})`).join('\n');
-  let sum=cart.reduce((a,c)=>a+c.num,0);
+  let items=cart.map(vid=>{const v=V.find(x=>x.id===vid);return v?`  • ${loc(v.name)} (${loc(v.price)})`:''}).filter(Boolean).join('\n');
+  let sum=cart.reduce((a,vid)=>{const v=V.find(x=>x.id===vid);return a+(v?parsePrice(v.price):0)},0);
   let m=`*RESERVA MallorcasLocal*\n\nNombre: ${n}\nFecha: ${d}\nPersonas: ${p}\n\nExperiencias:\n${items}\n\nTotal estimado: ${sum>0?sum+' €':'A confirmar'}`;
   if(notes)m+=`\nNotas: ${notes}`;
   m+='\n\n¿Podéis confirmar disponibilidad?';
@@ -477,14 +475,13 @@ function openModal(vid){document.getElementById('bkModal').classList.add('show')
 function closeModal(){document.getElementById('bkModal').classList.remove('show')}
 function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
 
-function setLang(l){lang=l;document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));applyI18n();renderFeatured();renderVenues();renderCollections();renderPricing();populateSelect();renderCart()}
+function setLang(l){lang=l;document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));applyI18n();renderFeatured();renderVenues();renderCollections();renderPricing();populateSelect()}
 function setCat(c){cat=c;document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('on',b.dataset.cat===c));renderVenues()}
 
 document.querySelectorAll('.lb').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
 document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',()=>setCat(b.dataset.cat)));
 document.getElementById('bkModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 document.getElementById('themeBtn').addEventListener('click',()=>document.body.classList.toggle('lm'));
-document.getElementById('addBtn').addEventListener('click',addToCart);
 document.getElementById('qfSend').addEventListener('click',submitQuick);
 document.getElementById('fD').min=new Date().toISOString().split('T')[0];
 document.getElementById('qD').min=new Date().toISOString().split('T')[0];
