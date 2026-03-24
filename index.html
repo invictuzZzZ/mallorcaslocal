@@ -2,255 +2,452 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MallorcasLocal — Reserva Mallorca como un local</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300..700;1,300..700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
+/* ══════ DESIGN TOKENS ══════ */
 :root {
-  --bg:#030303; --bg1:#080808; --bg2:#0f0f0f;
-  --surface:rgba(255,255,255,0.02); --card:rgba(15,15,15,0.6);
-  --line:rgba(255,255,255,0.06); --line2:rgba(255,255,255,0.1);
-  --text:#f0f0f0; --text2:rgba(255,255,255,0.5); --text3:rgba(255,255,255,0.25);
-  --gold:#D4AF37; --golddim:rgba(212,175,55,0.1); --goldglow:rgba(212,175,55,0.2);
-  --wa:#25d366; --ff:'DM Sans',sans-serif; --fs:'Playfair Display',serif;
-  --ease:0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --r:16px; --r2:20px; --rmax:999px;
+  --bg:#050505;--bg1:#0a0a0a;--bg2:#111;--bg3:#191919;
+  --surface:#0d0d0d;--card:#0e0e0e;
+  --line:rgba(255,255,255,.06);--line2:rgba(255,255,255,.09);--line3:rgba(255,255,255,.14);
+  --text:#eee;--text2:rgba(255,255,255,.45);--text3:rgba(255,255,255,.2);
+  --gold:#c9a96e;--golddim:rgba(201,169,110,.12);--goldglow:rgba(201,169,110,.25);
+  --wa:#25d366;--wadim:rgba(37,211,102,.1);
+  --ff:'DM Sans',sans-serif;--fs:'Playfair Display',serif;
+  --ease:.25s cubic-bezier(.4,0,.2,1);
+  --r:12px;--r2:16px;--r3:24px;--rmax:999px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color: transparent;}
-html{scroll-behavior:smooth; -webkit-text-size-adjust:100%;}
-body{background:var(--bg); color:var(--text); font-family:var(--ff); line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--ff);font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 button{font-family:var(--ff);cursor:pointer;border:none;background:none;color:var(--text)}
-img{display:block;max-width:100%;}
+img{display:block;max-width:100%}
 ::selection{background:var(--gold);color:#000}
 
-/* Noise Overlay */
+/* ══════ NOISE OVERLAY ══════ */
 body::before{
   content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
-  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-  opacity:0.6;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:.4;
 }
 
-/* Animations */
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.rv{opacity:0; animation:fadeIn 0.8s var(--ease) forwards;}
-
-/* TOPBAR */
+/* ══════ TOPBAR ══════ */
 .topbar{
-  position:fixed;top:0;left:0;right:0;z-index:900;height:64px;
-  background:rgba(3,3,3,0.7); border-bottom:1px solid var(--line);
-  backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  position:fixed;top:0;left:0;right:0;z-index:900;height:56px;
+  background:rgba(5,5,5,.88);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 24px; transition:all var(--ease);
+  padding:0 clamp(16px,4vw,32px);transition:background var(--ease);
 }
-.tb-logo{font-family:var(--fs);font-size:20px;font-weight:600;letter-spacing:-0.02em}
+.tb-logo{font-family:var(--fs);font-size:18px;font-weight:600;letter-spacing:-.02em}
 .tb-logo span{color:var(--gold);font-style:italic}
-.lang-grp{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:var(--rmax);border:1px solid var(--line)}
-.lb{padding:6px 10px;border-radius:var(--rmax);font-size:10px;font-weight:700;letter-spacing:0.05em;color:var(--text2);transition:all 0.2s;}
-.lb.on{color:#000;background:var(--gold);}
+.tb-r{display:flex;align-items:center;gap:4px}
+.lang-grp{display:flex;gap:2px}
+.lb{
+  padding:5px 8px;border-radius:6px;font-size:10px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text3);
+  transition:all var(--ease);
+}
+.lb:hover{color:var(--text2);background:var(--line)}
+.lb.on{color:var(--gold);background:var(--golddim)}
+.tb-theme{
+  width:32px;height:32px;border-radius:8px;margin-left:4px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);font-size:14px;transition:all var(--ease);
+}
+.tb-theme:hover{color:var(--text);background:var(--line)}
 
-/* HERO */
+/* ══════ HERO ══════ */
 .hero{
-  position:relative;min-height:90vh;min-height:90svh;
+  position:relative;min-height:100vh;min-height:100svh;
   display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 24px 80px; overflow:hidden;
+  padding:0 clamp(16px,4vw,40px) clamp(40px,8vh,80px);
+  overflow:hidden;
 }
 .hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.4;filter:saturate(0.8) contrast(1.1);}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:saturate(.6)}
 .hero-bg::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,var(--bg) 0%, rgba(3,3,3,0.6) 40%, transparent 100%);
+  background:linear-gradient(to top,var(--bg) 0%,rgba(5,5,5,.6) 40%,rgba(5,5,5,.2) 70%,rgba(5,5,5,.5) 100%);
 }
-.hero-content{position:relative;z-index:1;}
+.hero-content{position:relative;z-index:1;max-width:720px}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  margin-bottom:24px;padding:6px 16px;border-radius:var(--rmax);
-  background:var(--surface); border:1px solid var(--line);
-  font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:20px;padding:6px 14px;border-radius:var(--rmax);
+  border:1px solid var(--line2);
+  font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text2);
 }
-.hero h1{font-family:var(--fs);font-size:clamp(42px,10vw,80px);font-weight:500;letter-spacing:-0.03em;line-height:1;margin-bottom:20px;}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px var(--golddim);animation:glow 2.5s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 3px var(--golddim)}50%{box-shadow:0 0 0 8px transparent}}
+.hero h1{
+  font-family:var(--fs);font-size:clamp(38px,7vw,80px);
+  font-weight:500;letter-spacing:-.03em;line-height:1.02;
+  margin-bottom:20px;
+}
 .hero h1 em{font-style:italic;color:var(--gold)}
-.hero-p{font-size:15px;color:var(--text2);margin-bottom:36px;line-height:1.6;max-width:400px;font-weight:300;}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.hero-p{font-size:clamp(14px,1.6vw,17px);color:var(--text2);max-width:520px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .btn-gold{
-  display:flex;align-items:center;justify-content:center;
-  padding:16px 32px;border-radius:var(--rmax); flex:1; min-width:200px;
-  background:var(--gold);color:#000;font-weight:700;font-size:14px;
-  letter-spacing:0.02em;transition:all var(--ease); box-shadow:0 8px 32px var(--goldglow);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:var(--rmax);
+  background:var(--gold);color:#0a0a0a;font-weight:600;font-size:13.5px;
+  letter-spacing:.02em;transition:all var(--ease);
 }
+.btn-gold:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 24px var(--goldglow)}
 .btn-ghost{
-  display:flex;align-items:center;justify-content:center;
-  padding:16px 32px;border-radius:var(--rmax); flex:1; min-width:200px;
-  background:var(--surface);color:var(--text);font-weight:600;font-size:14px;
-  border:1px solid var(--line2); backdrop-filter:blur(10px);
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:var(--rmax);
+  background:transparent;color:var(--text);font-weight:600;font-size:13.5px;
+  border:1px solid var(--line2);letter-spacing:.02em;transition:all var(--ease);
 }
+.btn-ghost:hover{border-color:var(--line3);background:rgba(255,255,255,.04)}
+.hero-scroll{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:1;
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(4px)}}
+.hero-scroll::after{content:'';width:1px;height:20px;background:linear-gradient(to bottom,var(--text3),transparent)}
 
-/* TRUST */
+/* ══════ TRUST BAR ══════ */
 .trust{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
-  padding:24px; border-bottom:1px solid var(--line);
+  display:flex;justify-content:center;gap:clamp(24px,5vw,60px);
+  padding:28px clamp(16px,4vw,40px);
+  border-bottom:1px solid var(--line);
 }
-.trust-item{flex:1;min-width:40%;text-align:center;background:var(--surface);padding:16px;border-radius:var(--r);border:1px solid var(--line);}
-.trust-item strong{display:block;font-family:var(--fs);font-size:28px;font-weight:500;color:var(--gold);margin-bottom:4px;}
-.trust-item span{font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;font-weight:700;}
+.trust-item{text-align:center}
+.trust-item strong{display:block;font-family:var(--fs);font-size:clamp(24px,3vw,36px);font-weight:500;letter-spacing:-.02em;color:var(--gold)}
+.trust-item span{font-size:10.5px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
 
-/* CAT NAV */
+/* ══════ CATEGORY NAV ══════ */
 .cat-nav{
-  position:sticky;top:64px;z-index:800;
-  background:rgba(3,3,3,0.8);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--line);padding:16px 24px;
+  position:sticky;top:56px;z-index:800;
+  background:rgba(5,5,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);padding:12px clamp(16px,4vw,40px);
 }
-.cat-inner{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;}
+.cat-inner{display:flex;gap:6px;max-width:1200px;margin:0 auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
 .cat-inner::-webkit-scrollbar{display:none}
 .cat-btn{
-  padding:10px 20px;border-radius:var(--rmax);font-size:13px;font-weight:600;white-space:nowrap;
-  color:var(--text2);border:1px solid var(--line); transition:all 0.3s;
+  padding:8px 16px;border-radius:var(--rmax);
+  font-size:12px;font-weight:600;white-space:nowrap;
+  color:var(--text2);border:1px solid transparent;
+  transition:all var(--ease);
 }
-.cat-btn.on{color:var(--gold);background:var(--golddim);border-color:var(--goldglow);}
+.cat-btn:hover{color:var(--text);background:var(--line)}
+.cat-btn.on{color:var(--gold);background:var(--golddim);border-color:rgba(201,169,110,.2)}
 
-/* SECTION TITLE */
-.sec-title{padding:60px 24px 24px;}
-.sec-title h2{font-family:var(--fs);font-size:32px;font-weight:500;letter-spacing:-0.02em;}
+/* ══════ SECTION TITLE ══════ */
+.sec-title{
+  max-width:1200px;margin:0 auto;
+  padding:clamp(40px,6vh,72px) clamp(16px,4vw,40px) 24px;
+}
+.sec-title h2{font-family:var(--fs);font-size:clamp(26px,3.5vw,42px);font-weight:500;letter-spacing:-.02em}
 .sec-title h2 em{font-style:italic;color:var(--gold)}
-.sec-title p{font-size:14px;color:var(--text2);margin-top:8px;font-weight:300;}
+.sec-title p{font-size:14px;color:var(--text2);margin-top:8px;max-width:460px}
 
-/* FEATURED HORIZONTAL */
+/* ══════ FEATURED EXPERIENCES (HORIZONTAL SCROLL) ══════ */
+.featured{padding:0 0 20px}
 .feat-scroll{
-  display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;
-  padding:0 24px 24px;scroll-snap-type:x mandatory;
+  display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;
+  padding:0 clamp(16px,4vw,40px) 20px;scroll-snap-type:x mandatory;
 }
 .feat-scroll::-webkit-scrollbar{display:none}
 .feat-card{
-  flex:0 0 82vw;scroll-snap-align:center;
+  flex:0 0 clamp(280px,40vw,380px);scroll-snap-align:start;
   border-radius:var(--r2);overflow:hidden;position:relative;
-  aspect-ratio:4/5; border:1px solid var(--line); background:var(--bg2);
+  aspect-ratio:3/4;cursor:pointer;
 }
-.feat-card img{width:100%;height:100%;object-fit:cover;}
+.feat-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.feat-card:hover img{transform:scale(1.05)}
 .feat-card::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.15) 50%,transparent 100%);
 }
-.feat-info{position:absolute;bottom:0;left:0;right:0;z-index:1;padding:24px;}
+.feat-info{
+  position:absolute;bottom:0;left:0;right:0;z-index:1;
+  padding:20px;
+}
 .feat-tag{
-  display:inline-block;padding:4px 12px;border-radius:var(--rmax);
-  font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);color:var(--gold);border:1px solid var(--golddim);
-  margin-bottom:12px;
+  display:inline-block;padding:3px 10px;border-radius:var(--rmax);
+  font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--golddim);color:var(--gold);border:1px solid rgba(201,169,110,.2);
+  margin-bottom:8px;
 }
-.feat-info h3{font-family:var(--fs);font-size:24px;font-weight:500;margin-bottom:8px;}
-.feat-info p{font-size:13px;color:var(--text2);line-height:1.5;}
+.feat-info h3{font-family:var(--fs);font-size:20px;font-weight:500;margin-bottom:4px}
+.feat-info p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .feat-price{
-  position:absolute;top:16px;right:16px;z-index:1;
-  padding:6px 14px;border-radius:var(--rmax);
-  background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);
-  border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--gold);
+  position:absolute;top:14px;right:14px;z-index:1;
+  padding:5px 12px;border-radius:var(--rmax);
+  background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  font-size:12px;font-weight:700;color:var(--gold);
 }
 
-/* VENUE GRID (4:5 Images) */
-.grid-wrap{padding:0 24px 60px;}
-.venue-grid{display:grid;grid-template-columns:1fr;gap:24px;}
-@media(min-width:640px){.venue-grid{grid-template-columns:1fr 1fr;}}
+/* ══════ VENUE GRID ══════ */
+.grid-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 60px}
+.venue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+@media(max-width:640px){.venue-grid{grid-template-columns:1fr 1fr;gap:8px}}
+@media(max-width:400px){.venue-grid{grid-template-columns:1fr}}
 
 .v-card{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r2);
-  padding:6px; transition:all var(--ease);
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;transition:all var(--ease);position:relative;
 }
-.v-img{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--bg2);}
-.v-img img{width:100%;height:100%;object-fit:cover;}
-.v-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent 60%); pointer-events:none;}
+.v-card:hover{border-color:var(--line3);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.v-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg2)}
+.v-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.v-card:hover .v-img img{transform:scale(1.04)}
 .v-badge{
-  position:absolute;top:12px;left:12px;z-index:2;
-  padding:4px 10px;border-radius:var(--rmax);
-  font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
-  background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);border:1px solid var(--line);color:#fff;
+  position:absolute;top:8px;left:8px;
+  padding:3px 9px;border-radius:var(--rmax);
+  font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
-.b-premium{background:var(--golddim);color:var(--gold);border-color:var(--goldglow);}
-.v-info-overlay{position:absolute;bottom:16px;left:16px;right:16px;z-index:2;}
-.v-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
-.v-top h3{font-family:var(--fs);font-size:20px;font-weight:500;letter-spacing:-0.01em;}
-.v-pr{font-size:14px;font-weight:700;color:var(--gold);}
-.v-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
-.v-tag{font-size:10px;color:var(--text);padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.1);backdrop-filter:blur(4px);font-weight:500;}
-
-.v-body{padding:16px 10px 10px;}
-.v-desc{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:16px; font-weight:300;}
+.b-open{background:rgba(201,169,110,.18);color:var(--gold);border:1px solid rgba(201,169,110,.25)}
+.b-season{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1)}
+.b-premium{background:rgba(201,169,110,.3);color:#fff;border:1px solid rgba(201,169,110,.4)}
+.v-body{padding:12px 14px 14px}
+.v-top{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px}
+.v-top h3{font-size:13.5px;font-weight:700;letter-spacing:-.01em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-pr{font-size:11px;font-weight:700;color:var(--gold);white-space:nowrap}
+.v-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.v-tag{font-size:9.5px;color:var(--text2);padding:2px 6px;border-radius:var(--rmax);background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.v-desc{font-size:11.5px;color:var(--text2);line-height:1.45;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.v-acts{display:flex;gap:6px}
 .v-wa{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:14px;border-radius:12px;
-  background:var(--surface);color:var(--text);border:1px solid var(--line);
-  font-size:13px;font-weight:600;
+  flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
+  padding:9px;border-radius:10px;
+  background:var(--gold);color:#0a0a0a;font-size:11.5px;font-weight:700;
+  transition:all var(--ease);
 }
+.v-wa:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.v-map{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all var(--ease);flex-shrink:0;
+}
+.v-map:hover{background:rgba(255,255,255,.08)}
 
-/* QUICK FORM */
-.quick-form-sec{
-  margin:40px 24px; padding:32px 24px;
-  background:var(--bg2); border:1px solid var(--line2); border-radius:var(--r2);
-  position:relative; overflow:hidden;
+/* ══════ BOAT PRICING TABLE ══════ */
+.pricing-section{
+  max-width:1200px;margin:0 auto;
+  padding:0 clamp(16px,4vw,40px) 60px;
 }
-.quick-form-sec::before{
-  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:radial-gradient(circle, var(--golddim) 0%, transparent 60%);
-  opacity:0.3; pointer-events:none;
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.p-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:20px;transition:all var(--ease);
 }
-.qf-title{font-family:var(--fs);font-size:28px;margin-bottom:8px;}
-.qf-p{font-size:13px;color:var(--text2);margin-bottom:24px;}
-.fi{margin-bottom:16px;}
-.fi label{display:block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
-.fi input, .fi select{
-  width:100%;padding:14px 16px;border-radius:12px;
-  background:var(--bg);border:1px solid var(--line);
+.p-card:hover{border-color:rgba(201,169,110,.2)}
+.p-card h4{font-family:var(--fs);font-size:18px;font-weight:500;margin-bottom:4px}
+.p-card .p-sub{font-size:12px;color:var(--text2);margin-bottom:14px}
+.p-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.p-row:last-child{border:none}
+.p-row span:last-child{font-weight:700;color:var(--gold)}
+.p-note{font-size:10.5px;color:var(--text3);margin-top:10px;line-height:1.5}
+
+/* ══════ PARTNERS ══════ */
+.partners{
+  padding:48px clamp(16px,4vw,40px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.partners h3{
+  text-align:center;font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--text2);
+  margin-bottom:24px;
+}
+.partner-row{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
+.p-logo{
+  width:88px;height:88px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid var(--line2);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;transition:all var(--ease);
+}
+.p-logo:hover{border-color:rgba(201,169,110,.3);transform:scale(1.08)}
+.p-logo img{width:60px;height:60px;object-fit:contain;filter:brightness(1.5) contrast(1.1)}
+.p-logo:hover img{filter:brightness(1.8) contrast(1.2)}
+
+/* ══════ QUICK FORM ══════ */
+.quick-form-section{
+  max-width:560px;margin:0 auto;
+  padding:clamp(40px,6vh,72px) clamp(16px,4vw,40px) 60px;
+}
+.quick-form-section h2{font-family:var(--fs);font-size:clamp(24px,3vw,36px);font-weight:500;text-align:center;margin-bottom:6px}
+.quick-form-section .qf-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:24px}
+.qf-card{
+  background:var(--card);border:1px solid var(--line2);border-radius:var(--r3);
+  padding:24px;
+}
+.qf-card .fi{margin-bottom:12px}
+.qf-card .fi label{display:block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.qf-card .fi input,.qf-card .fi textarea,.qf-card .fi select{
+  width:100%;padding:11px 14px;border-radius:10px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);
   color:var(--text);font-family:var(--ff);font-size:14px;
-  appearance:none; outline:none; transition:border 0.3s;
+  outline:none;transition:border-color var(--ease);
 }
-.fi input:focus, .fi select:focus{border-color:var(--gold);}
-.fi select{background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23C9A96E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center;}
-.f-submit{
-  width:100%;padding:16px;border-radius:12px;margin-top:8px;
-  background:var(--gold);color:#000;font-size:14px;font-weight:700;
+.qf-card .fi input:focus,.qf-card .fi textarea:focus,.qf-card .fi select:focus{border-color:var(--gold)}
+.qf-card .fi textarea{resize:vertical;min-height:50px}
+.qf-card .fi select option{background:var(--bg2)}
+.qf-card .fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qf-submit{
+  width:100%;padding:14px;border-radius:var(--r);margin-top:16px;
+  background:var(--gold);color:#0a0a0a;font-size:14px;font-weight:700;
   display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all var(--ease);border:none;cursor:pointer;font-family:var(--ff);
 }
+.qf-submit:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 20px var(--goldglow)}
 
-/* FOOTER */
+/* ══════ THEME TOGGLE ══════ */
+body.light-mode{
+  --bg:#f5f4f0;--bg1:#eee;--bg2:#e4e2dd;--bg3:#d8d6d0;
+  --surface:#faf9f6;--card:#fff;
+  --line:rgba(0,0,0,.06);--line2:rgba(0,0,0,.09);--line3:rgba(0,0,0,.14);
+  --text:#111;--text2:rgba(0,0,0,.5);--text3:rgba(0,0,0,.25);
+  --gold:#a0813a;--golddim:rgba(160,129,58,.1);--goldglow:rgba(160,129,58,.2);
+}
+body.light-mode .topbar{background:rgba(245,244,240,.92)}
+body.light-mode .hero-bg img{opacity:.45;filter:saturate(.7)}
+body.light-mode .p-logo{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1)}
+body.light-mode .p-logo img{filter:brightness(1) contrast(1.1)}
+body.light-mode body::before{opacity:.15}
+
+/* ══════ FOOTER ══════ */
 .footer{
-  border-top:1px solid var(--line); padding:40px 24px; text-align:center;
+  border-top:1px solid var(--line);
+  padding:32px clamp(16px,4vw,40px);text-align:center;
 }
-.footer p{font-size:11px;color:var(--text3);letter-spacing:0.04em;}
-.footer a{color:var(--gold);}
+.footer p{font-size:11px;color:var(--text3);letter-spacing:.02em}
+.footer a{color:var(--gold);transition:opacity var(--ease)}
+.footer a:hover{opacity:.7}
 
-/* TOAST */
-.toast{
-  position:fixed;top:24px;left:50%;transform:translate(-50%, -20px);
-  padding:12px 24px;border-radius:var(--rmax);
-  background:var(--gold);color:#000;font-size:13px;font-weight:700;
-  opacity:0;pointer-events:none;transition:all 0.4s var(--ease);z-index:1100;
-  box-shadow:0 8px 32px var(--goldglow);
+/* ══════ FLOATING WA ══════ */
+.wa-fab{
+  position:fixed;bottom:20px;right:20px;z-index:999;
+  width:54px;height:54px;border-radius:50%;
+  background:var(--wa);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;box-shadow:0 4px 16px rgba(37,211,102,.3);
+  transition:all var(--ease);
 }
-.toast.show{opacity:1;transform:translate(-50%, 0);}
+.wa-fab:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(37,211,102,.45)}
+
+/* ══════ MODAL ══════ */
+.modal-bg{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;padding:16px;
+}
+.modal-bg.show{display:flex}
+.modal{
+  background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r3);
+  width:100%;max-width:400px;padding:28px;position:relative;
+  animation:mIn .2s ease;
+}
+@keyframes mIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.modal h3{font-family:var(--fs);font-size:22px;font-weight:500;margin-bottom:2px}
+.modal .ms{font-size:12.5px;color:var(--text2);margin-bottom:18px}
+.mx{
+  position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;
+  background:var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--text2);cursor:pointer;transition:all var(--ease);
+}
+.mx:hover{background:var(--line2);color:var(--text)}
+.fi{margin-bottom:10px}
+.fi label{display:block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.fi input,.fi textarea,.fi select{
+  width:100%;padding:10px 12px;border-radius:8px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);
+  color:var(--text);font-family:var(--ff);font-size:14px;
+  outline:none;transition:border-color var(--ease);
+}
+.fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--gold)}
+.fi textarea{resize:vertical;min-height:48px}
+.fi select option{background:var(--bg2)}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f-submit{
+  width:100%;padding:13px;border-radius:var(--r);margin-top:14px;
+  background:var(--gold);color:#0a0a0a;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:all var(--ease);
+}
+.f-submit:hover{filter:brightness(1.1)}
+
+/* ══════ TOAST ══════ */
+.toast{
+  position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(12px);
+  padding:10px 22px;border-radius:var(--rmax);
+  background:var(--gold);color:#0a0a0a;font-size:12px;font-weight:700;
+  opacity:0;pointer-events:none;transition:all .3s ease;z-index:1100;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ══════ REVEALS ══════ */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.vis{opacity:1;transform:none}
+
+/* ══════ RESPONSIVE ══════ */
+@media(max-width:768px){
+  .hero h1{margin-bottom:16px}
+  .trust{flex-wrap:wrap;gap:12px 24px;padding:20px 16px}
+  .trust-item{min-width:60px}
+  .trust-item strong{font-size:22px}
+  .feat-card{flex:0 0 75vw}
+  .sec-title{padding-top:32px}
+}
+@media(max-width:480px){
+  .feat-card{flex:0 0 88vw}
+  .venue-grid{grid-template-columns:1fr !important}
+  .pricing-grid{grid-template-columns:1fr}
+  .trust{gap:8px 16px}
+  .trust-item strong{font-size:20px}
+  .fi-row{grid-template-columns:1fr}
+  .qf-card .fi-row{grid-template-columns:1fr}
+  .hero-ctas{flex-direction:column;gap:8px}
+  .hero-ctas a,.hero-ctas button{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <header class="topbar">
-  <div class="tb-logo">Mallorcas<span style="font-style:italic;color:var(--gold);">Local</span></div>
-  <div class="lang-grp">
-    <button class="lb on" data-lang="es">ES</button>
-    <button class="lb" data-lang="en">EN</button>
+  <a href="#" class="tb-logo">Mallorcas<span>Local</span></a>
+  <div class="tb-r">
+    <div class="lang-grp">
+      <button class="lb on" data-lang="es">ES</button>
+      <button class="lb" data-lang="en">EN</button>
+      <button class="lb" data-lang="de">DE</button>
+      <button class="lb" data-lang="fr">FR</button>
+    </div>
+    <button class="tb-theme" id="themeBtn" title="Light/Dark">◑</button>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/w_800,q_auto,f_auto/v1774300396/28_dwfybr.png" alt="Mallorca BG"></div>
-  <div class="hero-content rv">
-    <div class="hero-eyebrow">Season 2025 – 2026</div>
+  <div class="hero-bg">
+    <img src="https://res.cloudinary.com/dxhef6dju/image/upload/w_1400,q_auto,f_auto/v1774300396/28_dwfybr.png" alt="Mallorca sunset">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="hero-dot"></span><span data-i18n="h_badge">Temporada 2025 – 2026</span></div>
     <h1 data-i18n="h_h1">Reserva Mallorca<br>como un <em>local</em></h1>
-    <p class="hero-p" data-i18n="h_p">Las mejores fiestas, boat parties y locales exclusivos. Sin intermediarios, reserva vía WhatsApp.</p>
+    <p class="hero-p" data-i18n="h_p">Fiestas, excursiones, boat parties y los mejores locales de la isla. Sin intermediarios — reserva directo por WhatsApp y paga al llegar.</p>
     <div class="hero-ctas">
-      <a href="#plans" class="btn-gold" data-i18n="h_cta1">Ver Planes</a>
-      <a href="#quick-book" class="btn-ghost" data-i18n="h_cta2">Booking Directo</a>
+      <a href="#plans" class="btn-gold" data-i18n="h_cta1">Ver todos los planes</a>
+      <button class="btn-ghost" onclick="openModal()" data-i18n="h_cta2">Reservar ahora</button>
     </div>
   </div>
+  <div class="hero-scroll"><span data-i18n="h_scroll">Scroll</span></div>
 </section>
 
+<!-- TRUST -->
 <div class="trust">
   <div class="trust-item"><strong>19+</strong><span data-i18n="t1">Experiencias</span></div>
   <div class="trust-item"><strong>4.8★</strong><span data-i18n="t2">Valoración</span></div>
@@ -258,130 +455,265 @@ body::before{
   <div class="trust-item"><strong>0€</strong><span data-i18n="t4">Comisiones</span></div>
 </div>
 
-<div class="sec-title" id="featured"><h2 data-i18n="feat_t">Lo más <em>reservado</em></h2></div>
-<section class="feat-scroll" id="featScroll"></section>
+<!-- FEATURED SECTION -->
+<div class="sec-title">
+  <h2 data-i18n="feat_t">Lo más <em>reservado</em></h2>
+  <p data-i18n="feat_s">Las experiencias que más repiten nuestros clientes esta temporada</p>
+</div>
+<section class="featured">
+  <div class="feat-scroll" id="featScroll"></div>
+</section>
 
+<!-- CATEGORY NAV -->
 <nav class="cat-nav" id="plans">
   <div class="cat-inner">
     <button class="cat-btn on" data-cat="all" data-i18n="c_all">Todos</button>
     <button class="cat-btn" data-cat="water" data-i18n="c_water">Agua</button>
-    <button class="cat-btn" data-cat="beach" data-i18n="c_beach">Playa</button>
+    <button class="cat-btn" data-cat="beach" data-i18n="c_beach">Playa & Día</button>
     <button class="cat-btn" data-cat="night" data-i18n="c_night">Nightlife</button>
     <button class="cat-btn" data-cat="food" data-i18n="c_food">Food</button>
     <button class="cat-btn" data-cat="explore" data-i18n="c_explore">Explorar</button>
   </div>
 </nav>
 
-<div class="sec-title"><h2 data-i18n="grid_t">Todos los <em>planes</em></h2></div>
-<section class="grid-wrap"><div class="venue-grid" id="vGrid"></div></section>
-
-<section class="quick-form-sec" id="quick-book">
-  <h2 class="qf-title" data-i18n="m_t">Reserva <em>Expres</em></h2>
-  <p class="qf-p" data-i18n="m_s">Rellena el formulario y recibe confirmación al instante vía WhatsApp.</p>
-  <form id="bkForm" onsubmit="submitBooking(event)">
-    <div class="fi"><label data-i18n="f_name">Nombre</label><input type="text" id="fN" required placeholder="Tu nombre"></div>
-    <div class="fi"><label data-i18n="f_act">Actividad</label><select id="fA"></select></div>
-    <div style="display:flex;gap:12px;">
-      <div class="fi" style="flex:1"><label data-i18n="f_date">Fecha</label><input type="date" id="fD" required></div>
-      <div class="fi" style="width:100px"><label data-i18n="f_pax">Pax</label><input type="number" id="fP" min="1" max="30" value="2"></div>
-    </div>
-    <button type="submit" class="f-submit">Reservar por WhatsApp →</button>
-  </form>
+<!-- VENUE GRID -->
+<div class="sec-title">
+  <h2 data-i18n="grid_t">Todos los <em>planes</em></h2>
+</div>
+<section class="grid-wrap">
+  <div class="venue-grid" id="vGrid"></div>
 </section>
 
-<footer class="footer"><p>© 2026 MallorcasLocal · <a href="https://wa.me/34644075065">WhatsApp</a></p></footer>
-<div class="toast" id="toast">¡Abriendo WhatsApp!</div>
+<!-- BOAT PRICING -->
+<div class="sec-title">
+  <h2 data-i18n="pr_t">Precios <em>detallados</em></h2>
+  <p data-i18n="pr_s">Info transparente — sin sorpresas al llegar</p>
+</div>
+<section class="pricing-section">
+  <div class="pricing-grid" id="pricingGrid"></div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners">
+  <h3 data-i18n="part_t">Colaboradores oficiales</h3>
+  <div class="partner-row" id="partnerRow"></div>
+</section>
+
+<!-- QUICK FORM -->
+<section class="quick-form-section">
+  <h2 data-i18n="qf_t">¿Sabes qué <em>reservar</em>?</h2>
+  <p class="qf-sub" data-i18n="qf_s">Dinos qué te interesa y te confirmamos por WhatsApp al momento</p>
+  <div class="qf-card">
+    <form id="quickForm" onsubmit="submitQuick(event)">
+      <div class="fi"><label data-i18n="f_name">Nombre</label><input type="text" id="qN" required placeholder="Tu nombre"></div>
+      <div class="fi"><label data-i18n="f_act">Actividad</label><select id="qA"></select></div>
+      <div class="fi-row">
+        <div class="fi"><label data-i18n="f_date">Fecha</label><input type="date" id="qD" required></div>
+        <div class="fi"><label data-i18n="f_pax">Personas</label><input type="number" id="qP" min="1" max="30" value="2"></div>
+      </div>
+      <div class="fi"><label data-i18n="f_notes">Notas</label><textarea id="qNo" placeholder="Horario preferido, necesidades especiales..."></textarea></div>
+      <button type="submit" class="qf-submit" data-i18n="qf_send">💬 Reservar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 MallorcasLocal · <span data-i18n="foot">Reserva directa sin comisiones</span> · <a href="https://wa.me/34644075065" target="_blank">WhatsApp</a></p>
+</footer>
+
+<!-- FLOATING WA -->
+<a class="wa-fab" href="https://wa.me/34644075065?text=Hola%20MallorcasLocal!%20Quiero%20info%20sobre%20planes%20en%20Mallorca" target="_blank" rel="noopener">💬</a>
+
+<!-- MODAL -->
+<div class="modal-bg" id="bkModal">
+  <div class="modal">
+    <button class="mx" onclick="closeModal()">✕</button>
+    <h3 data-i18n="m_t">Reserva <em>rápida</em></h3>
+    <p class="ms" data-i18n="m_s">Rellena y te contactamos por WhatsApp en menos de 1 hora</p>
+    <form id="bkForm" onsubmit="submitBooking(event)">
+      <div class="fi"><label data-i18n="f_name">Nombre</label><input type="text" id="fN" required placeholder="Tu nombre"></div>
+      <div class="fi"><label data-i18n="f_act">Actividad</label><select id="fA"></select></div>
+      <div class="fi-row">
+        <div class="fi"><label data-i18n="f_date">Fecha</label><input type="date" id="fD" required></div>
+        <div class="fi"><label data-i18n="f_pax">Personas</label><input type="number" id="fP" min="1" max="30" value="2"></div>
+      </div>
+      <div class="fi"><label data-i18n="f_notes">Notas</label><textarea id="fNo" placeholder="Detalles extra..."></textarea></div>
+      <button type="submit" class="f-submit" data-i18n="f_send">Enviar por WhatsApp →</button>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
 
 <script>
-const WA = '34644075065'; let lang = 'es', cat = 'all';
-const i18n = {
-  es: { h_h1:'Reserva Mallorca<br>como un <em>local</em>', h_p:'Las mejores fiestas y locales exclusivos. Sin intermediarios, reserva vía WhatsApp.', h_cta1:'Ver Planes', h_cta2:'Booking Directo', t1:'Experiencias', t2:'Valoración', t3:'Respuesta', t4:'Comisiones', feat_t:'Lo más <em>reservado</em>', c_all:'Todos', c_water:'Agua', c_beach:'Playa', c_night:'Nightlife', c_food:'Food', c_explore:'Explorar', grid_t:'Todos los <em>planes</em>', m_t:'Reserva <em>Expres</em>', m_s:'Rellena el formulario y te confirmamos por WhatsApp.', f_name:'Nombre', f_act:'Actividad', f_date:'Fecha', f_pax:'Pax', book:'Reservar' },
-  en: { h_h1:'Book Mallorca<br>like a <em>local</em>', h_p:'Top parties and exclusive venues. No middlemen, book via WhatsApp.', h_cta1:'See Plans', h_cta2:'Quick Book', t1:'Experiences', t2:'Rating', t3:'Response', t4:'Fees', feat_t:'Most <em>booked</em>', c_all:'All', c_water:'Water', c_beach:'Beach', c_night:'Nightlife', c_food:'Food', c_explore:'Explore', grid_t:'All <em>plans</em>', m_t:'Quick <em>Booking</em>', m_s:'Fill out the form for instant WhatsApp confirmation.', f_name:'Name', f_act:'Activity', f_date:'Date', f_pax:'Pax', book:'Book Now' }
-};
+const WA='34644075065';
+let lang='es',cat='all';
 
+/* ═══ VENUE DATA ═══ */
 const V=[
-  {id:'jet-ski',cat:'water',feat:true,badge:'open',name:{es:'Jet Ski Tour',en:'Jet Ski Tour'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107976/5_d0638s.png',price:'159 €',tags:{es:['1h Tour','1–2 pers'],en:['1h Tour','1–2 pax']},desc:{es:'Tour de 1h en moto de agua por aguas turquesas.',en:'1-hour jet ski tour over turquoise waters.'},wa:'Hola para Jet Ski Tour el %d'},
-  {id:'boat-rental',cat:'water',feat:false,badge:'open',name:{es:'Barco sin Licencia',en:'Boat Rental no license'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300395/8_gf0yft.png',price:'Desde 130 €',tags:{es:['2–6h','Hasta 5 pax'],en:['2–6h','Up to 5 pax']},desc:{es:'Barco sin licencia en Santa Ponça. Gas y snorkel incluido.',en:'No-license boat from Santa Ponça. Gas & snorkel included.'},wa:'Hola barco sin licencia el %d para %n personas'},
-  {id:'boat-party',cat:'water',feat:true,badge:'season',name:{es:'Sunsets Boat Party',en:'Sunsets Boat Party'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107981/6_iivrjt.png',price:'69 €',tags:{es:['3h','Todo incl.'],en:['3h','All incl.']},desc:{es:'DJs en vivo, bongo, swim stop, paella, + after party.',en:'Live DJs, bongo, swim stop, paella, + after party.'},wa:'Hola Sunsets Boat %d para %n pax'},
-  {id:'hidden-beaches',cat:'explore',feat:true,badge:'open',name:{es:'Hidden Beaches',en:'Hidden Beaches'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/36_slsjr4.png',price:'Desde 25 €',tags:{es:['Calas secretas'],en:['Secret coves']},desc:{es:'Calas escondidas, aguas cristalinas, menos turistas.',en:'Hidden coves, crystal-clear waters, fewer tourists.'},wa:'Hola Hidden Beaches el %d para %n pax'},
-  {id:'mountain',cat:'explore',feat:false,badge:'open',name:{es:'Mountain Spots',en:'Mountain Spots'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372350/IMG_0865_2_e1vrii.jpg',price:'Desde 20 €',tags:{es:['Tramuntana','Vistas'],en:['Tramuntana','Views']},desc:{es:'Miradores panorámicos en la Serra de Tramuntana.',en:'Panoramic mountain viewpoints.'},wa:'Hola Mountain Spots %n pax %d'},
-  {id:'sunset',cat:'explore',feat:false,badge:'open',name:{es:'Sunset Spots',en:'Sunset Spots'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372685/25C5332F-2027-4A9D-A685-912D9C01EAF7_lh7dna.jpg',price:'Desde 15 €',tags:{es:['Atardeceres'],en:['Sunsets']},desc:{es:'Mejores puntos de atardecer sobre mar y montaña.',en:'Best sunset spots over sea and mountains.'},wa:'Hola Sunset Spots %n pax %d'},
-  {id:'palma',cat:'explore',feat:false,badge:'open',name:{es:'Palma City',en:'Palma City'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300268/52_tfltdz.jpg',price:'Gratis/Guiado',tags:{es:['Cultura','Shopping'],en:['Culture','Shopping']},desc:{es:'Centro urbano: cultura, compras y gastronomía.',en:'Palma core: culture, shopping, food.'},wa:'Hola tour Palma %n pax %d'},
-  {id:'barbuda',cat:'beach',feat:true,badge:'season',name:{es:'Barbuda Beach',en:'Barbuda Beach'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302220/Screenshot_2026-03-23_at_22.43.25_i6psxa.png',price:'40-55 €',tags:{es:['Brunch','All incl'],en:['Brunch','All incl']},desc:{es:'Brunch frente al mar con cócteles, ambiente premium.',en:'Seaside brunch, cocktails, premium vibes.'},wa:'Hola Barbuda Beach %d pax %n'},
-  {id:'folies',cat:'beach',feat:true,badge:'premium',name:{es:'Beach Club Folies',en:'Beach Club Folies'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/15_rvbkq8.png',price:'€€€',tags:{es:['Exclusivo'],en:['Exclusive']},desc:{es:'Camas balinesas en Cala Llamp, vistas al mar.',en:'Bali beds at Cala Llamp, luxury experience.'},wa:'Hola Folies %n pax %d'},
-  {id:'bcm',cat:'night',feat:true,badge:'season',name:{es:'BCM Nightlife',en:'BCM Nightlife'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302375/Screenshot_2026-03-23_at_22.45.56_bhplz9.png',price:'35 €',tags:{es:['Magaluf','+18'],en:['Magaluf','+18']},desc:{es:'El club más grande. Eventos internacionales.',en:'Biggest club in Mallorca.'},wa:'Hola BCM %n pax %d'},
-  {id:'mcp',cat:'night',feat:false,badge:'season',name:{es:'MCP Club Pass',en:'MCP Club Pass'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774365725/IMG_5725_hssktr.jpg',price:'30 €',tags:{es:['3 clubs','2 bebidas'],en:['3 clubs','2 drinks']},desc:{es:'Acceso 3 clubs. 2 bebidas incl.',en:'3 clubs access. 2 drinks incl.'},wa:'Hola MCP Pass %n pax %d'},
-  {id:'social',cat:'night',feat:false,badge:'premium',name:{es:'Social Club',en:'Social Club'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107977/4_ykfzz0.png',price:'25 €',tags:{es:['Palma','2 copas'],en:['Palma','2 drinks']},desc:{es:'Terraza elegante vistas al puerto. 2 copas incl.',en:'Elegant harbour terrace. 2 drinks incl.'},wa:'Hola Social Club %n pax %d'},
-  {id:'redlion',cat:'night',feat:false,badge:'open',name:{es:'Red Lion',en:'Red Lion'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372174/IMG_5686_i8hxqh.jpg',price:'30-40 €',tags:{es:['Magaluf','4 bebidas'],en:['Magaluf','4 drinks']},desc:{es:'Ambiente pub desde medianoche hasta cierre.',en:'Midnight till late, pub vibes.'},wa:'Hola Red Lion %n pax %d'},
-  {id:'panama',cat:'night',feat:false,badge:'open',name:{es:'Panama Jack',en:'Panama Jack'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372179/1-scaled.jpg_ag1v3h.webp',price:'15-20 €',tags:{es:['Magaluf','1 copa'],en:['Magaluf','1 drink']},desc:{es:'Reggaetón y buen ambiente nocturno.',en:'Reggaeton & good nightlife.'},wa:'Hola Panama Jack %n pax %d'},
-  {id:'gringos',cat:'night',feat:false,badge:'open',name:{es:'Gringos Bingos',en:'Gringos Bingos'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372793/e1_wytmwc.webp',price:'35-45 €',tags:{es:['Mesa+Show','Magaluf'],en:['Table+Show','Magaluf']},desc:{es:'Bingo interactivo y fiesta (Mesa incluida).',en:'Interactive bingo and party (Table incl).'},wa:'Hola Gringos Bingos %n pax %d'},
-  {id:'tabana',cat:'night',feat:false,badge:'open',name:{es:'Tabana',en:'Tabana'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300400/13_ztcm3p.png',price:'Desde 15 €',tags:{es:['Exótico'],en:['Exotic']},desc:{es:'Club ambiente exótico y gastronomía.',en:'Exotic atmosphere club.'},wa:'Hola Tabana %n pax %d'},
-  {id:'shisha',cat:'night',feat:false,badge:'open',name:{es:'Shisha Lounge',en:'Shisha Lounge'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107980/10_gojczo.png',price:'€',tags:{es:['Palmanova'],en:['Palmanova']},desc:{es:'Lounge frente al mar, ambiente relajado.',en:'Seaside relaxing shisha lounge.'},wa:'Hola Shisha Lounge %n pax %d'},
-  {id:'massimo',cat:'food',feat:false,badge:'open',name:{es:'Massimo Pizza',en:'Massimo Pizza'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107978/9_l7ileb.png',price:'€',tags:{es:['Familiar'],en:['Family']},desc:{es:'Pizza horno de leña.',en:'Wood-fired pizza.'},wa:'Hola mesa Massimo %n pax %d'},
-  {id:'restaurants',cat:'food',feat:false,badge:'open',name:{es:'Restaurantes',en:'Restaurants'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300331/__-_2026-02-28T111918.026_syiynn.jpg',price:'Variado',tags:{es:['Gastronomía'],en:['Dining']},desc:{es:'Restaurantes recomendados.',en:'Recommended dining spots.'},wa:'Hola restaurantes %n pax %d'}
+  {id:'jet-ski',cat:'water',feat:true,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert'},name:'Jet Ski Tour',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107976/5_d0638s.png',price:'159 €',tags:{es:['1h Tour','1–2 pers','Transfer incl.'],en:['1h Tour','1–2 pax','Transfer incl.'],de:['1h Tour','1–2 Pers','Transfer inkl.'],fr:['1h Tour','1–2 pers','Transfert incl.']},desc:{es:'Tour de 1h en moto de agua por aguas turquesas. Depósito online 40 €, resto en destino. Transporte incluido.',en:'1-hour jet ski tour over turquoise waters. 40 € deposit online, rest on site. Transport included.',de:'1h Jetski-Tour. 40 € Anzahlung online, Rest vor Ort. Transfer inklusive.',fr:'Tour 1h jet ski. Acompte 40 € en ligne, reste sur place. Transport inclus.'},wa:{es:'Hola! Somos %n para Jet Ski Tour (1h, 159€) el %d. ¿Dispo?',en:'Hi! %n for Jet Ski Tour (1h, 159€) on %d. Available?',de:'Hallo! %n für Jet Ski Tour (1h, 159€) am %d. Verfügbar?',fr:'Bonjour! %n pour Jet Ski (1h, 159€) le %d. Dispo?'},map:''},
+  {id:'boat-rental',cat:'water',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:{es:'Barco sin Licencia',en:'Boat Rental (no license)',de:'Boot ohne Lizenz',fr:'Bateau sans Permis'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300395/8_gf0yft.png',price:{es:'Desde 130 €',en:'From 130 €',de:'Ab 130 €',fr:'Dès 130 €'},tags:{es:['2–6h','Hasta 5 pax','Dep. 200 €'],en:['2–6h','Up to 5 pax','Dep. 200 €'],de:['2–6h','Bis 5 Pers','Anz. 200 €'],fr:['2–6h','Jusqu\'à 5 pers','Dép. 200 €']},desc:{es:'Barco sin licencia en Santa Ponça. Gas, snorkel incluido. Depósito 200 €. De 130 € (2h) a 260 € (6h).',en:'No-license boat from Santa Ponça. Gas & snorkel included. Deposit 200 €. From 130 € (2h) to 260 € (6h).',de:'Boot ohne Lizenz ab Santa Ponça. Benzin & Schnorchel inkl. Anzahlung 200 €. Ab 130 € (2h) bis 260 € (6h).',fr:'Bateau sans permis depuis Santa Ponça. Essence & tuba inclus. Dépôt 200 €. De 130 € (2h) à 260 € (6h).'},wa:{es:'Hola, barco sin licencia el %d para %n personas. ¿Opciones y horarios?',en:'Hi, boat rental on %d for %n. Options?',de:'Hallo, Boot am %d für %n. Optionen?',fr:'Bonjour, bateau le %d pour %n. Options?'},map:''},
+  {id:'boat-party',cat:'water',feat:true,badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct'},name:'Sunsets Heatwave Boat',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107981/6_iivrjt.png',price:'69 €',tags:{es:['3h','350 pax','Todo incluido'],en:['3h','350 cap.','All-in'],de:['3h','350 Plätze','All-in'],fr:['3h','350 places','Tout inclus']},desc:{es:'Super barco doble cubierta: DJs live, bongo, swim stop, paella, fruta. After party gratis + camiseta + shots.',en:'Double-tier super boat: live DJs, bongo, swim stop, paella, fruit. Free after party + tee + shots.',de:'Doppelstock-Boot: Live-DJs, Bongo, Badestopp, Paella, Obst. Gratis After-Party + T-Shirt + Shots.',fr:'Bateau double pont: DJs live, bongo, baignade, paella, fruits. After party gratuite + t-shirt + shots.'},wa:{es:'Hola! Sunsets Heatwave Boat el %d para %n. ¿Plazas?',en:'Hi! Heatwave Boat on %d for %n. Spots?',de:'Hallo! Heatwave Boat am %d für %n. Plätze?',fr:'Bonjour! Heatwave Boat le %d pour %n. Places?'},map:''},
+  {id:'hidden-beaches',cat:'explore',feat:true,badge:'open',bTxt:{es:'Activo',en:'Active',de:'Aktiv',fr:'Actif'},name:'Hidden Beaches',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/36_slsjr4.png',price:{es:'Desde 25 €',en:'From 25 €',de:'Ab 25 €',fr:'Dès 25 €'},tags:{es:['Calas secretas','Guía local'],en:['Secret coves','Local guide'],de:['Geheime Buchten','Guide'],fr:['Criques secrètes','Guide local']},desc:{es:'Calas escondidas de difícil acceso, aguas cristalinas y menor afluencia turística.',en:'Hidden coves, crystal-clear waters and fewer tourists.',de:'Versteckte Buchten, kristallklares Wasser, weniger Touristen.',fr:"Criques cachées, eaux cristallines et moins de touristes."},wa:{es:'Hola, somos %n para Hidden Beaches el %d. ¿Info?',en:'Hi, %n for Hidden Beaches on %d. Info?',de:'Hallo, %n für Hidden Beaches am %d. Info?',fr:'Bonjour, %n pour Hidden Beaches le %d. Info?'},map:''},
+  {id:'mountain',cat:'explore',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:'Mountain Spots',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372350/IMG_0865_2_e1vrii.heic',price:{es:'Desde 20 €',en:'From 20 €',de:'Ab 20 €',fr:'Dès 20 €'},tags:{es:['Tramuntana','Miradores'],en:['Tramuntana','Viewpoints'],de:['Tramuntana','Aussichtspunkte'],fr:['Tramuntana','Belvédères']},desc:{es:'Miradores panorámicos en la Serra de Tramuntana.',en:'Panoramic mountain viewpoints.',de:'Panorama-Aussichtspunkte in der Serra de Tramuntana.',fr:'Belvédères panoramiques dans la Serra de Tramuntana.'},wa:{es:'Hola, Mountain Spots para %n el %d. ¿Info?',en:'Hi, Mountain Spots for %n on %d?',de:'Hallo, Mountain Spots für %n am %d?',fr:'Bonjour, Mountain Spots pour %n le %d?'},map:''},
+  {id:'sunset',cat:'explore',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:'Sunset Spots',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372685/25C5332F-2027-4A9D-A685-912D9C01EAF7_lh7dna.jpg',price:{es:'Desde 15 €',en:'From 15 €',de:'Ab 15 €',fr:'Dès 15 €'},tags:{es:['Formentor','Atardeceres'],en:['Formentor','Sunsets'],de:['Formentor','Sonnenuntergänge'],fr:['Formentor','Couchers de soleil']},desc:{es:'Los mejores puntos de atardecer sobre mar y montaña.',en:'Best sunset spots over sea and mountains.',de:'Beste Sonnenuntergangsspots über Meer und Bergen.',fr:'Meilleurs spots coucher de soleil sur mer et montagne.'},wa:{es:'Hola, Sunset Spots para %n el %d?',en:'Hi, Sunset Spots for %n on %d?',de:'Hallo, Sunset Spots für %n am %d?',fr:'Bonjour, Sunset Spots pour %n le %d?'},map:''},
+  {id:'palma',cat:'explore',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:'Palma City',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300268/52_tfltdz.jpg',price:{es:'Gratis / Guiado',en:'Free / Guided',de:'Gratis / Geführt',fr:'Gratuit / Guidé'},tags:{es:['Cultura','Shopping'],en:['Culture','Shopping'],de:['Kultur','Shopping'],fr:['Culture','Shopping']},desc:{es:'Centro urbano de Palma: cultura, compras y gastronomía.',en:"Palma's urban core: culture, shopping, food.",de:'Palma Innenstadt: Kultur, Shopping, Gastronomie.',fr:'Centre de Palma: culture, shopping, gastronomie.'},wa:{es:'Hola, tour Palma para %n el %d?',en:'Hi, Palma tour for %n on %d?',de:'Hallo, Palma Tour für %n am %d?',fr:'Bonjour, tour Palma pour %n le %d?'},map:''},
+  {id:'barbuda',cat:'beach',feat:true,badge:'season',bTxt:{es:'Mar–Oct',en:'Mar–Oct',de:'Mär–Okt',fr:'Mar–Oct'},name:'Barbuda Beach',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302220/Screenshot_2026-03-23_at_22.43.25_i6psxa.png',price:'40–55 €',tags:{es:['Brunch','All inclusive'],en:['Brunch','All inclusive'],de:['Brunch','All inclusive'],fr:['Brunch','All inclusive']},desc:{es:'Brunch frente al mar con cócteles, ambiente premium y estética beach club.',en:'Seaside brunch with cocktails, premium beach club vibes.',de:'Brunch am Meer, Cocktails, Premium Beach Club.',fr:'Brunch face à la mer, cocktails, esthétique beach club.'},wa:{es:'Hola, somos %n para Barbuda Beach el %d. ¿Reserva?',en:'Hi, %n for Barbuda on %d. Book?',de:'Hallo, %n für Barbuda am %d. Buchen?',fr:'Bonjour, %n pour Barbuda le %d. Réserver?'},map:''},
+  {id:'folies',cat:'beach',feat:true,premium:true,badge:'premium',bTxt:{es:'Premium',en:'Premium',de:'Premium',fr:'Premium'},name:'Beach Club Folies',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/15_rvbkq8.png',price:'€€€',tags:{es:['Cala Llamp','Exclusivo'],en:['Cala Llamp','Exclusive'],de:['Cala Llamp','Exklusiv'],fr:['Cala Llamp','Exclusif']},desc:{es:'Camas balinesas en Cala Llamp, experiencia de lujo con vistas al atardecer.',en:'Balinese beds at Cala Llamp, luxury experience with sunset views.',de:'Balinesische Betten in Cala Llamp, Luxuserlebnis.',fr:'Lits balinais à Cala Llamp, expérience luxe face au coucher de soleil.'},wa:{es:'Hola, cama balinesa para %n en Folies el %d. ¿Coste?',en:'Hi, Balinese bed for %n at Folies on %d. Cost?',de:'Hallo, Bali-Bett für %n bei Folies am %d. Kosten?',fr:'Bonjour, lit balinais pour %n à Folies le %d. Coût?'},map:'https://share.google/I2xJ1y2yYdBkT66jL'},
+  {id:'bcm',cat:'night',feat:true,badge:'season',bTxt:{es:'Abr–Oct',en:'Apr–Oct',de:'Apr–Okt',fr:'Avr–Oct'},name:'BCM Nightlife',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302375/Screenshot_2026-03-23_at_22.45.56_bhplz9.png',price:'35 €',tags:{es:['Magaluf','23–06h','+18'],en:['Magaluf','11PM–6AM','+18'],de:['Magaluf','23–06','+18'],fr:['Magaluf','23h–6h','+18']},desc:{es:'Entrada 35 € (depósito 10 € online + 25 € en punto autorizado). Camiseta/gorra BCM gratis. Dress code smart. +10 € si entras después de medianoche. Sin reentrada.',en:'Entry 35 € (10 € deposit online + 25 € at venue). Free BCM tee/hat. Smart dress code. +10 € after midnight. No re-entry.',de:'Eintritt 35 € (10 € Anzahlung online + 25 € vor Ort). BCM T-Shirt/Kappe gratis. Smart Dresscode. +10 € nach Mitternacht. Kein Wiedereintritt.',fr:'Entrée 35 € (10 € acompte en ligne + 25 € sur place). T-shirt/casquette BCM offert. Dress code smart. +10 € après minuit. Pas de réentrée.'},wa:{es:'Hola, BCM el %d para %n (35€). ¿Confirmar?',en:'Hi, BCM on %d for %n (35€). Confirm?',de:'Hallo, BCM am %d für %n (35€). Bestätigen?',fr:'Bonjour, BCM le %d pour %n (35€). Confirmer?'},map:''},
+  {id:'mcp',cat:'night',feat:false,badge:'season',bTxt:{es:'May–Sep',en:'May–Sep',de:'Mai–Sep',fr:'Mai–Sep'},name:'MCP Club Pass',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774365725/IMG_5725_hssktr.jpg',price:'30 €',tags:{es:['3 clubs','2 bebidas'],en:['3 clubs','2 drinks'],de:['3 Clubs','2 Getränke'],fr:['3 clubs','2 verres']},desc:{es:'30 € total (depósito 20 € + 10 € en puerta). Acceso 3 clubs: Bananas, Tokio, Soho. 2 bebidas incl. Shot gratis antes de 1 AM.',en:'30 € total (20 € deposit + 10 € at door). 3 clubs: Bananas, Tokio, Soho. 2 drinks incl. Free shot before 1 AM.',de:'30 € gesamt (20 € Anzahlung + 10 € Tür). 3 Clubs: Bananas, Tokio, Soho. 2 Getränke inkl. Gratis-Shot vor 1 Uhr.',fr:'30 € total (20 € acompte + 10 € entrée). 3 clubs: Bananas, Tokio, Soho. 2 verres incl. Shot gratuit avant 1h.'},wa:{es:'Hola, MCP Club Pass (30€) el %d para %n. ¿Reservar?',en:'Hi, MCP (30€) on %d for %n. Book?',de:'Hallo, MCP (30€) am %d für %n. Buchen?',fr:'Bonjour, MCP (30€) le %d pour %n. Réserver?'},map:''},
+  {id:'social',cat:'night',feat:false,premium:true,badge:'premium',bTxt:{es:'Premium',en:'Premium',de:'Premium',fr:'Premium'},name:'Social Club',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107977/4_ykfzz0.png',price:'25 €',tags:{es:['Palma','2 copas incl.'],en:['Palma','2 drinks incl.'],de:['Palma','2 Getränke inkl.'],fr:['Palma','2 verres incl.']},desc:{es:'25 € con 2 copas. Terraza elegante con vistas al puerto. 23:00–06:00.',en:'25 € with 2 drinks. Elegant harbour terrace. 11 PM–6 AM.',de:'25 € mit 2 Getränken. Elegante Hafenterrasse. 23–06.',fr:'25 € avec 2 verres. Terrasse élégante vue port. 23h–6h.'},wa:{es:'Buenas, Social Club el %d para %n. ¿Confirmar?',en:'Hi, Social Club on %d for %n. Confirm?',de:'Hallo, Social Club am %d für %n?',fr:'Bonjour, Social Club le %d pour %n?'},map:''},
+  {id:'redlion',cat:'night',feat:false,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert'},name:'Red Lion',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372174/IMG_5686_i8hxqh.jpg',price:'30–40 €',tags:{es:['Magaluf','4 bebidas'],en:['Magaluf','4 drinks'],de:['Magaluf','4 Getränke'],fr:['Magaluf','4 verres']},desc:{es:'30–40 € con 4 bebidas incluidas. Desde medianoche hasta cierre.',en:'30–40 € with 4 drinks. Midnight till late.',de:'30–40 € mit 4 Getränken. Ab Mitternacht.',fr:'30–40 € avec 4 boissons. De minuit à tard.'},wa:{es:'Hola, Red Lion el %d para %n?',en:'Hi, Red Lion on %d for %n?',de:'Hallo, Red Lion am %d für %n?',fr:'Bonjour, Red Lion le %d pour %n?'},map:''},
+  {id:'panama',cat:'night',feat:false,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert'},name:'Panama Jack',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372179/1-scaled.jpg_ag1v3h.webp',price:'15–20 €',tags:{es:['Magaluf','1 copa incl.'],en:['Magaluf','1 drink incl.'],de:['Magaluf','1 Getränk inkl.'],fr:['Magaluf','1 verre incl.']},desc:{es:'15–20 € entrada + consumición. 22:00–06:00.',en:'15–20 € entry + 1 drink. 10 PM–6 AM.',de:'15–20 € + 1 Getränk. 22–06.',fr:'15–20 € + 1 verre. 22h–6h.'},wa:{es:'Hola, Panama el %d para %n?',en:'Hi, Panama on %d for %n?',de:'Hallo, Panama am %d für %n?',fr:'Bonjour, Panama le %d pour %n?'},map:''},
+  {id:'gringos',cat:'night',feat:false,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert'},name:'Gringos Bingos',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372793/e1_wytmwc.webp',price:'35–45 €',tags:{es:['Magaluf','Mesa + show'],en:['Magaluf','Table + show'],de:['Magaluf','Tisch + Show'],fr:['Magaluf','Table + show']},desc:{es:'35–45 € con mesa incluida. Show + experiencia. 21:00–00:00.',en:'35–45 € with table. Show + experience. 9 PM–12 AM.',de:'35–45 € mit Tisch. Show + Erlebnis. 21–00.',fr:'35–45 € avec table. Show + expérience. 21h–00h.'},wa:{es:'Hola, Gringos el %d para %n?',en:'Hi, Gringos on %d for %n?',de:'Hallo, Gringos am %d für %n?',fr:'Bonjour, Gringos le %d pour %n?'},map:''},
+  {id:'tabana',cat:'night',feat:false,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert'},name:'Tabana',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300400/13_ztcm3p.png',price:{es:'Desde 15 €',en:'From 15 €',de:'Ab 15 €',fr:'Dès 15 €'},tags:{es:['Magaluf','Exótico'],en:['Magaluf','Exotic'],de:['Magaluf','Exotisch'],fr:['Magaluf','Exotique']},desc:{es:'Club con ambiente exótico, diseño cuidado y experiencia social.',en:'Exotic atmosphere club, refined design, social experience.',de:'Club mit exotischer Atmosphäre und raffiniertem Design.',fr:"Club ambiance exotique, design soigné."},wa:{es:'Hola, Tabana para %n el %d?',en:'Hi, Tabana for %n on %d?',de:'Hallo, Tabana für %n am %d?',fr:'Bonjour, Tabana pour %n le %d?'},map:''},
+  {id:'shisha',cat:'night',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:'Shisha Lounge',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107980/10_gojczo.png',price:'€',tags:{es:['Palmanova','Cocktails'],en:['Palmanova','Cocktails'],de:['Palmanova','Cocktails'],fr:['Palmanova','Cocktails']},desc:{es:'Lounge de shisha con ambiente relajado frente al mar.',en:'Shisha lounge with relaxed seaside vibes.',de:'Shisha-Lounge mit entspannter Atmosphäre am Meer.',fr:'Lounge chicha ambiance décontractée face à la mer.'},wa:{es:'Hola, mesa Shisha Lounge para %n el %d?',en:'Hi, Shisha Lounge for %n on %d?',de:'Hallo, Shisha Lounge für %n am %d?',fr:'Bonjour, Shisha Lounge pour %n le %d?'},map:''},
+  {id:'massimo',cat:'food',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:'Massimo Pizza',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107978/9_l7ileb.png',price:'€',tags:{es:['Magaluf','Familiar'],en:['Magaluf','Family'],de:['Magaluf','Familie'],fr:['Magaluf','Familial']},desc:{es:'Pizza artesanal al horno de leña, ambiente relajado.',en:'Wood-fired artisan pizza, relaxed vibe.',de:'Handgemachte Holzofenpizza, entspanntes Ambiente.',fr:'Pizza artisanale au four à bois, ambiance décontractée.'},wa:{es:'Hola, mesa Massimo para %n el %d a las 21:00?',en:'Hi, Massimo for %n on %d at 9 PM?',de:'Hallo, Massimo für %n am %d um 21?',fr:'Bonjour, Massimo pour %n le %d à 21h?'},map:''},
+  {id:'restaurants',cat:'food',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année"},name:{es:'Restaurantes',en:'Restaurants',de:'Restaurants',fr:'Restaurants'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300331/__-_2026-02-28T111918.026_syiynn.jpg',price:{es:'Variado',en:'Varies',de:'Variiert',fr:'Varié'},tags:{es:['Selección local','Gastronomía'],en:['Local selection','Gastronomy'],de:['Lokale Auswahl','Gastronomie'],fr:['Sélection locale','Gastronomie']},desc:{es:'Restaurantes locales y premium con propuestas gastronómicas variadas.',en:'Local and premium restaurants with diverse gastronomy.',de:'Lokale & Premium-Restaurants mit vielfältiger Gastronomie.',fr:'Restaurants locaux et premium, gastronomie variée.'},wa:{es:'Hola, restaurante para %n el %d. ¿Recomendaciones?',en:'Hi, restaurant for %n on %d. Recs?',de:'Hallo, Restaurant für %n am %d. Empfehlungen?',fr:'Bonjour, restaurant pour %n le %d. Suggestions?'},map:''}
 ];
 
-const loc = v => typeof v === 'object' ? (v[lang]||v.es) : v;
-const translate = k => i18n[lang][k] || k;
+const partners=[
+  {n:'MCP',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/44_ynjvv7.png'},
+  {n:'Sea Moments',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302017/45_t8pli3.png'},
+  {n:'Panama Jack',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/40_uhkdnr.png'},
+  {n:'Red Lion',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/41_aar27l.png'},
+  {n:'BCM',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/42_yb023k.png'},
+  {n:'Gringos',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/39_il5qvv.png'},
+  {n:'Social Club',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302014/43_vwzc9y.png'}
+];
 
-function renderFeatured() {
-  const f = V.filter(v=>v.feat);
-  document.getElementById('featScroll').innerHTML = f.map((v,i)=>`
-    <a class="feat-card rv" style="animation-delay:${i*0.1}s" href="https://wa.me/${WA}?text=${v.wa}">
-      <img src="${v.img}" alt="img" loading="lazy">
-      <div class="feat-price">${loc(v.price)}</div>
+const pricingData=[
+  {title:{es:'Alquiler Barco (sin licencia)',en:'Boat Rental (no license)',de:'Bootsvermietung (ohne Lizenz)',fr:'Location Bateau (sans permis)'},sub:{es:'Santa Ponça · Hasta 5 personas · Dep. 200 €',en:'Santa Ponça · Up to 5 pax · Dep. 200 €',de:'Santa Ponça · Bis 5 Pers · Anz. 200 €',fr:'Santa Ponça · Max 5 pers · Dép. 200 €'},rows:[['2h','130 €'],['3h','170 €'],['4h','200 €'],['5h','230 €'],['6h','260 €']],note:{es:'Incluye gasolina y snorkel. Contacto: +34 664 224 340',en:'Includes gas & snorkel. Contact: +34 664 224 340',de:'Inkl. Benzin & Schnorchel. Kontakt: +34 664 224 340',fr:'Essence & tuba inclus. Contact: +34 664 224 340'}},
+  {title:{es:'Nightlife Magaluf',en:'Magaluf Nightlife',de:'Magaluf Nachtleben',fr:'Nightlife Magaluf'},sub:{es:'Precios por persona · +18 obligatorio',en:'Per person · +18 required',de:'Pro Person · +18 erforderlich',fr:'Par personne · +18 obligatoire'},rows:[['BCM','35 €'],['MCP (3 clubs)','30 €'],['Social Club','25 €'],['Red Lion','30–40 €'],['Gringos Bingos','35–45 €'],['Panama Jack','15–20 €']],note:{es:'BCM: depósito 10 € online + 25 € en punto, camiseta gratis, +10 € después de medianoche, sin reentrada. MCP: depósito 20 € + 10 € puerta, shot gratis antes de 1 AM.',en:'BCM: 10 € deposit + 25 € at venue, free tee, +10 € after midnight, no re-entry. MCP: 20 € deposit + 10 € door, free shot before 1 AM.',de:'BCM: 10 € Anzahlung + 25 € vor Ort, Gratis-Shirt, +10 € nach Mitternacht, kein Wiedereintritt. MCP: 20 € Anz. + 10 € Tür, Gratis-Shot vor 1 Uhr.',fr:'BCM: 10 € acompte + 25 € sur place, t-shirt offert, +10 € après minuit, pas de réentrée. MCP: 20 € ac. + 10 € entrée, shot gratuit avant 1h.'}}
+];
+
+const i18n={
+  es:{h_badge:'Temporada 2025 – 2026',h_h1:'Reserva Mallorca<br>como un <em>local</em>',h_p:'Fiestas, excursiones, boat parties y los mejores locales de la isla. Sin intermediarios — reserva directo por WhatsApp y paga al llegar.',h_cta1:'Ver todos los planes',h_cta2:'Reservar ahora',h_scroll:'Scroll',t1:'Experiencias',t2:'Valoración',t3:'Respuesta WA',t4:'Comisiones',feat_t:'Lo más <em>reservado</em>',feat_s:'Las experiencias que más repiten nuestros clientes',c_all:'Todos',c_water:'Agua',c_beach:'Playa & Día',c_night:'Nightlife',c_food:'Food',c_explore:'Explorar',grid_t:'Todos los <em>planes</em>',pr_t:'Precios <em>detallados</em>',pr_s:'Info transparente — sin sorpresas al llegar',part_t:'Colaboradores oficiales',faq_t:'Preguntas <em>frecuentes</em>',foot:'Reserva directa sin comisiones',m_t:'Reserva <em>rápida</em>',m_s:'Rellena y te contactamos por WhatsApp en menos de 1 hora',f_name:'Nombre',f_act:'Actividad',f_date:'Fecha',f_pax:'Personas',f_notes:'Notas',f_send:'Enviar por WhatsApp →',book:'Reservar',toast:'¡Abriendo WhatsApp!',qf_t:'¿Sabes qué <em>reservar</em>?',qf_s:'Dinos qué te interesa y te confirmamos por WhatsApp al momento',qf_send:'💬 Reservar por WhatsApp'},
+  en:{h_badge:'2025 – 2026 Season',h_h1:'Book Mallorca<br>like a <em>local</em>',h_p:'Parties, excursions, boat trips and the best spots on the island. No middlemen — book via WhatsApp, pay on arrival.',h_cta1:'See all plans',h_cta2:'Book now',h_scroll:'Scroll',t1:'Experiences',t2:'Rating',t3:'WA Response',t4:'Fees',feat_t:'Most <em>booked</em>',feat_s:'Experiences our clients book again and again',c_all:'All',c_water:'Water',c_beach:'Beach & Day',c_night:'Nightlife',c_food:'Food',c_explore:'Explore',grid_t:'All <em>plans</em>',pr_t:'Detailed <em>pricing</em>',pr_s:'Transparent info — no surprises on arrival',part_t:'Official partners',faq_t:'Frequently <em>asked</em>',foot:'Direct booking, no fees',m_t:'Quick <em>booking</em>',m_s:"Fill in and we'll contact you via WhatsApp within 1 hour",f_name:'Name',f_act:'Activity',f_date:'Date',f_pax:'Guests',f_notes:'Notes',f_send:'Send via WhatsApp →',book:'Book',toast:'Opening WhatsApp!',qf_t:'Ready to <em>book</em>?',qf_s:'Tell us what you want and we\'ll confirm via WhatsApp instantly',qf_send:'💬 Book via WhatsApp'},
+  de:{h_badge:'Saison 2025 – 2026',h_h1:'Buche Mallorca<br>wie ein <em>Local</em>',h_p:'Partys, Ausflüge, Bootstouren und die besten Spots. Ohne Vermittler — per WhatsApp buchen, vor Ort zahlen.',h_cta1:'Alle Pläne',h_cta2:'Jetzt buchen',h_scroll:'Scroll',t1:'Erlebnisse',t2:'Bewertung',t3:'WA Antwort',t4:'Gebühren',feat_t:'Am meisten <em>gebucht</em>',feat_s:'Erlebnisse die unsere Kunden immer wieder buchen',c_all:'Alle',c_water:'Wasser',c_beach:'Strand & Tag',c_night:'Nightlife',c_food:'Essen',c_explore:'Entdecken',grid_t:'Alle <em>Pläne</em>',pr_t:'Detaillierte <em>Preise</em>',pr_s:'Transparente Info — keine Überraschungen vor Ort',part_t:'Offizielle Partner',faq_t:'Häufig <em>gefragt</em>',foot:'Direktbuchung ohne Gebühren',m_t:'Schnell<em>buchung</em>',m_s:'Ausfüllen — Kontakt per WhatsApp in unter 1 Stunde',f_name:'Name',f_act:'Aktivität',f_date:'Datum',f_pax:'Personen',f_notes:'Notizen',f_send:'Per WhatsApp senden →',book:'Buchen',toast:'WhatsApp öffnet!',qf_t:'Bereit zu <em>buchen</em>?',qf_s:'Sag uns was dich interessiert — Bestätigung per WhatsApp',qf_send:'💬 Per WhatsApp buchen'},
+  fr:{h_badge:'Saison 2025 – 2026',h_h1:'Réservez Majorque<br>comme un <em>local</em>',h_p:"Fêtes, excursions, boat parties et les meilleurs spots. Sans intermédiaire — réservez par WhatsApp, payez sur place.",h_cta1:'Voir les plans',h_cta2:'Réserver',h_scroll:'Scroll',t1:'Expériences',t2:'Note',t3:'Réponse WA',t4:'Frais',feat_t:'Les plus <em>réservés</em>',feat_s:'Les expériences que nos clients réservent encore et encore',c_all:'Tous',c_water:'Eau',c_beach:'Plage & Jour',c_night:'Nightlife',c_food:'Food',c_explore:'Explorer',grid_t:'Tous les <em>plans</em>',pr_t:'Prix <em>détaillés</em>',pr_s:'Info transparente — pas de surprises sur place',part_t:'Partenaires officiels',faq_t:'Questions <em>fréquentes</em>',foot:'Réservation directe sans frais',m_t:'Réservation <em>rapide</em>',m_s:'Remplissez et nous vous contactons par WhatsApp sous 1h',f_name:'Nom',f_act:'Activité',f_date:'Date',f_pax:'Personnes',f_notes:'Notes',f_send:'Envoyer par WhatsApp →',book:'Réserver',toast:'Ouverture WhatsApp!',qf_t:'Prêt à <em>réserver</em> ?',qf_s:'Dites-nous ce qui vous intéresse — confirmation WhatsApp immédiate',qf_send:'💬 Réserver par WhatsApp'}
+};
+
+const faqs={
+  es:[{q:'¿Cómo funciona?',a:'Elige plan → rellena formulario → confirmación WhatsApp en <1h → paga al llegar.'},{q:'¿Hay comisiones?',a:'Cero. Reservas directo con proveedores locales.'},{q:'¿Si llueve?',a:'Actividades acuáticas se reprograman gratis.'},{q:'¿Necesito licencia para barco?',a:'No. Barcos <5m y <15 CV sin licencia en España.'},{q:'¿Puedo cancelar?',a:'Mayoría: cancelación gratuita 24–48h antes.'},{q:'¿Idiomas?',a:'Español, inglés, alemán y francés.'}],
+  en:[{q:'How does it work?',a:'Pick plan → fill form → WhatsApp confirmation <1h → pay on arrival.'},{q:'Any fees?',a:'Zero. Book directly with local providers.'},{q:'Bad weather?',a:'Water activities rescheduled for free.'},{q:'Boat license needed?',a:'No. Boats <5m / 15HP need no license in Spain.'},{q:'Can I cancel?',a:'Most: free cancellation 24–48h ahead.'},{q:'Languages?',a:'Spanish, English, German, French.'}],
+  de:[{q:'Wie funktioniert es?',a:'Plan wählen → Formular → WhatsApp-Bestätigung <1h → vor Ort zahlen.'},{q:'Gebühren?',a:'Null. Direkt bei lokalen Anbietern.'},{q:'Schlechtes Wetter?',a:'Wasseraktivitäten kostenlos verschoben.'},{q:'Bootsführerschein?',a:'Nein. Boote <5m / 15 PS ohne Schein.'},{q:'Stornierung?',a:'Meist kostenlos 24–48h vorher.'},{q:'Sprachen?',a:'Spanisch, Englisch, Deutsch, Französisch.'}],
+  fr:[{q:'Comment ça marche?',a:'Choisir → formulaire → confirmation WhatsApp <1h → payer sur place.'},{q:'Des frais?',a:'Zéro. Réservation directe.'},{q:'Mauvais temps?',a:'Activités nautiques reprogrammées gratuitement.'},{q:'Permis bateau?',a:'Non. Bateaux <5m / <15CV sans permis.'},{q:'Annulation?',a:'La plupart: gratuite 24–48h avant.'},{q:'Langues?',a:'Espagnol, anglais, allemand, français.'}]
+};
+
+/* ═══ HELPERS ═══ */
+function t(k){return i18n[lang]?.[k]||i18n.es[k]||k}
+function loc(v){return typeof v==='object'?(v[lang]||v.es||''):v}
+
+function renderFeatured(){
+  const s=document.getElementById('featScroll');
+  const feats=V.filter(v=>v.feat);
+  s.innerHTML=feats.map(v=>`
+    <a class="feat-card" href="${waLink(v)}" target="_blank" rel="noopener">
+      <img src="${v.img}" alt="${loc(v.name)}" loading="lazy">
+      <span class="feat-price">${loc(v.price)}</span>
       <div class="feat-info">
-        <div class="feat-tag">${v.cat}</div>
+        <span class="feat-tag">${loc(v.bTxt)}</span>
         <h3>${loc(v.name)}</h3>
         <p>${loc(v.desc)}</p>
       </div>
     </a>`).join('');
 }
 
-function renderVenues() {
-  const list = cat==='all' ? V : V.filter(v=>v.cat===cat);
-  document.getElementById('vGrid').innerHTML = list.map((v,i)=>`
-    <div class="v-card rv" style="animation-delay:${i*0.1}s">
+function renderVenues(){
+  const g=document.getElementById('vGrid');
+  const list=cat==='all'?V:V.filter(v=>v.cat===cat);
+  g.innerHTML=list.map((v,i)=>`
+    <div class="v-card rv" style="transition-delay:${i*25}ms">
       <div class="v-img">
-        <img src="${v.img}" alt="img" loading="lazy">
-        <div class="v-badge ${v.badge==='premium'?'b-premium':''}">${v.badge}</div>
-        <div class="v-info-overlay">
-          <div class="v-top"><h3>${loc(v.name)}</h3><div class="v-pr">${loc(v.price)}</div></div>
-          <div class="v-tags">${(loc(v.tags)||[]).map(t=>`<span class="v-tag">${t}</span>`).join('')}</div>
-        </div>
+        <img src="${v.img}" alt="${loc(v.name)}" loading="lazy">
+        <span class="v-badge ${v.badge==='premium'?'b-premium':v.badge==='season'?'b-season':'b-open'}">${loc(v.bTxt)}</span>
       </div>
       <div class="v-body">
+        <div class="v-top"><h3>${loc(v.name)}</h3><span class="v-pr">${loc(v.price)}</span></div>
+        <div class="v-tags">${(loc(v.tags)||[]).map(t=>`<span class="v-tag">${t}</span>`).join('')}</div>
         <p class="v-desc">${loc(v.desc)}</p>
-        <a class="v-wa" href="https://wa.me/${WA}?text=${v.wa}">Reservar</a>
+        <div class="v-acts">
+          <a class="v-wa" href="${waLink(v)}" target="_blank" rel="noopener">💬 ${t('book')}</a>
+          ${v.map?`<a class="v-map" href="${v.map}" target="_blank" rel="noopener">📍</a>`:''}
+        </div>
       </div>
+    </div>`).join('');
+  requestAnimationFrame(()=>{g.querySelectorAll('.rv').forEach((el,i)=>{setTimeout(()=>el.classList.add('vis'),i*30)})});
+}
+
+function renderPricing(){
+  const g=document.getElementById('pricingGrid');
+  g.innerHTML=pricingData.map(p=>`
+    <div class="p-card rv">
+      <h4>${loc(p.title)}</h4>
+      <div class="p-sub">${loc(p.sub)}</div>
+      ${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}
+      <div class="p-note">${loc(p.note)}</div>
     </div>`).join('');
 }
 
-function renderFormSelect() {
-  document.getElementById('fA').innerHTML = V.map(v=>`<option value="${v.id}">${loc(v.name)}</option>`).join('');
+function renderPartners(){document.getElementById('partnerRow').innerHTML=partners.map(p=>`<div class="p-logo" title="${p.n}"><img src="${p.img}" alt="${p.n}"></div>`).join('')}
+
+function renderFaq(){} // removed
+
+function populateSelect(){
+  const opts=V.map(v=>`<option value="${v.id}">${loc(v.name)}</option>`).join('');
+  document.getElementById('fA').innerHTML=opts;
+  const qA=document.getElementById('qA');
+  if(qA)qA.innerHTML=opts;
 }
 
-function upUI() {
-  document.querySelectorAll('[data-i18n]').forEach(el => el.innerHTML = translate(el.dataset.i18n));
-  document.querySelectorAll('.lb').forEach(b => b.classList.toggle('on', b.dataset.lang===lang));
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('on', b.dataset.cat===cat));
-  renderFeatured(); renderVenues(); renderFormSelect();
-}
+function applyI18n(){document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t(el.getAttribute('data-i18n'));if(v)el.innerHTML=v})}
 
-document.querySelectorAll('.lb').forEach(b => b.addEventListener('click', ()=>{ lang=b.dataset.lang; upUI(); }));
-document.querySelectorAll('.cat-btn').forEach(b => b.addEventListener('click', ()=>{ cat=b.dataset.cat; upUI(); }));
+function waLink(v,n,d,p){let m=loc(v.wa);m=m.replace('%n',p||'2').replace('%d',d||'[fecha]');if(n)m=`(${n}) `+m;return`https://wa.me/${WA}?text=${encodeURIComponent(m)}`}
+
+function setLang(l){lang=l;document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));applyI18n();renderFeatured();renderVenues();renderPricing();populateSelect()}
+
+function setCat(c){cat=c;document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('on',b.dataset.cat===c));renderVenues()}
+
+function openModal(vid){document.getElementById('bkModal').classList.add('show');if(vid)document.getElementById('fA').value=vid}
+function closeModal(){document.getElementById('bkModal').classList.remove('show')}
+
+function buildSummary(n,aid,d,p,notes){
+  const v=V.find(x=>x.id===aid);if(!v)return'';
+  const vname=loc(v.name),vprice=loc(v.price);
+  let m=`📋 *RESERVA MallorcasLocal*\n\n👤 Nombre: ${n}\n🎯 Actividad: ${vname}\n💰 Precio: ${vprice}\n📅 Fecha: ${d}\n👥 Personas: ${p}`;
+  if(notes)m+=`\n📝 Notas: ${notes}`;
+  m+=`\n\n¿Podéis confirmar disponibilidad? ¡Gracias!`;
+  return m;
+}
 
 function submitBooking(e){
   e.preventDefault();
-  const n=document.getElementById('fN').value, aid=document.getElementById('fA').value, d=document.getElementById('fD').value, p=document.getElementById('fP').value;
-  const v=V.find(x=>x.id===aid);
-  const m=`📋 *RESERVA EXPRES*\n👤 Nombre: ${n}\n🎯 Actividad: ${loc(v.name)}\n📅 Fecha: ${d}\n👥 Personas: ${p}\n\nPor favor confirmar.`;
-  document.getElementById('toast').classList.add('show');
-  setTimeout(()=>{ window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank'); document.getElementById('toast').classList.remove('show'); },800);
+  const m=buildSummary(document.getElementById('fN').value,document.getElementById('fA').value,document.getElementById('fD').value,document.getElementById('fP').value,document.getElementById('fNo').value);
+  if(!m)return;
+  showToast(t('toast'));
+  setTimeout(()=>{window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');closeModal()},500);
 }
 
-document.getElementById('fD').min = new Date().toISOString().split('T')[0];
-upUI();
+function submitQuick(e){
+  e.preventDefault();
+  const m=buildSummary(document.getElementById('qN').value,document.getElementById('qA').value,document.getElementById('qD').value,document.getElementById('qP').value,document.getElementById('qNo').value);
+  if(!m)return;
+  showToast(t('toast'));
+  setTimeout(()=>{window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank')},500);
+}
+
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
+
+/* ═══ INIT ═══ */
+document.querySelectorAll('.lb').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',()=>setCat(b.dataset.cat)));
+document.getElementById('bkModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.getElementById('themeBtn').addEventListener('click',()=>document.body.classList.toggle('light-mode'));
+document.getElementById('fD').min=new Date().toISOString().split('T')[0];
+document.getElementById('qD').min=new Date().toISOString().split('T')[0];
+
+setLang('es');renderPartners();
+
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.06});
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>obs.observe(el)),200);
 </script>
 </body>
 </html>
