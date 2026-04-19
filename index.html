@@ -1,1639 +1,615 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Book Mallorca experiences like a local — parties, boat trips, hidden beaches, nightlife. Direct WhatsApp booking, no fees.">
-  <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
-  
-  <!-- Open Graph / Social -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="MallorcasLocal — Reserva Mallorca como un local">
-  <meta property="og:description" content="Fiestas, excursiones, boat parties y los mejores locales. Sin intermediarios.">
-  <meta property="og:image" content="https://res.cloudinary.com/dxhef6dju/image/upload/w_1200,q_auto,f_auto/v1774300396/28_dwfybr.png">
-  <meta property="og:url" content="https://mallorcaslocal.com">
-  <meta name="twitter:card" content="summary_large_image">
-  
-  <!-- Preconnect & Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://res.cloudinary.com">
-  <link rel="dns-prefetch" href="https://wa.me">
-  
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TravelAgency",
-    "name": "MallorcasLocal",
-    "description": "Book authentic Mallorca experiences directly via WhatsApp",
-    "url": "https://mallorcaslocal.com",
-    "areaServed": "Mallorca, Spain",
-    "availableLanguage": ["en","es","de","fr","it","ar","ru"],
-    "priceRange": "€€"
-  }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MallorcasLocal — Reserva Mallorca como un local</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;--bg2:#111;--bg3:#191919;--card:#0e0e0e;
+  --line:rgba(255,255,255,.06);--line2:rgba(255,255,255,.09);--line3:rgba(255,255,255,.14);
+  --text:#eee;--text2:rgba(255,255,255,.45);--text3:rgba(255,255,255,.2);
+  --gold:#c9a96e;--golddim:rgba(201,169,110,.12);--goldglow:rgba(201,169,110,.25);
+  --wa:#25d366;--ff:'DM Sans',sans-serif;--fs:'Playfair Display',serif;
+  --ease:.25s cubic-bezier(.4,0,.2,1);--r:12px;--r2:16px;--r3:24px;--rmax:999px;--btn-text:#0a0a0a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--ff);font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}button{font-family:var(--ff);cursor:pointer;border:none;background:none;color:var(--text)}img{display:block;max-width:100%}
+::selection{background:var(--gold);color:#000}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.35;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E")}
 
-  <title>MallorcasLocal — Reserva Mallorca como un local</title>
-  
-  <style>
-    /* ===== CSS RESET & BASE ===== */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-    body{background:var(--bg);color:var(--text);font-family:var(--ff);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
-    :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-    :focus:not(:focus-visible){outline:none}
-    img{display:block;max-width:100%;height:auto}
-    a{text-decoration:none;color:inherit;transition:color var(--ease)}
-    button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-    input,textarea,select{font:inherit;color:inherit;background:none;border:none;outline:none}
-    ::selection{background:var(--gold);color:#000}
-    
-    /* ===== CSS VARIABLES — ENHANCED ===== */
-    :root{
-      /* Core */
-      --bg:#050505;--bg2:#0f0f0f;--bg3:#1a1a1a;--card:#111;--surface:rgba(255,255,255,.03);
-      /* Lines & Borders */
-      --line:rgba(255,255,255,.06);--line2:rgba(255,255,255,.1);--line3:rgba(255,255,255,.18);--line-glow:rgba(201,169,110,.3);
-      /* Text */
-      --text:#f5f5f5;--text2:rgba(255,255,255,.65);--text3:rgba(255,255,255,.35);--text-inv:#0a0a0a;
-      /* Accent */
-      --gold:#c9a96e;--gold2:#e6c98e;--golddim:rgba(201,169,110,.12);--goldglow:rgba(201,169,110,.35);--gold-glow-2:0 0 32px rgba(201,169,110,.25);
-      --wa:#25d366;--wa-glow:0 0 24px rgba(37,211,102,.35);
-      /* UI */
-      --ff:'DM Sans',system-ui,-apple-system,sans-serif;--fs:'Playfair Display',Georgia,serif;--fm:'JetBrains Mono',monospace;
-      --ease:250ms cubic-bezier(.4,0,.2,1);--ease-out:cubic-bezier(.0,0,.2,1);--ease-in:cubic-bezier(.4,0,1,1);
-      --r:12px;--r2:16px;--r3:24px;--r4:32px;--rmax:999px;--shadow:0 4px 24px rgba(0,0,0,.35);--shadow-lg:0 12px 48px rgba(0,0,0,.5);
-      --blur:blur(24px);--blur-sm:blur(12px);
-      --container:1280px;--gap:16px;--gap-lg:24px;
-      --z-toast:1100;--z-modal:1000;--z-fab:999;--z-nav:900;--z-hero:100;
-      --btn-text:#0a0a0a;--btn-text-inv:#fff;
-      /* Animation */
-      --anim-fade:opacity .4s var(--ease-out),transform .4s var(--ease-out);
-      --anim-slide:opacity .5s var(--ease-out),transform .5s var(--ease-out);
-      --anim-scale:transform .3s var(--ease),opacity .2s var(--ease);
-    }
-    
-    /* Light Mode — Enhanced */
-    [data-theme="light"]{
-      --bg:#faf9f6;--bg2:#f0efea;--bg3:#e5e3dc;--card:#fff;--surface:rgba(0,0,0,.03);
-      --line:rgba(0,0,0,.06);--line2:rgba(0,0,0,.1);--line3:rgba(0,0,0,.18);--line-glow:rgba(154,122,60,.25);
-      --text:#1a1a1a;--text2:rgba(0,0,0,.6);--text3:rgba(0,0,0,.35);
-      --gold:#9a7a3c;--gold2:#b89a5e;--golddim:rgba(154,122,60,.1);--goldglow:rgba(154,122,60,.2);--gold-glow-2:0 0 32px rgba(154,122,60,.18);
-      --btn-text:#fff;--btn-text-inv:#0a0a0a;
-    }
-    [data-theme="light"]::before{opacity:.08}
-    [data-theme="light"] .glass{background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.08)}
-    [data-theme="light"] .hero-bg img{opacity:.45;filter:saturate(.9) brightness(1.02)}
-    
-    /* ===== TEXTURE OVERLAY — SUBTLE NOISE ===== */
-    body::before{
-      content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-      opacity:.25;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size:256px;animation:noise 2s steps(1) infinite;
-    }
-    @keyframes noise{0%,100%{transform:translate(0,0)}10%{transform:translate(-1%,1%)}20%{transform:translate(1%,-1%)}30%{transform:translate(-1%,-1%)}40%{transform:translate(1%,1%)}50%{transform:translate(-1%,0)}60%{transform:translate(1%,0)}70%{transform:translate(0,-1%)}80%{transform:translate(0,1%)}90%{transform:translate(-1%,1%)}}
-    
-    /* ===== GLASSMORPHISM UTILS ===== */
-    .glass{
-      background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-      border:1px solid var(--line);border-radius:var(--r2);transition:border-color var(--ease),background var(--ease)
-    }
-    .glass:hover{border-color:var(--line2)}
-    
-    /* ===== TYPOGRAPHY — ENHANCED ===== */
-    .text-gradient{
-      background:linear-gradient(135deg,var(--gold),var(--gold2));
-      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-      display:inline-block;font-weight:600
-    }
-    .text-glow{text-shadow:var(--gold-glow-2)}
-    .fs-display{font-family:var(--fs);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:500;line-height:1.02;letter-spacing:-.025em}
-    .fs-h1{font-family:var(--fs);font-size:clamp(1.875rem,4vw,3rem);font-weight:500;line-height:1.05;letter-spacing:-.02em}
-    .fs-h2{font-family:var(--fs);font-size:clamp(1.5rem,3vw,2.25rem);font-weight:500;letter-spacing:-.015em}
-    .fs-body{font-size:clamp(.875rem,1.2vw,1rem);color:var(--text2)}
-    .fs-sm{font-size:.8125rem;color:var(--text3);line-height:1.5}
-    .fs-mono{font-family:var(--fm);font-size:.75rem;letter-spacing:.02em}
-    
-    /* ===== LAYOUT ===== */
-    .container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:clamp(1rem,4vw,2rem)}
-    .section{padding-block:clamp(3rem,8vh,5rem)}
-    .section-header{max-width:680px;margin-inline:auto;text-align:center;margin-bottom:clamp(2rem,4vh,3rem)}
-    .section-header h2 em{font-style:italic;color:var(--gold)}
-    .section-header p{margin-top:.5rem;color:var(--text2);max-width:480px;margin-inline:auto}
-    
-    /* ===== TOPBAR — ENHANCED ===== */
-    .topbar{
-      position:sticky;top:0;z-index:var(--z-nav);height:64px;
-      background:rgba(5,5,5,.85);border-bottom:1px solid var(--line);
-      backdrop-filter:var(--blur-sm);-webkit-backdrop-filter:var(--blur-sm);
-      display:flex;align-items:center;justify-content:space-between;
-      padding-inline:clamp(1rem,4vw,2rem);transition:all var(--ease);
-    }
-    [data-theme="light"] .topbar{background:rgba(250,249,246,.92)}
-    .topbar.scrolled{height:56px;background:rgba(5,5,5,.95);box-shadow:0 4px 24px rgba(0,0,0,.25)}
-    [data-theme="light"] .topbar.scrolled{background:rgba(250,249,246,.98)}
-    
-    .tb-logo{
-      font-family:var(--fs);font-size:1.125rem;font-weight:600;letter-spacing:-.02em;
-      display:flex;align-items:center;gap:.375rem;transition:transform var(--ease)
-    }
-    .tb-logo:hover{transform:translateY(-1px)}
-    .tb-logo span{color:var(--gold);font-style:italic;font-weight:700}
-    .tb-logo::after{
-      content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;
-      background:linear-gradient(90deg,transparent,var(--gold),transparent);
-      opacity:0;transition:opacity var(--ease);border-radius:2px
-    }
-    .tb-logo:hover::after{opacity:1}
-    
-    .tb-actions{display:flex;align-items:center;gap:.25rem}
-    
-    .lang-switch{
-      display:flex;gap:2px;padding:3px;background:var(--surface);
-      border:1px solid var(--line);border-radius:8px;overflow:hidden
-    }
-    .lang-btn{
-      padding:4px 8px;font-size:.6875rem;font-weight:600;letter-spacing:.05em;
-      text-transform:uppercase;color:var(--text3);border-radius:6px;
-      transition:all var(--ease);min-width:28px;text-align:center
-    }
-    .lang-btn:hover{color:var(--text2);background:var(--line)}
-    .lang-btn.active{color:var(--gold);background:var(--golddim);font-weight:700}
-    
-    .theme-toggle{
-      width:36px;height:36px;border-radius:10px;margin-left:4px;
-      display:flex;align-items:center;justify-content:center;
-      color:var(--text2);font-size:1rem;transition:all var(--ease);
-      position:relative;overflow:hidden
-    }
-    .theme-toggle::before{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:radial-gradient(circle at 30% 30%,var(--gold),transparent 60%);
-      opacity:0;transition:opacity var(--ease)
-    }
-    .theme-toggle:hover{color:var(--text);background:var(--line)}
-    .theme-toggle:hover::before{opacity:.15}
-    
-    /* ===== HERO — CINEMATIC ===== */
-    .hero{
-      position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
-      padding-block-end:clamp(3rem,8vh,6rem);overflow:hidden;isolation:isolate
-    }
-    .hero-bg{
-      position:absolute;inset:0;z-index:-2;transform:scale(1.02)
-    }
-    .hero-bg img{
-      width:100%;height:100%;object-fit:cover;opacity:.4;filter:saturate(.7) contrast(1.05);
-      transition:transform .8s var(--ease-out),opacity .6s var(--ease)
-    }
-    .hero:hover .hero-bg img{transform:scale(1.04)}
-    .hero-bg::after{
-      content:'';position:absolute;inset:0;z-index:-1;
-      background:linear-gradient(to top,var(--bg) 0%,rgba(5,5,5,.7) 35%,rgba(5,5,5,.3) 65%,transparent 100%)
-    }
-    [data-theme="light"] .hero-bg::after{
-      background:linear-gradient(to top,var(--bg) 0%,rgba(250,249,246,.6) 35%,rgba(250,249,246,.2) 65%,transparent 100%)
-    }
-    
-    .hero-content{
-      position:relative;z-index:1;max-width:720px;margin-inline:auto;text-align:center;
-      padding-inline:clamp(1rem,4vw,2rem);animation:heroIn .8s var(--ease-out) both
-    }
-    @keyframes heroIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-    
-    .hero-badge{
-      display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;
-      padding:.375rem 1rem;border-radius:var(--rmax);border:1px solid var(--line2);
-      font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-      color:var(--text2);background:var(--surface);backdrop-filter:var(--blur-sm)
-    }
-    .hero-dot{
-      width:6px;height:6px;border-radius:50%;background:var(--gold);
-      box-shadow:0 0 0 3px var(--golddim);animation:pulse 2.5s infinite
-    }
-    @keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--golddim)}50%{box-shadow:0 0 0 10px transparent}}
-    
-    .hero h1{margin-bottom:1rem}
-    .hero h1 em{font-style:italic;color:var(--gold);position:relative}
-    .hero h1 em::after{
-      content:'';position:absolute;bottom:2px;left:-2px;right:-2px;height:4px;
-      background:var(--gold);opacity:.15;border-radius:2px;z-index:-1
-    }
-    
-    .hero-p{
-      font-size:clamp(.9375rem,1.5vw,1.0625rem);color:var(--text2);
-      max-width:560px;margin-inline:auto;margin-bottom:2rem;line-height:1.7
-    }
-    
-    .hero-ctas{
-      display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;
-      margin-bottom:2.5rem
-    }
-    
-    /* ===== BUTTONS — ENHANCED ===== */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-      padding:.8125rem 1.75rem;border-radius:var(--rmax);font-weight:600;
-      font-size:.8125rem;letter-spacing:.01em;transition:all var(--ease);
-      position:relative;overflow:hidden;will-change:transform
-    }
-    .btn::before{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:linear-gradient(135deg,rgba(255,255,255,.15),transparent 50%);
-      opacity:0;transition:opacity var(--ease)
-    }
-    .btn:hover::before{opacity:1}
-    .btn:active{transform:translateY(1px) scale(.99)}
-    
-    .btn-primary{
-      background:var(--gold);color:var(--btn-text);
-      box-shadow:0 4px 16px var(--goldglow)
-    }
-    .btn-primary:hover{
-      filter:brightness(1.08);transform:translateY(-2px);
-      box-shadow:0 8px 32px var(--goldglow)
-    }
-    
-    .btn-secondary{
-      background:transparent;color:var(--text);border:1px solid var(--line2)
-    }
-    .btn-secondary:hover{border-color:var(--line3);background:var(--surface)}
-    
-    .btn-ghost{
-      background:transparent;color:var(--text2);border:1px solid var(--line)
-    }
-    .btn-ghost:hover{color:var(--text);border-color:var(--line2);background:var(--surface)}
-    
-    .btn-icon{padding:.625rem;border-radius:12px;width:44px;height:44px}
-    
-    /* Scroll Indicator */
-    .hero-scroll{
-      position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-      z-index:1;font-size:.625rem;letter-spacing:.15em;text-transform:uppercase;
-      color:var(--text3);display:flex;flex-direction:column;align-items:center;gap:.5rem;
-      animation:bob 2.5s ease-in-out infinite
-    }
-    @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-    .hero-scroll::after{
-      content:'';width:1px;height:24px;background:linear-gradient(to bottom,var(--text3),transparent)
-    }
-    .hero-scroll svg{width:18px;height:18px;opacity:.6}
-    
-    /* ===== TRUST BAR — ENHANCED ===== */
-    .trust{
-      display:flex;justify-content:center;gap:clamp(1.5rem,4vw,3.5rem);
-      padding:1.5rem clamp(1rem,4vw,2rem);border-bottom:1px solid var(--line);
-      background:var(--bg2);position:relative;z-index:10
-    }
-    .trust::after{
-      content:'';position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(ellipse at top,transparent 60%,var(--bg2) 100%)
-    }
-    .trust-item{text-align:center;min-width:64px}
-    .trust-item strong{
-      display:block;font-family:var(--fs);font-size:clamp(1.375rem,2.5vw,2.125rem);
-      font-weight:500;letter-spacing:-.02em;color:var(--gold);line-height:1
-    }
-    .trust-item span{
-      font-size:.625rem;color:var(--text2);text-transform:uppercase;
-      letter-spacing:.08em;font-weight:600;margin-top:.25rem;display:block
-    }
-    
-    /* ===== FEATURED CAROUSEL — MAGNETIC ===== */
-    .featured{padding-block-end:1rem}
-    .feat-scroll{
-      display:flex;gap:var(--gap);overflow-x:auto;scrollbar-width:none;
-      padding-inline:clamp(1rem,4vw,2rem);scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch
-    }
-    .feat-scroll::-webkit-scrollbar{display:none}
-    
-    .feat-card{
-      flex:0 0 clamp(14rem,32vw,20rem);scroll-snap-align:start;
-      border-radius:var(--r3);overflow:hidden;position:relative;
-      aspect-ratio:3/4;cursor:pointer;transition:transform var(--ease);
-      will-change:transform
-    }
-    .feat-card:hover{transform:translateY(-4px)}
-    .feat-card img{
-      width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)
-    }
-    .feat-card:hover img{transform:scale(1.06)}
-    .feat-card::after{
-      content:'';position:absolute;inset:0;z-index:1;
-      background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.2) 50%,transparent 100%);
-      transition:background .4s var(--ease)
-    }
-    .feat-card:hover::after{
-      background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.1) 100%)
-    }
-    
-    .feat-info{
-      position:absolute;bottom:0;left:0;right:0;z-index:2;
-      padding:1rem;transform:translateY(4px);transition:transform .3s var(--ease)
-    }
-    .feat-card:hover .feat-info{transform:translateY(0)}
-    
-    .feat-tag{
-      display:inline-flex;align-items:center;gap:.375rem;
-      padding:.25rem .625rem;border-radius:var(--rmax);
-      font-size:.625rem;font-weight:700;letter-spacing:.08em;
-      text-transform:uppercase;background:var(--golddim);
-      color:var(--gold);border:1px solid var(--line-glow);
-      margin-bottom:.5rem
-    }
-    .feat-tag::before{
-      content:'';width:4px;height:4px;border-radius:50%;background:var(--gold)
-    }
-    
-    .feat-info h3{
-      font-family:var(--fs);font-size:1.125rem;font-weight:500;
-      margin-bottom:.25rem;color:#fff;line-height:1.2
-    }
-    .feat-info p{
-      font-size:.75rem;color:rgba(255,255,255,.75);line-height:1.45;
-      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-      overflow:hidden;transition:all .3s var(--ease)
-    }
-    .feat-card:hover .feat-info p{-webkit-line-clamp:4;color:rgba(255,255,255,.9)}
-    
-    .feat-price{
-      position:absolute;top:.75rem;right:.75rem;z-index:2;
-      padding:.375rem .875rem;border-radius:var(--rmax);
-      background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
-      border:1px solid rgba(255,255,255,.15);font-size:.75rem;
-      font-weight:700;color:var(--gold);font-family:var(--fm)
-    }
-    
-    /* ===== CATEGORY NAV — STICKY ===== */
-    .cat-nav{
-      position:sticky;top:64px;z-index:var(--z-nav);
-      background:rgba(5,5,5,.92);backdrop-filter:var(--blur);
-      -webkit-backdrop-filter:var(--blur);border-bottom:1px solid var(--line);
-      padding:.625rem clamp(1rem,4vw,2rem);transition:all var(--ease)
-    }
-    [data-theme="light"] .cat-nav{background:rgba(250,249,246,.96)}
-    
-    .cat-inner{
-      display:flex;gap:.375rem;max-width:var(--container);margin-inline:auto;
-      overflow-x:auto;scrollbar-width:none;padding-block:.25rem
-    }
-    .cat-inner::-webkit-scrollbar{display:none}
-    
-    .cat-btn{
-      padding:.5rem 1rem;border-radius:var(--rmax);font-size:.75rem;
-      font-weight:600;white-space:nowrap;color:var(--text2);
-      border:1px solid transparent;transition:all var(--ease);
-      position:relative;overflow:hidden
-    }
-    .cat-btn::after{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:var(--golddim);opacity:0;transition:opacity var(--ease)
-    }
-    .cat-btn:hover{color:var(--text);background:var(--surface)}
-    .cat-btn.active{color:var(--btn-text);border-color:var(--gold)}
-    .cat-btn.active::after{opacity:1}
-    
-    /* ===== VENUE GRID — HOVER REVEAL ===== */
-    .grid-wrap{padding-block-end:3rem}
-    .venue-grid{
-      display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));
-      gap:var(--gap)
-    }
-    @media(max-width:640px){.venue-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
-    @media(max-width:400px){.venue-grid{grid-template-columns:1fr}}
-    
-    .v-card{
-      background:var(--card);border:1px solid var(--line);border-radius:var(--r2);
-      overflow:hidden;transition:all var(--ease);position:relative;
-      will-change:transform
-    }
-    .v-card:hover{
-      border-color:var(--line3);transform:translateY(-4px);
-      box-shadow:var(--shadow-lg)
-    }
-    .v-card::after{
-      content:'';position:absolute;inset:0;pointer-events:none;
-      border-radius:inherit;box-shadow:inset 0 0 0 1px var(--line-glow);
-      opacity:0;transition:opacity var(--ease)
-    }
-    .v-card:hover::after{opacity:1}
-    
-    .v-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg2)}
-    .v-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
-    .v-card:hover .v-img img{transform:scale(1.05)}
-    
-    /* Hover Overlay with Description */
-    .v-img-overlay{
-      position:absolute;inset:0;z-index:2;
-      background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.2) 100%);
-      opacity:0;transition:opacity .4s var(--ease);display:flex;align-items:flex-end;
-      padding:1rem
-    }
-    .v-card:hover .v-img-overlay{opacity:1}
-    .v-img-overlay p{
-      font-size:.8125rem;color:rgba(255,255,255,.92);line-height:1.5;
-      display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
-      overflow:hidden
-    }
-    
-    .v-badge{
-      position:absolute;top:.5rem;left:.5rem;padding:.25rem .625rem;
-      border-radius:var(--rmax);font-size:.625rem;font-weight:700;
-      letter-spacing:.05em;text-transform:uppercase;backdrop-filter:blur(8px);
-      z-index:3;border:1px solid
-    }
-    .b-open{background:rgba(201,169,110,.18);color:var(--gold);border-color:rgba(201,169,110,.25)}
-    .b-season{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)}
-    .b-premium{background:rgba(201,169,110,.35);color:#fff;border-color:rgba(201,169,110,.5);box-shadow:0 0 0 1px var(--gold)}
-    
-    .v-body{padding:.75rem}
-    .v-top{display:flex;align-items:center;justify-content:space-between;gap:.375rem;margin-bottom:.375rem}
-    .v-top h3{
-      font-size:.8125rem;font-weight:700;letter-spacing:-.01em;
-      flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
-    }
-    .v-pr{
-      font-size:.75rem;font-weight:700;color:var(--gold);white-space:nowrap;
-      font-family:var(--fm)
-    }
-    
-    .v-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:.5rem}
-    .v-tag{
-      font-size:.6875rem;color:var(--text2);padding:.125rem .5rem;
-      border-radius:var(--rmax);background:var(--surface);
-      border:1px solid var(--line)
-    }
-    
-    .v-desc{
-      font-size:.75rem;color:var(--text2);line-height:1.45;
-      margin-bottom:.625rem;display:-webkit-box;-webkit-line-clamp:2;
-      -webkit-box-orient:vertical;overflow:hidden
-    }
-    
-    .v-acts{display:flex;gap:.375rem}
-    .v-wa{
-      flex:1;display:flex;align-items:center;justify-content:center;
-      padding:.625rem;border-radius:10px;background:var(--gold);
-      color:var(--btn-text);font-size:.75rem;font-weight:700;
-      transition:all var(--ease)
-    }
-    .v-wa:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 4px 16px var(--goldglow)}
-    .v-map{
-      width:36px;height:36px;border-radius:10px;
-      background:var(--surface);border:1px solid var(--line2);
-      display:flex;align-items:center;justify-content:center;
-      font-size:1rem;transition:all var(--ease);flex-shrink:0
-    }
-    .v-map:hover{background:var(--line);color:var(--gold)}
-    
-    /* ===== COLLECTIONS — PARALLAX ===== */
-    .collections-wrap{padding-block-end:3rem}
-    .col-grid{
-      display:grid;grid-template-columns:repeat(auto-fill,minmax(13.5rem,1fr));
-      gap:var(--gap)
-    }
-    
-    .collection-card{
-      position:relative;border-radius:var(--r3);overflow:hidden;
-      aspect-ratio:3/4;cursor:pointer;transition:all var(--ease);
-      will-change:transform
-    }
-    .collection-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-    .collection-card img{
-      width:100%;height:100%;object-fit:cover;
-      transition:transform .7s var(--ease-out)
-    }
-    .collection-card:hover img{transform:scale(1.05)}
-    
-    .col-overlay{
-      position:absolute;inset:0;z-index:1;
-      background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.1) 60%,transparent 100%)
-    }
-    
-    .col-info{
-      position:absolute;bottom:0;left:0;right:0;z-index:2;
-      padding:1.25rem;transform:translateY(6px);transition:transform .3s var(--ease)
-    }
-    .collection-card:hover .col-info{transform:translateY(0)}
-    
-    .col-eyebrow{
-      font-size:.625rem;font-weight:700;letter-spacing:.12em;
-      text-transform:uppercase;color:var(--gold);margin-bottom:.375rem
-    }
-    .col-info h3{
-      font-family:var(--fs);font-size:1.125rem;font-weight:500;
-      color:#fff;margin-bottom:.25rem;line-height:1.2
-    }
-    .col-info p{
-      font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.4
-    }
-    .col-cta{
-      display:inline-flex;align-items:center;gap:.375rem;
-      margin-top:.625rem;font-size:.75rem;font-weight:600;
-      color:var(--gold);letter-spacing:.01em;transition:gap var(--ease)
-    }
-    .collection-card:hover .col-cta{gap:.75rem}
-    .col-cta::after{
-      content:'→';transition:transform var(--ease);display:inline-block
-    }
-    .collection-card:hover .col-cta::after{transform:translateX(4px)}
-    
-    /* ===== PRICING — CLEAN CARDS ===== */
-    .pricing-section{padding-block-end:3rem}
-    .pricing-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
-      gap:var(--gap)
-    }
-    
-    .p-card{
-      background:var(--card);border:1px solid var(--line);
-      border-radius:var(--r2);padding:1.25rem;transition:all var(--ease)
-    }
-    .p-card:hover{border-color:var(--line-glow);transform:translateY(-2px)}
-    .p-card.featured{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),var(--shadow)}
-    
-    .p-card h4{
-      font-family:var(--fs);font-size:1.0625rem;font-weight:500;
-      margin-bottom:.25rem
-    }
-    .p-card .p-sub{
-      font-size:.75rem;color:var(--text2);margin-bottom:1rem
-    }
-    
-    .p-row{
-      display:flex;justify-content:space-between;padding:.375rem 0;
-      border-bottom:1px solid var(--line);font-size:.8125rem
-    }
-    .p-row:last-child{border:none}
-    .p-row span:last-child{font-weight:700;color:var(--gold);font-family:var(--fm)}
-    
-    .p-note{
-      font-size:.6875rem;color:var(--text3);margin-top:.75rem;
-      line-height:1.5;padding:.5rem;background:var(--surface);
-      border-radius:var(--r);border-left:2px solid var(--gold)
-    }
-    
-    /* ===== PARTNERS — LOGO GRID ===== */
-    .partners{
-      padding-block:2.5rem;border-block:1px solid var(--line);
-      background:var(--bg2)
-    }
-    .partners h3{
-      text-align:center;font-size:.6875rem;font-weight:700;
-      letter-spacing:.12em;text-transform:uppercase;color:var(--text2);
-      margin-bottom:1.5rem
-    }
-    .partner-row{
-      display:flex;justify-content:center;flex-wrap:wrap;
-      gap:clamp(1rem,3vw,2rem)
-    }
-    .p-logo{
-      width:72px;height:72px;border-radius:50%;
-      background:var(--surface);border:1px solid var(--line2);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;transition:all var(--ease);position:relative
-    }
-    .p-logo::after{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:radial-gradient(circle at 30% 30%,var(--gold),transparent 60%);
-      opacity:0;transition:opacity var(--ease)
-    }
-    .p-logo:hover{border-color:var(--gold);transform:scale(1.12);box-shadow:0 8px 24px var(--goldglow)}
-    .p-logo:hover::after{opacity:.15}
-    .p-logo img{
-      width:48px;height:48px;object-fit:contain;
-      filter:brightness(1.4) contrast(1.05);transition:filter var(--ease)
-    }
-    .p-logo:hover img{filter:brightness(1.8) contrast(1.15)}
-    
-    /* ===== QUICK FORM — MODERN ===== */
-    .qf-section{padding-block:clamp(3rem,6vh,4.5rem)}
-    .qf-section h2{text-align:center;margin-bottom:.5rem}
-    .qf-section h2 em{font-style:italic;color:var(--gold)}
-    .qf-sub{
-      font-size:.875rem;color:var(--text2);text-align:center;
-      margin-bottom:1.5rem;max-width:480px;margin-inline:auto
-    }
-    
-    .qf-card{
-      background:var(--card);border:1px solid var(--line2);
-      border-radius:var(--r3);padding:1.5rem;max-width:560px;
-      margin-inline:auto;box-shadow:var(--shadow)
-    }
-    
-    .fi{margin-bottom:.875rem}
-    .fi label{
-      display:block;font-size:.6875rem;font-weight:600;
-      letter-spacing:.06em;text-transform:uppercase;
-      color:var(--text3);margin-bottom:.375rem
-    }
-    .fi input,.fi textarea,.fi select{
-      width:100%;padding:.625rem .875rem;border-radius:10px;
-      background:var(--surface);border:1px solid var(--line2);
-      color:var(--text);font-family:var(--ff);font-size:.9375rem;
-      transition:border-color var(--ease),box-shadow var(--ease)
-    }
-    .fi input:focus,.fi textarea:focus,.fi select:focus{
-      border-color:var(--gold);box-shadow:0 0 0 3px var(--golddim)
-    }
-    .fi textarea{resize:vertical;min-height:52px}
-    
-    .fi-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-    
-    /* Checkbox Grid — Enhanced */
-    .cb-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
-    .cb-item{
-      display:flex;align-items:center;gap:.5rem;padding:.625rem .75rem;
-      border-radius:10px;background:var(--surface);border:1px solid var(--line2);
-      cursor:pointer;transition:all var(--ease);user-select:none
-    }
-    .cb-item:hover{border-color:var(--line3);background:var(--line)}
-    .cb-item.active{
-      background:var(--golddim);border-color:var(--gold);
-      box-shadow:0 0 0 1px var(--gold)
-    }
-    .cb-ck{
-      width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line3);
-      display:flex;align-items:center;justify-content:center;flex-shrink:0;
-      transition:all var(--ease);font-size:.75rem;color:transparent
-    }
-    .cb-item.active .cb-ck{
-      background:var(--gold);border-color:var(--gold);
-      color:var(--btn-text);animation:checkIn .2s var(--ease)
-    }
-    @keyframes checkIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
-    .cb-lb{flex:1;font-size:.8125rem;font-weight:500;line-height:1.3}
-    .cb-lb small{
-      display:block;font-size:.75rem;color:var(--text2);
-      font-weight:400;font-family:var(--fm)
-    }
-    
-    .cart-total{
-      display:flex;justify-content:space-between;padding:.625rem 0;
-      border-top:1px solid var(--line2);margin-top:.5rem;
-      font-size:.875rem;font-weight:700
-    }
-    .cart-total span:last-child{color:var(--gold);font-family:var(--fm)}
-    
-    .qf-submit{
-      width:100%;padding:.875rem;border-radius:var(--r2);
-      margin-top:1rem;background:var(--gold);color:var(--btn-text);
-      font-size:.875rem;font-weight:700;display:flex;align-items:center;
-      justify-content:center;gap:.5rem;transition:all var(--ease);
-      border:none;cursor:pointer;font-family:var(--ff)
-    }
-    .qf-submit:hover{
-      filter:brightness(1.08);transform:translateY(-2px);
-      box-shadow:0 8px 28px var(--goldglow)
-    }
-    .qf-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
-    
-    /* ===== FOOTER — MINIMAL ===== */
-    .footer{
-      border-top:1px solid var(--line);padding-block:1.75rem;
-      text-align:center;margin-top:auto
-    }
-    .footer p{font-size:.75rem;color:var(--text3)}
-    .footer a{color:var(--gold);font-weight:500}
-    .footer a:hover{text-decoration:underline}
-    
-    /* ===== WA FAB — FLOATING ===== */
-    .wa-fab{
-      position:fixed;bottom:clamp(1rem,3vh,1.5rem);right:clamp(1rem,3vw,1.5rem);
-      z-index:var(--z-fab);width:56px;height:56px;border-radius:50%;
-      background:var(--wa);color:#fff;display:flex;align-items:center;
-      justify-content:center;box-shadow:var(--wa-glow);
-      transition:all var(--ease);will-change:transform
-    }
-    .wa-fab:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,.5)}
-    .wa-fab:active{transform:scale(.98)}
-    .wa-fab svg{width:24px;height:24px;fill:#fff;transition:transform var(--ease)}
-    .wa-fab:hover svg{animation:wiggle .4s var(--ease)}
-    @keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
-    
-    /* ===== MODALS — POLISHED ===== */
-    .modal-bg{
-      position:fixed;inset:0;z-index:var(--z-modal);
-      background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
-      display:none;align-items:center;justify-content:center;
-      padding:1rem;opacity:0;transition:opacity .3s var(--ease)
-    }
-    .modal-bg.active{display:flex;opacity:1}
-    
-    .modal{
-      background:var(--bg2);border:1px solid var(--line2);
-      border-radius:var(--r3);width:100%;max-width:440px;
-      padding:1.5rem;position:relative;animation:modalIn .3s var(--ease-out);
-      max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)
-    }
-    @keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
-    
-    .modal h3{
-      font-family:var(--fs);font-size:1.25rem;font-weight:500;
-      margin-bottom:.25rem
-    }
-    .modal h3 em{color:var(--gold);font-style:italic}
-    .modal .ms{
-      font-size:.8125rem;color:var(--text2);margin-bottom:1.25rem
-    }
-    
-    .mx{
-      position:absolute;top:.75rem;right:.75rem;width:32px;height:32px;
-      border-radius:50%;background:var(--surface);border:1px solid var(--line2);
-      display:flex;align-items:center;justify-content:center;
-      font-size:1.125rem;color:var(--text2);cursor:pointer;
-      transition:all var(--ease)
-    }
-    .mx:hover{background:var(--line);color:var(--text);transform:rotate(90deg)}
-    
-    /* Jet Ski Modal Specifics */
-    .jf-tours{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
-    .jf-tour{
-      display:flex;align-items:center;gap:.75rem;padding:.75rem;
-      border-radius:10px;background:var(--surface);border:1px solid var(--line2);
-      cursor:pointer;transition:all var(--ease)
-    }
-    .jf-tour:hover{border-color:var(--line3);background:var(--line)}
-    .jf-tour.active{
-      background:var(--golddim);border-color:var(--gold);
-      box-shadow:0 0 0 1px var(--gold)
-    }
-    .jf-radio{
-      width:20px;height:20px;border-radius:50%;border:2px solid var(--line3);
-      display:flex;align-items:center;justify-content:center;flex-shrink:0;
-      transition:all var(--ease)
-    }
-    .jf-tour.active .jf-radio{border-color:var(--gold)}
-    .jf-tour.active .jf-radio::after{
-      content:'';width:10px;height:10px;border-radius:50%;
-      background:var(--gold);animation:radioIn .2s var(--ease)
-    }
-    @keyframes radioIn{from{transform:scale(0)}to{transform:scale(1)}}
-    .jf-tinfo{flex:1}
-    .jf-tname{font-size:.875rem;font-weight:600}
-    .jf-tmeta{font-size:.75rem;color:var(--text2)}
-    .jf-tprice{font-size:.875rem;font-weight:700;color:var(--gold);font-family:var(--fm)}
-    
-    .f-submit,.jf-submit{
-      width:100%;padding:.875rem;border-radius:var(--r2);
-      margin-top:1rem;background:var(--gold);color:var(--btn-text);
-      font-size:.875rem;font-weight:700;display:flex;align-items:center;
-      justify-content:center;gap:.5rem;transition:all var(--ease);
-      border:none;cursor:pointer;font-family:var(--ff)
-    }
-    .f-submit:hover,.jf-submit:hover{
-      filter:brightness(1.08);transform:translateY(-2px);
-      box-shadow:0 8px 28px var(--goldglow)
-    }
-    
-    /* ===== TOAST — SMOOTH ===== */
-    .toast{
-      position:fixed;bottom:calc(56px + 1rem);left:50%;transform:translateX(-50%) translateY(16px);
-      padding:.625rem 1.25rem;border-radius:var(--rmax);
-      background:var(--gold);color:#fff;font-size:.8125rem;
-      font-weight:600;opacity:0;pointer-events:none;
-      transition:all .3s var(--ease);z-index:var(--z-toast);
-      box-shadow:0 8px 24px rgba(0,0,0,.3);backdrop-filter:blur(8px)
-    }
-    .toast.active{opacity:1;transform:translateX(-50%) translateY(0)}
-    
-    /* ===== REVEAL ON SCROLL ===== */
-    .reveal{opacity:0;transform:translateY(24px);transition:var(--anim-slide)}
-    .reveal.active{opacity:1;transform:none}
-    
-    /* ===== RTL SUPPORT ===== */
-    [dir="rtl"] .topbar{flex-direction:row-reverse}
-    [dir="rtl"] .tb-actions{flex-direction:row-reverse}
-    [dir="rtl"] .lang-switch{flex-direction:row-reverse}
-    [dir="rtl"] .hero-content{text-align:right}
-    [dir="rtl"] .hero-ctas{justify-content:center}
-    [dir="rtl"] .fi-row{direction:rtl}
-    [dir="rtl"] .v-top{flex-direction:row-reverse}
-    [dir="rtl"] .cat-inner{flex-direction:row-reverse}
-    [dir="rtl"] .trust{flex-direction:row-reverse}
-    [dir="rtl"] .cb-item{flex-direction:row-reverse}
-    [dir="rtl"] .jf-tour{flex-direction:row-reverse}
-    
-    /* ===== RESPONSIVE ===== */
-    @media(max-width:768px){
-      .hero h1{margin-bottom:.75rem}
-      .trust{flex-wrap:wrap;gap:1rem;padding:1.25rem 1rem}
-      .trust-item{min-width:56px}
-      .trust-item strong{font-size:1.25rem}
-      .feat-card{flex:0 0 72vw}
-      .section-header{padding-inline:1rem}
-      .cb-grid,.fi-row{grid-template-columns:1fr}
-    }
-    @media(max-width:480px){
-      .feat-card{flex:0 0 85vw}
-      .venue-grid,.col-grid{grid-template-columns:1fr !important}
-      .pricing-grid{grid-template-columns:1fr}
-      .hero-ctas{flex-direction:column;gap:.625rem}
-      .hero-ctas .btn{width:100%;justify-content:center}
-      .trust{gap:.75rem 1.25rem}
-      .trust-item strong{font-size:1.125rem}
-      .qf-card{padding:1.25rem}
-    }
-    
-    /* ===== ACCESSIBILITY ===== */
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
-    }
-    
-    /* ===== PRINT ===== */
-    @media print{
-      .topbar,.wa-fab,.hero-scroll,.cat-nav{display:none !important}
-      body{background:#fff;color:#000}
-      .hero{min-height:auto;padding-block:2rem}
-      .hero-bg{display:none}
-    }
-  </style>
+/* === LIGHT MODE === */
+body.lm{--bg:#f7f6f2;--bg2:#edece7;--bg3:#e2e0da;--card:#fff;--line:rgba(0,0,0,.07);--line2:rgba(0,0,0,.1);--line3:rgba(0,0,0,.16);--text:#1a1a1a;--text2:rgba(0,0,0,.5);--text3:rgba(0,0,0,.22);--gold:#9a7a3c;--golddim:rgba(154,122,60,.1);--goldglow:rgba(154,122,60,.18);--btn-text:#fff}
+body.lm::before{opacity:.1}body.lm .topbar{background:rgba(247,246,242,.94)}
+body.lm .hero-bg img{opacity:.55;filter:saturate(.8) brightness(1.05)}
+body.lm .hero-bg::after{background:linear-gradient(to top,var(--bg) 0%,rgba(247,246,242,.5) 35%,rgba(247,246,242,.15) 65%,rgba(247,246,242,.4) 100%)}
+body.lm .cat-nav{background:rgba(247,246,242,.95)}body.lm .cat-btn{color:var(--text2)}body.lm .cat-btn:hover{background:rgba(0,0,0,.04);color:var(--text)}body.lm .cat-btn.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+body.lm .btn-gold,body.lm .v-wa,body.lm .qf-submit,body.lm .f-submit,body.lm .jf-submit{color:#fff}
+body.lm .v-card{box-shadow:0 1px 4px rgba(0,0,0,.04)}body.lm .p-logo{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.08)}body.lm .p-logo img{filter:none}
+body.lm .feat-info h3,body.lm .feat-info p{color:#fff}body.lm .feat-tag{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2);color:#fff}body.lm .feat-price{color:#fff}
+body.lm .col-info h3,body.lm .col-info p,body.lm .col-eyebrow,body.lm .col-cta{color:#fff}
+
+/* === RTL === */
+html[dir="rtl"] .topbar{flex-direction:row-reverse}html[dir="rtl"] .tb-r{flex-direction:row-reverse}html[dir="rtl"] .lang-grp{flex-direction:row-reverse}
+html[dir="rtl"] .hero-content{text-align:right}html[dir="rtl"] .hero-ctas{justify-content:flex-end}
+html[dir="rtl"] .fi-row{direction:rtl}html[dir="rtl"] .v-top{flex-direction:row-reverse}
+html[dir="rtl"] .cat-inner{flex-direction:row-reverse}html[dir="rtl"] .trust{flex-direction:row-reverse}
+
+/* === TOPBAR === */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:900;height:56px;background:rgba(5,5,5,.88);border-bottom:1px solid var(--line);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,32px);transition:all var(--ease)}
+.tb-logo{font-family:var(--fs);font-size:18px;font-weight:600;letter-spacing:-.02em}.tb-logo span{color:var(--gold);font-style:italic}
+.tb-r{display:flex;align-items:center;gap:4px}.lang-grp{display:flex;gap:2px;flex-wrap:wrap}
+.lb{padding:4px 7px;border-radius:5px;font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);transition:all var(--ease)}.lb:hover{color:var(--text2);background:var(--line)}.lb.on{color:var(--gold);background:var(--golddim)}
+.tb-theme{width:30px;height:30px;border-radius:7px;margin-left:2px;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:13px;transition:all var(--ease)}.tb-theme:hover{color:var(--text);background:var(--line)}
+
+/* === HERO === */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(16px,4vw,40px) clamp(40px,8vh,80px);overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:saturate(.6)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,rgba(5,5,5,.6) 40%,rgba(5,5,5,.2) 70%,rgba(5,5,5,.5) 100%)}
+.hero-content{position:relative;z-index:1;max-width:720px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;padding:6px 14px;border-radius:var(--rmax);border:1px solid var(--line2);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text2)}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px var(--golddim);animation:glow 2.5s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 3px var(--golddim)}50%{box-shadow:0 0 0 8px transparent}}
+.hero h1{font-family:var(--fs);font-size:clamp(36px,6.5vw,74px);font-weight:500;letter-spacing:-.03em;line-height:1.02;margin-bottom:20px}.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-p{font-size:clamp(14px,1.5vw,16px);color:var(--text2);max-width:520px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--rmax);background:var(--gold);color:var(--btn-text);font-weight:600;font-size:13px;letter-spacing:.02em;transition:all var(--ease)}.btn-gold:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 24px var(--goldglow)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--rmax);background:transparent;color:var(--text);font-weight:600;font-size:13px;border:1px solid var(--line2);transition:all var(--ease)}.btn-ghost:hover{border-color:var(--line3);background:rgba(255,255,255,.04)}
+.hero-scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:1;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(4px)}}
+.hero-scroll::after{content:'';width:1px;height:18px;background:linear-gradient(to bottom,var(--text3),transparent)}
+
+/* === TRUST === */
+.trust{display:flex;justify-content:center;gap:clamp(20px,5vw,56px);padding:26px clamp(16px,4vw,40px);border-bottom:1px solid var(--line)}
+.trust-item{text-align:center}.trust-item strong{display:block;font-family:var(--fs);font-size:clamp(22px,2.8vw,34px);font-weight:500;letter-spacing:-.02em;color:var(--gold)}.trust-item span{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+
+/* === SECTION TITLE === */
+.sec-title{max-width:1200px;margin:0 auto;padding:clamp(36px,5vh,64px) clamp(16px,4vw,40px) 20px}
+.sec-title h2{font-family:var(--fs);font-size:clamp(24px,3vw,38px);font-weight:500;letter-spacing:-.02em}.sec-title h2 em{font-style:italic;color:var(--gold)}
+.sec-title p{font-size:13.5px;color:var(--text2);margin-top:6px;max-width:440px}
+
+/* === FEATURED === */
+.featured{padding:0 0 16px}.feat-scroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:0 clamp(16px,4vw,40px) 16px;scroll-snap-type:x mandatory}.feat-scroll::-webkit-scrollbar{display:none}
+.feat-card{flex:0 0 clamp(240px,32vw,320px);scroll-snap-align:start;border-radius:var(--r2);overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer}
+.feat-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}.feat-card:hover img{transform:scale(1.05)}
+.feat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.15) 50%,transparent 100%);transition:background .3s ease}
+.feat-card:hover::after{background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.4) 50%,rgba(0,0,0,.15) 100%)}
+.feat-info{position:absolute;bottom:0;left:0;right:0;z-index:1;padding:16px}
+.feat-tag{display:inline-block;padding:3px 9px;border-radius:var(--rmax);font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--golddim);color:var(--gold);border:1px solid rgba(201,169,110,.2);margin-bottom:6px}
+.feat-info h3{font-family:var(--fs);font-size:18px;font-weight:500;margin-bottom:3px;color:#fff}
+.feat-info p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:all .3s ease}
+.feat-card:hover .feat-info p{-webkit-line-clamp:6;color:rgba(255,255,255,.8)}
+.feat-price{position:absolute;top:12px;right:12px;z-index:1;padding:4px 10px;border-radius:var(--rmax);background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);font-size:11px;font-weight:700;color:var(--gold)}
+
+/* === CATEGORY NAV === */
+.cat-nav{position:sticky;top:56px;z-index:800;background:rgba(5,5,5,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line);padding:10px clamp(16px,4vw,40px);transition:all var(--ease)}
+.cat-inner{display:flex;gap:5px;max-width:1200px;margin:0 auto;overflow-x:auto;scrollbar-width:none}.cat-inner::-webkit-scrollbar{display:none}
+.cat-btn{padding:7px 14px;border-radius:var(--rmax);font-size:11.5px;font-weight:600;white-space:nowrap;color:var(--text2);border:1px solid transparent;transition:all var(--ease)}.cat-btn:hover{color:var(--text);background:var(--line)}.cat-btn.on{color:var(--btn-text);background:var(--gold);border-color:var(--gold)}
+
+/* === VENUE GRID === */
+.grid-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 48px}
+.venue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+@media(max-width:640px){.venue-grid{grid-template-columns:1fr 1fr;gap:8px}}@media(max-width:400px){.venue-grid{grid-template-columns:1fr}}
+.v-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:all var(--ease)}.v-card:hover{border-color:var(--line3);transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,.25)}
+.v-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg2)}.v-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}.v-card:hover .v-img img{transform:scale(1.04)}
+/* Hover overlay for description */
+.v-img-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.6) 40%,rgba(0,0,0,.3) 100%);opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;padding:14px}
+.v-card:hover .v-img-overlay{opacity:1}
+.v-img-overlay p{font-size:12px;color:rgba(255,255,255,.88);line-height:1.5}
+.v-badge{position:absolute;top:7px;left:7px;padding:3px 8px;border-radius:var(--rmax);font-size:8.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;backdrop-filter:blur(8px);z-index:3}
+.b-open{background:rgba(201,169,110,.18);color:var(--gold);border:1px solid rgba(201,169,110,.25)}.b-season{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.1)}.b-premium{background:rgba(201,169,110,.3);color:#fff;border:1px solid rgba(201,169,110,.4)}
+.v-body{padding:10px 12px 12px}.v-top{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-bottom:5px}.v-top h3{font-size:12.5px;font-weight:700;letter-spacing:-.01em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v-pr{font-size:10.5px;font-weight:700;color:var(--gold);white-space:nowrap}
+.v-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:5px}.v-tag{font-size:9px;color:var(--text2);padding:2px 5px;border-radius:var(--rmax);background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.v-desc{font-size:11px;color:var(--text2);line-height:1.4;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.v-acts{display:flex;gap:5px}
+.v-wa{flex:1;display:flex;align-items:center;justify-content:center;padding:8px;border-radius:9px;background:var(--gold);color:var(--btn-text);font-size:11px;font-weight:700;transition:all var(--ease)}.v-wa:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.v-map{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all var(--ease);flex-shrink:0}.v-map:hover{background:rgba(255,255,255,.08)}
+
+/* === COLLECTIONS === */
+.collections-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 48px}
+.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.collection-card{position:relative;border-radius:var(--r2);overflow:hidden;aspect-ratio:3/4;cursor:pointer;transition:all var(--ease)}.collection-card:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,.25)}
+.collection-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}.collection-card:hover img{transform:scale(1.04)}
+.col-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.05) 60%,transparent 100%);z-index:1}
+.col-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:16px}
+.col-eyebrow{font-size:8.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.col-info h3{font-family:var(--fs);font-size:18px;font-weight:500;color:#fff;margin-bottom:3px}
+.col-info p{font-size:11px;color:rgba(255,255,255,.55);line-height:1.35}
+.col-cta{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:10.5px;font-weight:600;color:var(--gold);letter-spacing:.02em;transition:gap var(--ease)}.collection-card:hover .col-cta{gap:8px}
+
+/* === PRICING === */
+.pricing-section{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 48px}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.p-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;transition:all var(--ease)}.p-card:hover{border-color:rgba(201,169,110,.2)}
+.p-card h4{font-family:var(--fs);font-size:17px;font-weight:500;margin-bottom:3px}.p-card .p-sub{font-size:11.5px;color:var(--text2);margin-bottom:12px}
+.p-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);font-size:12px}.p-row:last-child{border:none}.p-row span:last-child{font-weight:700;color:var(--gold)}
+.p-note{font-size:10px;color:var(--text3);margin-top:8px;line-height:1.45}
+
+/* === PARTNERS === */
+.partners{padding:40px clamp(16px,4vw,40px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.partners h3{text-align:center;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:20px}
+.partner-row{display:flex;justify-content:center;flex-wrap:wrap;gap:18px}
+.p-logo{width:82px;height:82px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:all var(--ease)}.p-logo:hover{border-color:rgba(201,169,110,.3);transform:scale(1.08)}
+.p-logo img{width:54px;height:54px;object-fit:contain;filter:brightness(1.5) contrast(1.1)}.p-logo:hover img{filter:brightness(1.8)}
+
+/* === QUICK FORM === */
+.qf-section{max-width:600px;margin:0 auto;padding:clamp(36px,5vh,64px) clamp(16px,4vw,40px) 48px}
+.qf-section h2{font-family:var(--fs);font-size:clamp(22px,3vw,34px);font-weight:500;text-align:center;margin-bottom:5px}.qf-section h2 em{font-style:italic;color:var(--gold)}
+.qf-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:22px}
+.qf-card{background:var(--card);border:1px solid var(--line2);border-radius:var(--r3);padding:22px}
+.fi{margin-bottom:10px}.fi label{display:block;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.fi input,.fi textarea,.fi select{width:100%;padding:10px 12px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--text);font-family:var(--ff);font-size:13.5px;outline:none;transition:border-color var(--ease)}.fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--gold)}.fi textarea{resize:vertical;min-height:44px}.fi select option{background:var(--bg2)}
+.fi-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cb-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:12px}
+.cb-item{display:flex;align-items:center;gap:7px;padding:9px 10px;border-radius:9px;background:rgba(255,255,255,.03);border:1px solid var(--line2);cursor:pointer;transition:all var(--ease);user-select:none}.cb-item:hover{border-color:var(--line3)}.cb-item.sel{background:var(--golddim);border-color:rgba(201,169,110,.3)}
+.cb-ck{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--line3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:transparent;transition:all var(--ease)}.cb-item.sel .cb-ck{background:var(--gold);border-color:var(--gold);color:var(--btn-text)}
+.cb-lb{flex:1;font-size:11.5px;font-weight:500;line-height:1.25}.cb-lb small{display:block;font-size:9.5px;color:var(--text2);font-weight:400}
+.cart-total{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line2);margin-top:4px;font-size:13px;font-weight:700}.cart-total span:last-child{color:var(--gold)}
+.qf-submit{width:100%;padding:13px;border-radius:var(--r);margin-top:14px;background:var(--gold);color:var(--btn-text);font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all var(--ease);border:none;cursor:pointer;font-family:var(--ff)}.qf-submit:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 20px var(--goldglow)}
+
+/* === FOOTER === */
+.footer{border-top:1px solid var(--line);padding:28px clamp(16px,4vw,40px);text-align:center}.footer p{font-size:10.5px;color:var(--text3)}.footer a{color:var(--gold)}
+
+/* === WA FAB === */
+.wa-fab{position:fixed;bottom:18px;right:18px;z-index:999;width:52px;height:52px;border-radius:50%;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.3);transition:all var(--ease)}.wa-fab:hover{transform:scale(1.08)}.wa-fab svg{width:22px;height:22px;fill:#fff}
+
+/* === MODALS === */
+.modal-bg{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:16px}.modal-bg.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r3);width:100%;max-width:420px;padding:24px;position:relative;animation:mIn .2s ease;max-height:90vh;overflow-y:auto}
+@keyframes mIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.modal h3{font-family:var(--fs);font-size:20px;font-weight:500;margin-bottom:2px}.modal h3 em{color:var(--gold);font-style:italic}
+.modal .ms{font-size:12px;color:var(--text2);margin-bottom:16px}
+.mx{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text2);cursor:pointer;transition:all var(--ease)}.mx:hover{background:var(--line2);color:var(--text)}
+.f-submit{width:100%;padding:12px;border-radius:var(--r);margin-top:12px;background:var(--gold);color:var(--btn-text);font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all var(--ease);border:none;cursor:pointer;font-family:var(--ff)}.f-submit:hover{filter:brightness(1.1)}
+/* Jet Ski modal specifics */
+.jf-tours{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.jf-tour{display:flex;align-items:center;gap:8px;padding:10px;border-radius:9px;background:rgba(255,255,255,.03);border:1px solid var(--line2);cursor:pointer;transition:all var(--ease)}.jf-tour:hover{border-color:var(--line3)}.jf-tour.sel{background:var(--golddim);border-color:rgba(201,169,110,.3)}
+.jf-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--ease)}.jf-tour.sel .jf-radio{border-color:var(--gold)}.jf-tour.sel .jf-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.jf-tinfo{flex:1}.jf-tname{font-size:12px;font-weight:600}.jf-tmeta{font-size:10px;color:var(--text2)}
+.jf-tprice{font-size:12px;font-weight:700;color:var(--gold)}
+.jf-submit{width:100%;padding:13px;border-radius:var(--r);margin-top:14px;background:var(--gold);color:var(--btn-text);font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all var(--ease);border:none;cursor:pointer;font-family:var(--ff)}.jf-submit:hover{filter:brightness(1.1);transform:translateY(-1px)}
+
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(12px);padding:9px 20px;border-radius:var(--rmax);background:var(--gold);color:#fff;font-size:12px;font-weight:700;opacity:0;pointer-events:none;transition:all .3s ease;z-index:1100}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}.rv.vis{opacity:1;transform:none}
+
+@media(max-width:768px){.hero h1{margin-bottom:16px}.trust{flex-wrap:wrap;gap:10px 20px;padding:18px 16px}.trust-item{min-width:55px}.trust-item strong{font-size:20px}.feat-card{flex:0 0 72vw}.sec-title{padding-top:28px}}
+@media(max-width:480px){.feat-card{flex:0 0 85vw}.venue-grid,.col-grid{grid-template-columns:1fr !important}.pricing-grid{grid-template-columns:1fr}.cb-grid{grid-template-columns:1fr}.fi-row{grid-template-columns:1fr}.hero-ctas{flex-direction:column;gap:8px}.hero-ctas a,.hero-ctas button{width:100%;justify-content:center}.trust{gap:6px 14px}.trust-item strong{font-size:18px}}
+</style>
 </head>
-
 <body>
-  <!-- Skip Link for Accessibility -->
-  <a href="#main" class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">Skip to content</a>
-  
-  <!-- Top Navigation -->
-  <header class="topbar" role="banner">
-    <a href="#" class="tb-logo" aria-label="MallorcasLocal Home">
-      Mallorcas<span>Local</span>
-    </a>
-    <div class="tb-actions">
-      <div class="lang-switch" id="langGrp" role="group" aria-label="Select language"></div>
-      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme" title="Toggle light/dark mode">◑</button>
-    </div>
-  </header>
+<header class="topbar"><a href="#" class="tb-logo">Mallorcas<span>Local</span></a><div class="tb-r"><div class="lang-grp" id="langGrp"></div><button class="tb-theme" id="themeBtn">◑</button></div></header>
 
-  <!-- Hero Section -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-bg">
-      <img src="https://res.cloudinary.com/dxhef6dju/image/upload/w_1400,q_auto,f_auto/v1774300396/28_dwfybr.png" 
-           alt="Stunning Mallorca coastline at sunset" 
-           width="1400" height="933" 
-           loading="eager" fetchpriority="high">
-    </div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-dot" aria-hidden="true"></span>
-        <span data-i18n="h_badge"></span>
-      </div>
-      <h1 id="hero-title" class="fs-display" data-i18n="h_h1"></h1>
-      <p class="hero-p fs-body" data-i18n="h_p"></p>
-      <div class="hero-ctas">
-        <a href="#plans" class="btn btn-primary" data-i18n="h_cta1">
-          <span>🗺️</span><span data-i18n="h_cta1"></span>
-        </a>
-        <button class="btn btn-secondary" onclick="openModal()" data-i18n="h_cta2">
-          <span>✨</span><span data-i18n="h_cta2"></span>
-        </button>
-      </div>
-    </div>
-    <a href="#trust" class="hero-scroll" aria-label="Scroll to explore">
-      <span data-i18n="h_scroll"></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-    </a>
-  </section>
-
-  <!-- Trust Bar -->
-  <div class="trust" id="trust" role="list" aria-label="Key benefits">
-    <div class="trust-item" role="listitem">
-      <strong>19+</strong>
-      <span data-i18n="t1"></span>
-    </div>
-    <div class="trust-item" role="listitem">
-      <strong>4.8</strong>
-      <span data-i18n="t2"></span>
-    </div>
-    <div class="trust-item" role="listitem">
-      <strong>&lt;1h</strong>
-      <span data-i18n="t3"></span>
-    </div>
-    <div class="trust-item" role="listitem">
-      <strong>0€</strong>
-      <span data-i18n="t4"></span>
-    </div>
+<section class="hero">
+  <div class="hero-bg"><img src="https://res.cloudinary.com/dxhef6dju/image/upload/w_1400,q_auto,f_auto/v1774300396/28_dwfybr.png" alt="Mallorca"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="hero-dot"></span><span data-i18n="h_badge"></span></div>
+    <h1 data-i18n="h_h1"></h1>
+    <p class="hero-p" data-i18n="h_p"></p>
+    <div class="hero-ctas"><a href="#plans" class="btn-gold" data-i18n="h_cta1"></a><button class="btn-ghost" onclick="openModal()" data-i18n="h_cta2"></button></div>
   </div>
+  <div class="hero-scroll"><span data-i18n="h_scroll"></span></div>
+</section>
 
-  <!-- Main Content -->
-  <main id="main" role="main">
-    <!-- Featured Section -->
-    <div class="section">
-      <div class="section-header">
-        <h2 class="fs-h2" data-i18n="feat_t"></h2>
-        <p class="fs-body" data-i18n="feat_s"></p>
-      </div>
-      <section class="featured" aria-label="Featured experiences">
-        <div class="feat-scroll" id="featScroll" role="list"></div>
-      </section>
-    </div>
+<div class="trust">
+  <div class="trust-item"><strong>19+</strong><span data-i18n="t1"></span></div>
+  <div class="trust-item"><strong>4.8</strong><span data-i18n="t2"></span></div>
+  <div class="trust-item"><strong>&lt;1h</strong><span data-i18n="t3"></span></div>
+  <div class="trust-item"><strong>0€</strong><span data-i18n="t4"></span></div>
+</div>
 
-    <!-- Category Navigation -->
-    <nav class="cat-nav" id="plans" aria-label="Experience categories">
-      <div class="cat-inner" id="catInner" role="tablist"></div>
-    </nav>
+<div class="sec-title"><h2 data-i18n="feat_t"></h2><p data-i18n="feat_s"></p></div>
+<section class="featured"><div class="feat-scroll" id="featScroll"></div></section>
 
-    <!-- Venue Grid -->
-    <div class="section">
-      <div class="section-header">
-        <h2 class="fs-h2" data-i18n="grid_t"></h2>
-      </div>
-      <section class="grid-wrap" aria-label="All experiences">
-        <div class="venue-grid" id="vGrid" role="list"></div>
-      </section>
-    </div>
+<nav class="cat-nav" id="plans"><div class="cat-inner" id="catInner"></div></nav>
 
-    <!-- Collections -->
-    <div class="section">
-      <div class="section-header">
-        <h2 class="fs-h2" data-i18n="col_t"></h2>
-        <p class="fs-body" data-i18n="col_s"></p>
-      </div>
-      <section class="collections-wrap" aria-label="Curated collections">
-        <div class="col-grid" id="colGrid" role="list"></div>
-      </section>
-    </div>
+<div class="sec-title"><h2 data-i18n="grid_t"></h2></div>
+<section class="grid-wrap"><div class="venue-grid" id="vGrid"></div></section>
 
-    <!-- Pricing -->
-    <div class="section">
-      <div class="section-header">
-        <h2 class="fs-h2" data-i18n="pr_t"></h2>
-        <p class="fs-body" data-i18n="pr_s"></p>
-      </div>
-      <section class="pricing-section" aria-label="Pricing information">
-        <div class="pricing-grid" id="pricingGrid"></div>
-      </section>
-    </div>
+<div class="sec-title"><h2 data-i18n="col_t"></h2><p data-i18n="col_s"></p></div>
+<section class="collections-wrap"><div class="col-grid" id="colGrid"></div></section>
 
-    <!-- Partners -->
-    <section class="partners" aria-label="Official partners">
-      <h3 data-i18n="part_t"></h3>
-      <div class="partner-row" id="partnerRow" role="list"></div>
-    </section>
+<div class="sec-title"><h2 data-i18n="pr_t"></h2><p data-i18n="pr_s"></p></div>
+<section class="pricing-section"><div class="pricing-grid" id="pricingGrid"></div></section>
 
-    <!-- Quick Booking Form -->
-    <section class="qf-section" aria-labelledby="qf-title">
-      <h2 id="qf-title" class="fs-h2" data-i18n="qf_t"></h2>
-      <p class="qf-sub fs-body" data-i18n="qf_s"></p>
-      <div class="qf-card glass">
-        <form id="quickForm" onsubmit="submitQuick(event)">
-          <div class="fi">
-            <label for="qN" data-i18n="f_name"></label>
-            <input type="text" id="qN" name="name" required autocomplete="name" placeholder="Your name">
-          </div>
-          <div class="fi">
-            <label data-i18n="qf_sel"></label>
-          </div>
-          <div class="cb-grid" id="cbGrid" role="group" aria-label="Select experiences"></div>
-          <div class="cart-total" id="cartTotal" style="display:none" aria-live="polite">
-            <span data-i18n="qf_total"></span>
-            <span id="totalAmt" class="text-gradient">0 €</span>
-          </div>
-          <div class="fi-row">
-            <div class="fi">
-              <label for="qD" data-i18n="f_date"></label>
-              <input type="date" id="qD" name="date" required>
-            </div>
-            <div class="fi">
-              <label for="qP" data-i18n="f_pax"></label>
-              <input type="number" id="qP" name="guests" min="1" max="30" value="2" required>
-            </div>
-          </div>
-          <div class="fi">
-            <label for="qNo" data-i18n="f_notes"></label>
-            <textarea id="qNo" name="notes" placeholder="Any special requests?"></textarea>
-          </div>
-          <button type="submit" class="qf-submit" id="qfSend">
-            <span>💬</span><span data-i18n="qf_send"></span>
-          </button>
-        </form>
-      </div>
-    </section>
-  </main>
+<section class="partners"><h3 data-i18n="part_t"></h3><div class="partner-row" id="partnerRow"></div></section>
 
-  <!-- Footer -->
-  <footer class="footer" role="contentinfo">
-    <p>© 2026 MallorcasLocal · <span data-i18n="foot"></span> · <a href="https://wa.me/34644075065" target="_blank" rel="noopener">WhatsApp</a></p>
-  </footer>
-
-  <!-- WhatsApp FAB -->
-  <a class="wa-fab" href="https://wa.me/34644075065?text=Hola%20MallorcasLocal" 
-     target="_blank" rel="noopener" 
-     aria-label="Chat with us on WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.615-1.457A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
-    </svg>
-  </a>
-
-  <!-- Generic Booking Modal -->
-  <div class="modal-bg" id="bkModal" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
-    <div class="modal glass">
-      <button class="mx" onclick="closeModal('bkModal')" aria-label="Close modal">✕</button>
-      <h3 id="bkTitle" data-i18n="m_t"></h3>
-      <p class="ms" data-i18n="m_s"></p>
-      <form id="bkForm" onsubmit="submitBooking(event)">
-        <div class="fi">
-          <label for="fN" data-i18n="f_name"></label>
-          <input type="text" id="fN" name="name" required autocomplete="name">
-        </div>
-        <div class="fi">
-          <label for="fA" data-i18n="f_act"></label>
-          <select id="fA" name="activity" required></select>
-        </div>
-        <div class="fi-row">
-          <div class="fi">
-            <label for="fD" data-i18n="f_date"></label>
-            <input type="date" id="fD" name="date" required>
-          </div>
-          <div class="fi">
-            <label for="fP" data-i18n="f_pax"></label>
-            <input type="number" id="fP" name="guests" min="1" max="30" value="2" required>
-          </div>
-        </div>
-        <div class="fi">
-          <label for="fNo" data-i18n="f_notes"></label>
-          <textarea id="fNo" name="notes"></textarea>
-        </div>
-        <button type="submit" class="f-submit">
-          <span>🚀</span><span data-i18n="f_send"></span>
-        </button>
-      </form>
-    </div>
+<section class="qf-section">
+  <h2 data-i18n="qf_t"></h2><p class="qf-sub" data-i18n="qf_s"></p>
+  <div class="qf-card">
+    <div class="fi"><label data-i18n="f_name"></label><input type="text" id="qN" required></div>
+    <div class="fi"><label data-i18n="qf_sel"></label></div>
+    <div class="cb-grid" id="cbGrid"></div>
+    <div class="cart-total" id="cartTotal" style="display:none"><span data-i18n="qf_total"></span><span id="totalAmt">0 €</span></div>
+    <div class="fi-row" style="margin-top:12px"><div class="fi"><label data-i18n="f_date"></label><input type="date" id="qD" required></div><div class="fi"><label data-i18n="f_pax"></label><input type="number" id="qP" min="1" max="30" value="2"></div></div>
+    <div class="fi"><label data-i18n="f_notes"></label><textarea id="qNo"></textarea></div>
+    <button type="button" class="qf-submit" id="qfSend" data-i18n="qf_send"></button>
   </div>
+</section>
 
-  <!-- Jet Ski Modal -->
-  <div class="modal-bg" id="jsModal" role="dialog" aria-modal="true" aria-labelledby="jsTitle">
-    <div class="modal glass">
-      <button class="mx" onclick="closeModal('jsModal')" aria-label="Close modal">✕</button>
-      <h3 id="jsTitle">Jet Ski <em>Tour</em></h3>
-      <p class="ms" data-i18n="js_sub"></p>
-      <form id="jsForm" onsubmit="submitJetSki(event)">
-        <div class="fi">
-          <label for="jsName" data-i18n="f_fullname"></label>
-          <input type="text" id="jsName" name="fullname" required autocomplete="name">
-        </div>
-        <div class="fi">
-          <label for="jsPhone" data-i18n="f_phone"></label>
-          <input type="tel" id="jsPhone" name="phone" required autocomplete="tel" pattern="[0-9+\s\-()]{7,}">
-        </div>
-        <div class="fi">
-          <label data-i18n="js_tour"></label>
-        </div>
-        <div class="jf-tours" id="jsTours" role="radiogroup" aria-label="Select tour"></div>
-        <div class="fi-row">
-          <div class="fi">
-            <label for="jsPax" data-i18n="f_pax"></label>
-            <input type="number" id="jsPax" name="pax" min="1" max="20" value="2" required>
-          </div>
-          <div class="fi">
-            <label for="jsSkis" data-i18n="js_skis"></label>
-            <input type="number" id="jsSkis" name="skis" min="1" max="10" value="1" required>
-          </div>
-        </div>
-        <div class="fi">
-          <label for="jsPickup" data-i18n="js_pickup"></label>
-          <input type="text" id="jsPickup" name="pickup" required placeholder="Hotel name or 'Own transport'" autocomplete="address-line1">
-        </div>
-        <div class="fi">
-          <label for="jsTime" data-i18n="js_time"></label>
-          <input type="time" id="jsTime" name="time" required>
-        </div>
-        <div class="fi">
-          <label for="jsNotes" data-i18n="f_notes"></label>
-          <textarea id="jsNotes" name="notes"></textarea>
-        </div>
-        <button type="submit" class="jf-submit">
-          <span>🚤</span><span data-i18n="js_send"></span>
-        </button>
-      </form>
-    </div>
-  </div>
+<footer class="footer"><p>© 2026 MallorcasLocal · <span data-i18n="foot"></span> · <a href="https://wa.me/34644075065" target="_blank">WhatsApp</a></p></footer>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<a class="wa-fab" href="https://wa.me/34644075065?text=Hola%20MallorcasLocal" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.615-1.457A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
 
-  <!-- JavaScript -->
-  <script>
-    // ===== CONFIG =====
-    const WA = '34644075065';
-    const BCM_TICKET_URL = 'https://top-3-prs-brand.sumupstore.com/product/bcm-pre-sale-ticket';
-    const BOAT_PARTY_URL = 'https://top-3-prs-brand.sumupstore.com/product/sunset-heatwave-boat-party-deposit';
-    
-    let lang = 'en', cat = 'all', cart = [], selTour = 'gojet';
-    const LANGS = ['es','en','de','fr','it','ar','ru'];
-    const RTL_LANGS = ['ar'];
-    
-    // ===== DATA =====
-    const jetSkiTours = [
-      {id:'gojet',name:'GoJet Tour',dur:'30 min',price:99},
-      {id:'sunset',name:'Sunset Tour',dur:'60 min',price:169},
-      {id:'basset',name:'Tour Cala en Basset & Cave S\'Argilau',dur:'60 min',price:159},
-      {id:'dragonera',name:'Sa Dragonera Natural Park Tour',dur:'1h 30 min',price:199},
-      {id:'vip',name:'VIP Tour Tramuntana Jobe',dur:'2h',price:279}
-    ];
-    
-    // ===== TRANSLATIONS =====
-    const L = {
-      h_badge:{es:'Temporada 2025–2026',en:'2025–2026 Season',de:'Saison 2025–2026',fr:'Saison 2025–2026',it:'Stagione 2025–2026',ar:'موسم 2025–2026',ru:'Сезон 2025–2026'},
-      h_h1:{es:'Reserva Mallorca<br>como un <em>local</em>',en:'Book Mallorca<br>like a <em>local</em>',de:'Buche Mallorca<br>wie ein <em>Local</em>',fr:'Réservez Majorque<br>comme un <em>local</em>',it:'Prenota Mallorca<br>come un <em>local</em>',ar:'احجز مايوركا<br>مثل <em>المحليين</em>',ru:'Бронируй Майорку<br>как <em>местный</em>'},
-      h_p:{es:'Fiestas, excursiones, boat parties y los mejores locales. Sin intermediarios — reserva por WhatsApp y paga al llegar.',en:'Parties, excursions, boat trips and the best spots. No middlemen — book via WhatsApp, pay on arrival.',de:'Partys, Ausflüge, Bootstouren. Ohne Vermittler — per WhatsApp, vor Ort zahlen.',fr:'Fêtes, excursions, boat parties. Sans intermédiaire — WhatsApp, payez sur place.',it:'Feste, escursioni, boat party. Senza intermediari — prenota via WhatsApp, paga all\'arrivo.',ar:'حفلات، رحلات، جولات بحرية. بدون وسطاء — احجز عبر واتساب، ادفع عند الوصول.',ru:'Вечеринки, экскурсии, морские прогулки. Без посредников — бронируй в WhatsApp, плати на месте.'},
-      h_cta1:{es:'Ver todos los planes',en:'See all plans',de:'Alle Pläne',fr:'Voir les plans',it:'Vedi tutti i piani',ar:'عرض جميع الخطط',ru:'Все планы'},
-      h_cta2:{es:'Reservar ahora',en:'Book now',de:'Jetzt buchen',fr:'Réserver',it:'Prenota ora',ar:'احجز الآن',ru:'Забронировать'},
-      h_scroll:{es:'Scroll',en:'Scroll',de:'Scroll',fr:'Scroll',it:'Scroll',ar:'تمرير',ru:'Листай'},
-      t1:{es:'Experiencias',en:'Experiences',de:'Erlebnisse',fr:'Expériences',it:'Esperienze',ar:'تجارب',ru:'Впечатлений'},
-      t2:{es:'Valoración',en:'Rating',de:'Bewertung',fr:'Note',it:'Valutazione',ar:'تقييم',ru:'Рейтинг'},
-      t3:{es:'Respuesta WA',en:'WA Response',de:'WA Antwort',fr:'Réponse WA',it:'Risposta WA',ar:'رد واتساب',ru:'Ответ WA'},
-      t4:{es:'Comisiones',en:'Fees',de:'Gebühren',fr:'Frais',it:'Commissioni',ar:'عمولات',ru:'Комиссий'},
-      feat_t:{es:'Lo más <em>reservado</em>',en:'Most <em>booked</em>',de:'Am meisten <em>gebucht</em>',fr:'Les plus <em>réservés</em>',it:'I più <em>prenotati</em>',ar:'الأكثر <em>حجزاً</em>',ru:'Самые <em>популярные</em>'},
-      feat_s:{es:'Las experiencias que más repiten nuestros clientes',en:'Experiences our clients book again and again',de:'Erlebnisse die Kunden immer wieder buchen',fr:'Expériences préférées de nos clients',it:'Le esperienze più richieste dai nostri clienti',ar:'التجارب التي يحجزها عملاؤنا مراراً',ru:'Впечатления, которые клиенты бронируют снова'},
-      c_all:{es:'Todos',en:'All',de:'Alle',fr:'Tous',it:'Tutti',ar:'الكل',ru:'Все'},
-      c_water:{es:'Agua',en:'Water',de:'Wasser',fr:'Eau',it:'Acqua',ar:'مائية',ru:'Вода'},
-      c_beach:{es:'Playa & Día',en:'Beach & Day',de:'Strand & Tag',fr:'Plage & Jour',it:'Spiaggia',ar:'شاطئ',ru:'Пляж'},
-      c_night:{es:'Nightlife',en:'Nightlife',de:'Nightlife',fr:'Nightlife',it:'Nightlife',ar:'حياة ليلية',ru:'Ночная жизнь'},
-      c_food:{es:'Food',en:'Food',de:'Essen',fr:'Food',it:'Food',ar:'طعام',ru:'Еда'},
-      c_mountain:{es:'Montaña',en:'Mountain',de:'Berge',fr:'Montagne',it:'Montagna',ar:'جبال',ru:'Горы'},
-      c_culture:{es:'Cultura',en:'Culture',de:'Kultur',fr:'Culture',it:'Cultura',ar:'ثقافة',ru:'Культура'},
-      c_free:{es:'Gratis',en:'Free',de:'Gratis',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},
-      v_info:{es:'Info',en:'Info',de:'Info',fr:'Info',it:'Info',ar:'معلومات',ru:'Инфо'},
-      grid_t:{es:'Todos los <em>planes</em>',en:'All <em>plans</em>',de:'Alle <em>Pläne</em>',fr:'Tous les <em>plans</em>',it:'Tutti i <em>piani</em>',ar:'جميع <em>الخطط</em>',ru:'Все <em>планы</em>'},
-      col_t:{es:'Descubre la <em>isla</em>',en:'Discover the <em>island</em>',de:'Entdecke die <em>Insel</em>',fr:'Découvrez l\'<em>île</em>',it:'Scopri l\'<em>isola</em>',ar:'اكتشف <em>الجزيرة</em>',ru:'Открой <em>остров</em>'},
-      col_s:{es:'Selecciones curadas para vivir Mallorca como nadie te la ha enseñado',en:'Curated selections to experience Mallorca like no one has shown you',de:'Kuratierte Auswahl für einzigartiges Mallorca',fr:'Sélections curatées pour vivre Majorque autrement',it:'Selezioni curate per vivere Mallorca come nessuno te l\'ha mostrata',ar:'مختارات منسقة لتجربة مايوركا كما لم يُريك أحد من قبل',ru:'Кураторские подборки для уникального опыта на Майорке'},
-      pr_t:{es:'Precios <em>detallados</em>',en:'Detailed <em>pricing</em>',de:'Detaillierte <em>Preise</em>',fr:'Prix <em>détaillés</em>',it:'Prezzi <em>dettagliati</em>',ar:'أسعار <em>تفصيلية</em>',ru:'Подробные <em>цены</em>'},
-      pr_s:{es:'Info transparente — sin sorpresas',en:'Transparent info — no surprises',de:'Transparente Info',fr:'Info transparente',it:'Info trasparente — nessuna sorpresa',ar:'معلومات شفافة — بدون مفاجآت',ru:'Прозрачная информация'},
-      part_t:{es:'Colaboradores oficiales',en:'Official partners',de:'Offizielle Partner',fr:'Partenaires officiels',it:'Partner ufficiali',ar:'شركاء رسميون',ru:'Официальные партнёры'},
-      foot:{es:'Reserva directa sin comisiones',en:'Direct booking, no fees',de:'Direktbuchung ohne Gebühren',fr:'Réservation directe sans frais',it:'Prenotazione diretta senza commissioni',ar:'حجز مباشر بدون عمولات',ru:'Прямое бронирование без комиссий'},
-      m_t:{es:'Reserva <em>rápida</em>',en:'Quick <em>booking</em>',de:'Schnell<em>buchung</em>',fr:'Réservation <em>rapide</em>',it:'Prenotazione <em>rapida</em>',ar:'حجز <em>سريع</em>',ru:'Быстрое <em>бронирование</em>'},
-      m_s:{es:'Rellena y te contactamos por WhatsApp',en:'Fill in and we contact you via WhatsApp',de:'Ausfüllen — WhatsApp in <1h',fr:'Remplissez — WhatsApp sous 1h',it:'Compila e ti contattiamo via WhatsApp',ar:'املأ البيانات وسنتواصل معك عبر واتساب',ru:'Заполните — свяжемся в WhatsApp'},
-      f_name:{es:'Nombre',en:'Name',de:'Name',fr:'Nom',it:'Nome',ar:'الاسم',ru:'Имя'},
-      f_act:{es:'Actividad',en:'Activity',de:'Aktivität',fr:'Activité',it:'Attività',ar:'النشاط',ru:'Активность'},
-      f_date:{es:'Fecha',en:'Date',de:'Datum',fr:'Date',it:'Data',ar:'التاريخ',ru:'Дата'},
-      f_pax:{es:'Personas',en:'Guests',de:'Personen',fr:'Personnes',it:'Persone',ar:'الأشخاص',ru:'Гостей'},
-      f_notes:{es:'Notas',en:'Notes',de:'Notizen',fr:'Notes',it:'Note',ar:'ملاحظات',ru:'Заметки'},
-      f_send:{es:'Enviar por WhatsApp',en:'Send via WhatsApp',de:'Per WhatsApp senden',fr:'Envoyer par WhatsApp',it:'Invia via WhatsApp',ar:'إرسال عبر واتساب',ru:'Отправить в WhatsApp'},
-      book:{es:'Reservar',en:'Book',de:'Buchen',fr:'Réserver',it:'Prenota',ar:'احجز',ru:'Забронировать'},
-      toast:{es:'Abriendo WhatsApp...',en:'Opening WhatsApp...',de:'WhatsApp öffnet...',fr:'WhatsApp...',it:'Apertura WhatsApp...',ar:'فتح واتساب...',ru:'Открываем WhatsApp...'},
-      qf_t:{es:'Monta tu <em>plan</em>',en:'Build your <em>plan</em>',de:'Stelle deinen <em>Plan</em> zusammen',fr:'Composez votre <em>plan</em>',it:'Crea il tuo <em>piano</em>',ar:'أنشئ <em>خطتك</em>',ru:'Составь свой <em>план</em>'},
-      qf_s:{es:'Selecciona experiencias, revisa el total y envía tu reserva',en:'Select experiences, review the total and send your booking',de:'Erlebnisse wählen, Preis prüfen, Buchung senden',fr:'Sélectionnez, vérifiez le total et envoyez',it:'Seleziona esperienze, controlla il totale e invia',ar:'اختر التجارب، راجع الإجمالي وأرسل حجزك',ru:'Выбирай впечатления, проверяй сумму, отправляй бронь'},
-      qf_sel:{es:'Selecciona experiencias',en:'Select experiences',de:'Erlebnisse wählen',fr:'Sélectionner',it:'Seleziona esperienze',ar:'اختر التجارب',ru:'Выбрать впечатления'},
-      qf_total:{es:'Total estimado',en:'Estimated total',de:'Geschätzter Preis',fr:'Total estimé',it:'Totale stimato',ar:'الإجمالي المقدر',ru:'Примерная сумма'},
-      qf_send:{es:'Enviar reserva por WhatsApp',en:'Send booking via WhatsApp',de:'Buchung per WhatsApp senden',fr:'Envoyer par WhatsApp',it:'Invia prenotazione via WhatsApp',ar:'إرسال الحجز عبر واتساب',ru:'Отправить бронь в WhatsApp'},
-      qf_tbc:{es:'A confirmar',en:'TBC',de:'Auf Anfrage',fr:'À confirmer',it:'Da confermare',ar:'للتأكيد',ru:'Уточняется'},
-      f_fullname:{es:'Nombre completo',en:'Full name',de:'Vollständiger Name',fr:'Nom complet',it:'Nome completo',ar:'الاسم الكامل',ru:'Полное имя'},
-      f_phone:{es:'Teléfono',en:'Phone',de:'Telefon',fr:'Téléphone',it:'Telefono',ar:'الهاتف',ru:'Телефон'},
-      js_sub:{es:'Selecciona tu tour y completa los datos',en:'Select your tour and fill in the details',de:'Tour wählen und Daten ausfüllen',fr:'Sélectionnez votre tour',it:'Seleziona il tour e compila i dati',ar:'اختر جولتك واملأ البيانات',ru:'Выберите тур и заполните данные'},
-      js_tour:{es:'Tour',en:'Tour',de:'Tour',fr:'Tour',it:'Tour',ar:'الجولة',ru:'Тур'},
-      js_skis:{es:'Jet Skis',en:'Jet Skis',de:'Jet Skis',fr:'Jet Skis',it:'Jet Ski',ar:'جت سكي',ru:'Гидроциклов'},
-      js_pickup:{es:'Punto de recogida',en:'Pick-up location',de:'Abholpunkt',fr:'Point de retrait',it:'Punto di ritiro',ar:'نقطة الالتقاط',ru:'Точка посадки'},
-      js_time:{es:'Hora deseada',en:'Desired time',de:'Gewünschte Zeit',fr:'Heure souhaitée',it:'Orario desiderato',ar:'الوقت المطلوب',ru:'Желаемое время'},
-      js_send:{es:'Reservar Jet Ski',en:'Book Jet Ski',de:'Jet Ski buchen',fr:'Réserver Jet Ski',it:'Prenota Jet Ski',ar:'احجز جت سكي',ru:'Забронировать Jet Ski'},
-      bcm_buy:{es:'Comprar entrada',en:'Buy ticket',de:'Ticket kaufen',fr:'Acheter billet',it:'Acquista biglietto',ar:'شراء تذكرة',ru:'Купить билет'}
-    };
-    
-    // ===== VENUES DATA (abbreviated for brevity - full data would be included) =====
-    const V = [
-      {id:'jet-ski',cat:'water',feat:true,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Jet Ski Tour',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107976/5_d0638s.png',price:{es:'Desde 99 €',en:'From 99 €',de:'Ab 99 €',fr:'Dès 99 €',it:'Da 99 €',ar:'من 99 €',ru:'От 99 €'},tags:{es:['5 tours','1–2 pers'],en:['5 tours','1–2 pax'],de:['5 Tours','1–2 Pers'],fr:['5 tours','1–2 pers'],it:['5 tour','1–2 pers'],ar:['5 جولات','1-2 أشخاص'],ru:['5 туров','1–2 чел']},desc:{es:'5 rutas disponibles desde 30 min hasta 2h. Transporte incluido. Reserva con tour específico.',en:'5 routes from 30 min to 2h. Transport included. Book your specific tour.',de:'5 Routen von 30 Min bis 2h. Transfer inklusive.',fr:'5 parcours de 30 min à 2h. Transport inclus.',it:'5 percorsi da 30 min a 2h. Trasporto incluso.',ar:'5 مسارات من 30 دقيقة إلى ساعتين. النقل مشمول.',ru:'5 маршрутов от 30 мин до 2ч. Трансфер включён.'},jetski:true},
-      // ... (all other venue objects would be included here)
-    ];
-    
-    const collections = [
-      {id:'hidden-beaches',name:'Hidden Beaches',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/36_slsjr4.png',eyebrow:{es:'Colección',en:'Collection',de:'Kollektion',fr:'Collection',it:'Collezione',ar:'مجموعة',ru:'Коллекция'},desc:{es:'Calas escondidas de agua cristalina.',en:'Crystal-clear hidden coves.',de:'Versteckte Buchten.',fr:'Criques cachées.',it:'Cale nascoste.',ar:'خلجان مخفية بمياه صافية.',ru:'Скрытые бухты.'},cta:{es:'Descubrir calas',en:'Discover coves',de:'Buchten entdecken',fr:'Découvrir',it:'Scopri le cale',ar:'اكتشف الخلجان',ru:'Открыть бухты'}},
-      // ... (other collections)
-    ];
-    
-    const partners = [
-      {n:'MCP',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/44_ynjvv7.png'},
-      {n:'Sea Moments',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302017/45_t8pli3.png'},
-      // ... (other partners)
-    ];
-    
-    const pricingData = [
-      {title:{es:'Alquiler Barco (sin licencia)',en:'Boat Rental (no license)',de:'Bootsvermietung',fr:'Location Bateau',it:'Noleggio Barca',ar:'تأجير قارب',ru:'Аренда лодки'},sub:{es:'Ramón de Moncada 20, Santa Ponça · Max 5 pax · Dep. 200 €',en:'Ramón de Moncada 20, Santa Ponça · Max 5 pax · Dep. 200 €',de:'Ramón de Moncada 20, Santa Ponça · Max 5 · Anz. 200 €',fr:'Ramón de Moncada 20, Santa Ponça · Max 5 · Dép. 200 €',it:'Ramón de Moncada 20, Santa Ponça · Max 5 · Dep. 200 €',ar:'رامون دي مونكادا 20، سانتا بونسا · 5 أشخاص · وديعة 200 €',ru:'Рамон де Монкада 20, Санта Понса · Макс 5 · Залог 200 €'},rows:[['2h','130 €'],['3h','170 €'],['4h','200 €'],['5h','230 €'],['6h','260 €']],note:{es:'Incluye gasolina y snorkel. Sin licencia requerida.',en:'Gas & snorkel included. No license required.',de:'Benzin & Schnorchel inkl. Kein Schein nötig.',fr:'Essence & tuba inclus. Sans permis.',it:'Benzina e snorkel inclusi. Senza patente.',ar:'البنزين والغطس مشمولان. لا رخصة مطلوبة.',ru:'Бензин и снорклинг включены. Без лицензии.'}},
-      // ... (other pricing items)
-    ];
-    
-    // ===== HELPER FUNCTIONS =====
-    function t(k){return L[k]?.[lang]||L[k]?.es||k}
-    function loc(v){return typeof v==='object'?(v[lang]||v.es||''):v}
-    function parsePrice(p){const s=typeof p==='object'?(p.es||''):String(p);const m=s.match(/(\d+)/);return m?parseInt(m[1]):0}
-    
-    function waLink(v){
-      const dateLbl={es:'[fecha]',en:'[date]',de:'[Datum]',fr:'[date]',it:'[data]',ar:'[التاريخ]',ru:'[дата]'}[lang]||'[date]';
-      let m = (v.wa && typeof v.wa === 'object') ? (v.wa[lang] || v.wa.en || v.wa.es || '') : (v.wa || '');
-      m=m.replace('%n','2').replace('%d',dateLbl);
-      return `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+<!-- GENERIC MODAL -->
+<div class="modal-bg" id="bkModal"><div class="modal">
+  <button class="mx" onclick="closeModal('bkModal')">✕</button>
+  <h3 data-i18n="m_t"></h3><p class="ms" data-i18n="m_s"></p>
+  <form id="bkForm" onsubmit="submitBooking(event)">
+    <div class="fi"><label data-i18n="f_name"></label><input type="text" id="fN" required></div>
+    <div class="fi"><label data-i18n="f_act"></label><select id="fA"></select></div>
+    <div class="fi-row"><div class="fi"><label data-i18n="f_date"></label><input type="date" id="fD" required></div><div class="fi"><label data-i18n="f_pax"></label><input type="number" id="fP" min="1" max="30" value="2"></div></div>
+    <div class="fi"><label data-i18n="f_notes"></label><textarea id="fNo"></textarea></div>
+    <button type="submit" class="f-submit" data-i18n="f_send"></button>
+  </form>
+</div></div>
+
+<!-- JET SKI MODAL -->
+<div class="modal-bg" id="jsModal"><div class="modal">
+  <button class="mx" onclick="closeModal('jsModal')">✕</button>
+  <h3>Jet Ski <em>Tour</em></h3><p class="ms" data-i18n="js_sub"></p>
+  <div class="fi"><label data-i18n="f_fullname"></label><input type="text" id="jsName" required></div>
+  <div class="fi"><label data-i18n="f_phone"></label><input type="tel" id="jsPhone" required></div>
+  <div class="fi"><label data-i18n="js_tour"></label></div>
+  <div class="jf-tours" id="jsTours"></div>
+  <div class="fi-row"><div class="fi"><label data-i18n="f_pax"></label><input type="number" id="jsPax" min="1" max="20" value="2"></div><div class="fi"><label data-i18n="js_skis"></label><input type="number" id="jsSkis" min="1" max="10" value="1"></div></div>
+  <div class="fi"><label data-i18n="js_pickup"></label><input type="text" id="jsPickup" required placeholder="Hotel name or 'Own transport'"></div>
+  <div class="fi"><label data-i18n="js_time"></label><input type="time" id="jsTime" required></div>
+  <div class="fi"><label data-i18n="f_notes"></label><textarea id="jsNotes"></textarea></div>
+  <button type="button" class="jf-submit" id="jsSend" data-i18n="js_send"></button>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WA='34644075065';
+const BCM_TICKET_URL='https://top-3-prs-brand.sumupstore.com/product/bcm-pre-sale-ticket';
+const BOAT_PARTY_URL='https://top-3-prs-brand.sumupstore.com/product/sunset-heatwave-boat-party-deposit';
+
+let lang='en',cat='all',cart=[];
+const LANGS=['es','en','de','fr','it','ar','ru'];
+const RTL_LANGS=['ar'];
+
+const jetSkiTours=[
+  {id:'gojet',name:'GoJet Tour',dur:'30 min',price:99},
+  {id:'sunset',name:'Sunset Tour',dur:'60 min',price:169},
+  {id:'basset',name:'Tour Cala en Basset & Cave S\'Argilau',dur:'60 min',price:159},
+  {id:'dragonera',name:'Sa Dragonera Natural Park Tour',dur:'1h 30 min',price:199},
+  {id:'vip',name:'VIP Tour Tramuntana Jobe',dur:'2h',price:279}
+];
+let selTour='gojet';
+
+const V=[
+  {id:'jet-ski',cat:'water',feat:true,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Jet Ski Tour',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107976/5_d0638s.png',price:{es:'Desde 99 €',en:'From 99 €',de:'Ab 99 €',fr:'Dès 99 €',it:'Da 99 €',ar:'من 99 €',ru:'От 99 €'},tags:{es:['5 tours','1–2 pers'],en:['5 tours','1–2 pax'],de:['5 Tours','1–2 Pers'],fr:['5 tours','1–2 pers'],it:['5 tour','1–2 pers'],ar:['5 جولات','1-2 أشخاص'],ru:['5 туров','1–2 чел']},desc:{es:'5 rutas disponibles desde 30 min hasta 2h. Transporte incluido. Reserva con tour específico.',en:'5 routes from 30 min to 2h. Transport included. Book your specific tour.',de:'5 Routen von 30 Min bis 2h. Transfer inklusive.',fr:'5 parcours de 30 min à 2h. Transport inclus.',it:'5 percorsi da 30 min a 2h. Trasporto incluso.',ar:'5 مسارات من 30 دقيقة إلى ساعتين. النقل مشمول.',ru:'5 маршрутов от 30 мин до 2ч. Трансфер включён.'},jetski:true},
+  {id:'boat-rental',cat:'water',feat:false,badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:{es:'Barco sin Licencia',en:'Boat Rental',de:'Boot ohne Lizenz',fr:'Bateau sans Permis',it:'Barca senza Patente',ar:'قارب بدون رخصة',ru:'Лодка без лицензии'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300395/8_gf0yft.png',price:{es:'Desde 130 €',en:'From 130 €',de:'Ab 130 €',fr:'Dès 130 €',it:'Da 130 €',ar:'من 130 €',ru:'От 130 €'},tags:{es:['2–6h','Max 5 pax'],en:['2–6h','Max 5 pax'],de:['2–6h','Max 5'],fr:['2–6h','Max 5'],it:['2–6h','Max 5'],ar:['2-6 ساعات','5 أشخاص'],ru:['2–6ч','Макс 5']},desc:{es:'Desde Santa Ponça. Gasolina y snorkel incluido. Depósito 200 €. Recogida: Ramón de Moncada 20.',en:'From Santa Ponça. Gas & snorkel included. Deposit 200 €. Pick-up: Ramón de Moncada 20.',de:'Ab Santa Ponça. Benzin & Schnorchel inkl. Anzahlung 200 €.',fr:'Depuis Santa Ponça. Essence & tuba inclus. Dépôt 200 €.',it:'Da Santa Ponça. Benzina e snorkel inclusi. Deposito 200 €.',ar:'من سانتا بونسا. البنزين والغطس مشمولان. وديعة 200 €.',ru:'Из Санта-Понса. Бензин и снорклинг включены. Залог 200 €.'},wa:{es:'Hola, barco sin licencia el %d para %n. Opciones?',en:'Hi, boat on %d for %n. Options?',de:'Hallo, Boot am %d für %n?',fr:'Bonjour, bateau le %d pour %n?',it:'Ciao, barca il %d per %n?',ar:'مرحبا، قارب في %d لـ %n أشخاص?',ru:'Привет, лодка на %d для %n. Варианты?'}},
+  {id:'boat-party',cat:'water',feat:true,badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct',it:'Mag–Ott',ar:'مايو–أكتوبر',ru:'Май–Окт'},name:'Sunsets Heatwave Boat',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107981/6_iivrjt.png',price:'69 €',tags:{es:['3h','Todo incl.'],en:['3h','All-in'],de:['3h','All-in'],fr:['3h','Tout inclus'],it:['3h','Tutto incl.'],ar:['3 ساعات','شامل'],ru:['3ч','Всё вкл.']},desc:{es:'Barco doble cubierta: DJs, bongo, swim stop, paella, fruta. After party + camiseta gratis.',en:'Double-deck boat: DJs, bongo, swim stop, paella, fruit. Free after party + tee.',de:'Doppelstock-Boot: DJs, Bongo, Badestopp, Paella. Gratis After-Party.',fr:'Bateau double pont: DJs, bongo, baignade, paella. After party gratuite.',it:'Barca doppio ponte: DJ, bongo, sosta bagno, paella. After party gratis.',ar:'قارب بطابقين: دي جي، بونغو، توقف للسباحة، بايلا. حفلة مجانية بعدها.',ru:'Двухпалубный катер: DJ, бонго, купание, паэлья. Бесплатная вечеринка.'},wa:{es:'Hola! Sunsets Heatwave Boat el %d para %n. Plazas?',en:'Hi! Heatwave Boat on %d for %n. Spots?',de:'Hallo! Heatwave Boat am %d für %n?',fr:'Bonjour! Heatwave Boat le %d pour %n?',it:'Ciao! Heatwave Boat il %d per %n?',ar:'مرحبا! قارب Heatwave في %d لـ %n?',ru:'Привет! Heatwave Boat на %d для %n?'}},
+  {id:'barbuda',cat:'beach',feat:true,badge:'season',bTxt:{es:'Mar–Oct',en:'Mar–Oct',de:'Mär–Okt',fr:'Mar–Oct',it:'Mar–Ott',ar:'مارس–أكتوبر',ru:'Мар–Окт'},name:'Barbuda Beach',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302220/Screenshot_2026-03-23_at_22.43.25_i6psxa.png',price:'40–55 €',tags:{es:['Brunch','All incl.'],en:['Brunch','All incl.'],de:['Brunch','All inkl.'],fr:['Brunch','All incl.'],it:['Brunch','Tutto incl.'],ar:['برانش','شامل'],ru:['Бранч','Всё вкл.']},desc:{es:'Brunch frente al mar con cócteles, ambiente premium.',en:'Seaside brunch with cocktails, premium vibes.',de:'Brunch am Meer, Cocktails, Premium.',fr:'Brunch face à la mer, cocktails.',it:'Brunch fronte mare con cocktail.',ar:'برانش على البحر مع كوكتيلات.',ru:'Бранч у моря с коктейлями.'},wa:{es:'Hola, %n para Barbuda el %d. Reserva?',en:'Hi, %n for Barbuda on %d. Book?',de:'Hallo, %n für Barbuda am %d?',fr:'Bonjour, %n pour Barbuda le %d?',it:'Ciao, %n per Barbuda il %d?',ar:'مرحبا، %n لباربودا في %d?',ru:'Привет, %n для Barbuda на %d?'}},
+  {id:'folies',cat:'beach',feat:true,premium:true,badge:'premium',bTxt:{es:'Premium',en:'Premium',de:'Premium',fr:'Premium',it:'Premium',ar:'بريميوم',ru:'Премиум'},name:'Beach Club Folies',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/15_rvbkq8.png',price:'€€€',tags:{es:['Cala Llamp','Exclusivo'],en:['Cala Llamp','Exclusive'],de:['Cala Llamp','Exklusiv'],fr:['Cala Llamp','Exclusif'],it:['Cala Llamp','Esclusivo'],ar:['كالا يامب','حصري'],ru:['Кала Льямп','Эксклюзив']},desc:{es:'Camas balinesas en Cala Llamp, lujo con vistas al atardecer.',en:'Balinese beds at Cala Llamp, luxury with sunset views.',de:'Balinesische Betten in Cala Llamp, Luxus.',fr:'Lits balinais à Cala Llamp, luxe.',it:'Letti balinesi a Cala Llamp, lusso.',ar:'أسرّة بالينية في كالا يامب، فخامة.',ru:'Балийские кровати в Кала Льямп, роскошь.'},wa:{es:'Hola, cama balinesa para %n en Folies el %d. Coste?',en:'Hi, bed for %n at Folies on %d. Cost?',de:'Hallo, Bett für %n bei Folies am %d?',fr:'Bonjour, lit pour %n à Folies le %d?',it:'Ciao, letto per %n a Folies il %d?',ar:'مرحبا، سرير لـ %n في فوليز %d?',ru:'Привет, кровать для %n в Folies на %d?'},map:'https://share.google/I2xJ1y2yYdBkT66jL'},
+  {id:'bcm',cat:'night',feat:true,bcm:true,badge:'season',bTxt:{es:'Abr–Oct',en:'Apr–Oct',de:'Apr–Okt',fr:'Avr–Oct',it:'Apr–Ott',ar:'أبريل–أكتوبر',ru:'Апр–Окт'},name:'BCM Nightlife',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774302375/Screenshot_2026-03-23_at_22.45.56_bhplz9.png',price:'35 €',tags:{es:['Magaluf','23–06h'],en:['Magaluf','11PM–6AM'],de:['Magaluf','23–06'],fr:['Magaluf','23h–6h'],it:['Magaluf','23–06'],ar:['ماغالوف','23-06'],ru:['Магалуф','23–06']},desc:{es:'35 € (dep. 10 € + 25 € en punto). Camiseta BCM gratis. Smart dress. +10 € tras medianoche.',en:'35 € (10 € deposit + 25 € at venue). Free BCM tee. Smart dress. +10 € after midnight.',de:'35 € (10 € Anz. + 25 € vor Ort). BCM T-Shirt gratis. +10 € nach 00.',fr:'35 € (10 € ac. + 25 € sur place). T-shirt BCM. +10 € après minuit.',it:'35 € (10 € dep. + 25 € in loco). T-shirt BCM gratis. +10 € dopo mezzanotte.',ar:'35 € (10 € وديعة + 25 € في الموقع). قميص BCM مجاني.',ru:'35 € (залог 10 € + 25 € на месте). Футболка BCM бесплатно.'},wa:{es:'Hola, BCM el %d para %n. Confirmar?',en:'Hi, BCM on %d for %n. Confirm?',de:'Hallo, BCM am %d für %n?',fr:'Bonjour, BCM le %d pour %n?',it:'Ciao, BCM il %d per %n?',ar:'مرحبا، BCM في %d لـ %n?',ru:'Привет, BCM на %d для %n?'}},
+  {id:'mcp',cat:'night',badge:'season',bTxt:{es:'May–Sep',en:'May–Sep',de:'Mai–Sep',fr:'Mai–Sep',it:'Mag–Set',ar:'مايو–سبتمبر',ru:'Май–Сен'},name:'MCP Club Pass',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774365725/IMG_5725_hssktr.jpg',price:'30 €',tags:{es:['3 clubs','2 bebidas'],en:['3 clubs','2 drinks'],de:['3 Clubs','2 Getränke'],fr:['3 clubs','2 verres'],it:['3 club','2 drink'],ar:['3 نوادي','2 مشروبات'],ru:['3 клуба','2 напитка']},desc:{es:'30 € (dep. 20 € + 10 € puerta). Bananas, Tokio, Soho. Shot gratis antes de 1 AM.',en:'30 € (20 € dep. + 10 € door). Bananas, Tokio, Soho. Free shot before 1 AM.',de:'30 € (20 € + 10 € Tür). 3 Clubs. Gratis-Shot vor 1 Uhr.',fr:'30 € (20 € + 10 € entrée). 3 clubs. Shot gratuit avant 1h.',it:'30 € (20 € + 10 € porta). 3 club. Shot gratis prima dell\'1.',ar:'30 € (20 € + 10 € عند الباب). 3 نوادي. شوت مجاني قبل 1 صباحاً.',ru:'30 € (20 € + 10 € на входе). 3 клуба. Бесплатный шот до 1 ночи.'},wa:{es:'Hola, MCP el %d para %n?',en:'Hi, MCP on %d for %n?',de:'Hallo, MCP am %d für %n?',fr:'Bonjour, MCP le %d pour %n?',it:'Ciao, MCP il %d per %n?',ar:'مرحبا، MCP في %d لـ %n?',ru:'Привет, MCP на %d для %n?'}},
+  {id:'social',cat:'night',premium:true,badge:'premium',bTxt:{es:'Premium',en:'Premium',de:'Premium',fr:'Premium',it:'Premium',ar:'بريميوم',ru:'Премиум'},name:'Social Club',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107977/4_ykfzz0.png',price:'25 €',tags:{es:['Palma','2 copas'],en:['Palma','2 drinks'],de:['Palma','2 Getränke'],fr:['Palma','2 verres'],it:['Palma','2 drink'],ar:['بالما','2 مشروبات'],ru:['Пальма','2 напитка']},desc:{es:'25 € con 2 copas. Terraza elegante, vistas al puerto. 23–06h.',en:'25 € with 2 drinks. Elegant harbour terrace. 11 PM–6 AM.',de:'25 € mit 2 Getränken. Hafenterrasse. 23–06.',fr:'25 € avec 2 verres. Terrasse vue port. 23h–6h.',it:'25 € con 2 drink. Terrazza elegante, vista porto. 23–06.',ar:'25 € مع 2 مشروبات. تراس أنيق. 23-06.',ru:'25 € с 2 напитками. Терраса с видом на порт. 23–06.'},wa:{es:'Buenas, Social Club el %d para %n?',en:'Hi, Social Club on %d for %n?',de:'Hallo, Social Club am %d für %n?',fr:'Bonjour, Social Club le %d pour %n?',it:'Ciao, Social Club il %d per %n?',ar:'مرحبا، Social Club في %d لـ %n?',ru:'Привет, Social Club на %d для %n?'}},
+  {id:'redlion',cat:'night',badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Red Lion',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372174/IMG_5686_i8hxqh.jpg',price:'30–40 €',tags:{es:['Magaluf','4 bebidas'],en:['Magaluf','4 drinks'],de:['Magaluf','4 Getränke'],fr:['Magaluf','4 verres'],it:['Magaluf','4 drink'],ar:['ماغالوف','4 مشروبات'],ru:['Магалуф','4 напитка']},desc:{es:'30–40 € con 4 bebidas. Desde medianoche.',en:'30–40 € with 4 drinks. Midnight till late.',de:'30–40 € mit 4 Getränken. Ab Mitternacht.',fr:'30–40 € avec 4 boissons. Dès minuit.',it:'30–40 € con 4 drink. Da mezzanotte.',ar:'30-40 € مع 4 مشروبات. من منتصف الليل.',ru:'30–40 € с 4 напитками. С полуночи.'},wa:{es:'Hola, Red Lion el %d para %n?',en:'Hi, Red Lion on %d for %n?',de:'Hallo, Red Lion am %d für %n?',fr:'Bonjour, Red Lion le %d pour %n?',it:'Ciao, Red Lion il %d per %n?',ar:'مرحبا، Red Lion في %d لـ %n?',ru:'Привет, Red Lion на %d для %n?'}},
+  {id:'panama',cat:'night',badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Panama Jack',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372179/1-scaled.jpg_ag1v3h.webp',price:'15–20 €',tags:{es:['Magaluf','1 copa'],en:['Magaluf','1 drink'],de:['Magaluf','1 Getränk'],fr:['Magaluf','1 verre'],it:['Magaluf','1 drink'],ar:['ماغالوف','1 مشروب'],ru:['Магалуф','1 напиток']},desc:{es:'15–20 € + consumición. 22–06h.',en:'15–20 € + 1 drink. 10 PM–6 AM.',de:'15–20 € + 1 Getränk. 22–06.',fr:'15–20 € + 1 verre. 22h–6h.',it:'15–20 € + 1 drink. 22–06.',ar:'15-20 € + مشروب. 22-06.',ru:'15–20 € + 1 напиток. 22–06.'},wa:{es:'Hola, Panama el %d para %n?',en:'Hi, Panama on %d for %n?',de:'Hallo, Panama am %d für %n?',fr:'Bonjour, Panama le %d pour %n?',it:'Ciao, Panama il %d per %n?',ar:'مرحبا، Panama في %d لـ %n?',ru:'Привет, Panama на %d для %n?'}},
+  {id:'gringos',cat:'night',badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Gringos Bingos',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372793/e1_wytmwc.webp',price:'35–45 €',tags:{es:['Magaluf','Mesa + show'],en:['Magaluf','Table + show'],de:['Magaluf','Tisch + Show'],fr:['Magaluf','Table + show'],it:['Magaluf','Tavolo + show'],ar:['ماغالوف','طاولة + عرض'],ru:['Магалуф','Стол + шоу']},desc:{es:'35–45 € con mesa. Show + experiencia. 21–00h.',en:'35–45 € with table. Show. 9 PM–12 AM.',de:'35–45 € mit Tisch. Show. 21–00.',fr:'35–45 € avec table. Show. 21h–00h.',it:'35–45 € con tavolo. Show. 21–00.',ar:'35-45 € مع طاولة. عرض. 21-00.',ru:'35–45 € со столом. Шоу. 21–00.'},wa:{es:'Hola, Gringos el %d para %n?',en:'Hi, Gringos on %d for %n?',de:'Hallo, Gringos am %d für %n?',fr:'Bonjour, Gringos le %d pour %n?',it:'Ciao, Gringos il %d per %n?',ar:'مرحبا، Gringos في %d لـ %n?',ru:'Привет, Gringos на %d для %n?'}},
+  {id:'tabana',cat:'night',badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Tabana',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300400/13_ztcm3p.png',price:{es:'Desde 15 €',en:'From 15 €',de:'Ab 15 €',fr:'Dès 15 €',it:'Da 15 €',ar:'من 15 €',ru:'От 15 €'},tags:{es:['Magaluf','Exótico'],en:['Magaluf','Exotic'],de:['Magaluf','Exotisch'],fr:['Magaluf','Exotique'],it:['Magaluf','Esotico'],ar:['ماغالوف','غريب'],ru:['Магалуф','Экзотика']},desc:{es:'Club con ambiente exótico.',en:'Exotic atmosphere club.',de:'Exotischer Club.',fr:'Club exotique.',it:'Club esotico.',ar:'نادي بأجواء غريبة.',ru:'Клуб с экзотической атмосферой.'},wa:{es:'Hola, Tabana para %n el %d?',en:'Hi, Tabana for %n on %d?',de:'Hallo, Tabana für %n am %d?',fr:'Bonjour, Tabana pour %n le %d?',it:'Ciao, Tabana per %n il %d?',ar:'مرحبا، Tabana لـ %n في %d?',ru:'Привет, Tabana для %n на %d?'}},
+  {id:'shisha',cat:'night',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Shisha Lounge',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107980/10_gojczo.png',price:'€',tags:{es:['Palmanova'],en:['Palmanova'],de:['Palmanova'],fr:['Palmanova'],it:['Palmanova'],ar:['بالمانوفا'],ru:['Пальманова']},desc:{es:'Lounge de shisha frente al mar.',en:'Shisha lounge by the sea.',de:'Shisha-Lounge am Meer.',fr:'Lounge chicha face à la mer.',it:'Shisha lounge sul mare.',ar:'لاونج شيشة على البحر.',ru:'Кальянная у моря.'},wa:{es:'Hola, Shisha Lounge para %n el %d?',en:'Hi, Shisha Lounge for %n on %d?',de:'Hallo, Shisha Lounge für %n am %d?',fr:'Bonjour, Shisha Lounge pour %n le %d?',it:'Ciao, Shisha Lounge per %n il %d?',ar:'مرحبا، شيشة لاونج لـ %n في %d?',ru:'Привет, Shisha Lounge для %n на %d?'}},
+  {id:'massimo',cat:'food',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Massimo Pizza',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774107978/9_l7ileb.png',price:'€',tags:{es:['Magaluf'],en:['Magaluf'],de:['Magaluf'],fr:['Magaluf'],it:['Magaluf'],ar:['ماغالوف'],ru:['Магалуф']},desc:{es:'Pizza artesanal al horno de leña.',en:'Wood-fired artisan pizza.',de:'Holzofenpizza.',fr:'Pizza au four à bois.',it:'Pizza artigianale al forno a legna.',ar:'بيتزا حرفية بالفرن الحطبي.',ru:'Пицца из дровяной печи.'},wa:{es:'Hola, mesa Massimo para %n el %d?',en:'Hi, Massimo for %n on %d?',de:'Hallo, Massimo für %n am %d?',fr:'Bonjour, Massimo pour %n le %d?',it:'Ciao, Massimo per %n il %d?',ar:'مرحبا، طاولة Massimo لـ %n في %d?',ru:'Привет, столик Massimo для %n на %d?'}},
+
+  /* ============ 5 HIDDEN BEACHES ============ */
+  {id:'cala-marmols',cat:'beach',badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct',it:'Mag–Ott',ar:'مايو–أكتوبر',ru:'Май–Окт'},name:'Cala Màrmols',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776018264/Calo-des-marmol4_q9vaeh.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Secreta','Senderismo'],en:['Hidden','Hiking'],de:['Versteckt','Wanderung'],fr:['Cachée','Randonnée'],it:['Nascosta','Trekking'],ar:['سرية','مشي'],ru:['Скрытая','Поход']},desc:{es:'El Caribe de Mallorca. Acceso solo a pie (45–60 min) o en barco. Ses Salines. Agua turquesa, cero servicios. Consejo: empieza antes de las 9 y lleva 3L de agua.',en:'The Caribbean of Mallorca. Access by hike (45–60 min) or boat only. Near Ses Salines. Turquoise water, zero facilities. Tip: start before 9am, bring 3L water minimum.',de:'Die Karibik Mallorcas. Zugang nur zu Fuß (45–60 Min) oder per Boot. Bei Ses Salines. Türkisfarbenes Wasser, keine Einrichtungen. Tipp: vor 9 Uhr starten, mindestens 3L Wasser mitnehmen.',fr:'Les Caraïbes de Majorque. Accès uniquement à pied (45–60 min) ou en bateau. Près de Ses Salines. Eau turquoise, aucun service. Conseil: partez avant 9h avec 3L d\'eau.',it:'I Caraibi di Mallorca. Accesso solo a piedi (45–60 min) o in barca. Vicino a Ses Salines. Acqua turchese, zero servizi. Consiglio: parti prima delle 9 con 3L di acqua.',ar:'كاريبي مايوركا. الوصول سيراً (45-60 دقيقة) أو بالقارب فقط. قرب سيس سالينس. مياه فيروزية، بدون خدمات. نصيحة: ابدأ قبل الساعة 9 مع 3 لتر ماء.',ru:'Карибы Майорки. Доступ только пешком (45–60 мин) или на лодке. Рядом с Сес Салинес. Бирюзовая вода, никаких удобств. Совет: выходите до 9 утра с 3 л воды.'},wa:{es:'Hola! Info sobre cómo llegar a Cala Màrmols el %d para %n personas?',en:'Hi! Info on how to get to Cala Màrmols on %d for %n people?',de:'Hallo! Info zu Cala Màrmols am %d für %n Personen?',fr:'Bonjour! Info sur Cala Màrmols le %d pour %n personnes?',it:'Ciao! Info su Cala Màrmols il %d per %n persone?',ar:'مرحبا! معلومات عن كالا مارمولس في %d لـ %n شخص؟',ru:'Привет! Информация о Cala Màrmols на %d для %n человек?'}},
+
+  {id:'cala-varques',cat:'beach',badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct',it:'Mag–Ott',ar:'مايو–أكتوبر',ru:'Май–Окт'},name:'Cala Varques',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776018261/IMG_6679_g4k8zz.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Cuevas','Acantilados'],en:['Sea caves','Cliff jumps'],de:['Höhlen','Klippen'],fr:['Grottes','Falaises'],it:['Grotte','Scogliere'],ar:['كهوف','منحدرات'],ru:['Пещеры','Скалы']},desc:{es:'Cuevas marinas y saltos de acantilado cerca de Manacor. Caminata de 20 min por pinar. Cero servicios. Cuevas mejor iluminadas de 10h a 12h. Llega antes de las 9.',en:'Sea caves and cliff jumping near Manacor. 20-min forest walk through pines. Zero facilities. Caves best lit 10am–12pm. Arrive before 9am to have the caves to yourself.',de:'Meereshöhlen und Klippensprünge nahe Manacor. 20-min Spaziergang durch Pinienwald. Keine Einrichtungen. Höhlen zwischen 10 und 12 Uhr am besten beleuchtet. Komm vor 9 Uhr.',fr:'Grottes marines et sauts de falaise près de Manacor. 20 min à travers la pinède. Aucun service. Grottes mieux éclairées de 10h à 12h. Arrivez avant 9h.',it:'Grotte marine e salti dalle scogliere vicino a Manacor. 20 min a piedi tra i pini. Zero servizi. Grotte meglio illuminate dalle 10 alle 12. Arriva prima delle 9.',ar:'كهوف بحرية وقفزات من المنحدرات قرب ماناكور. مشي 20 دقيقة عبر غابة الصنوبر. بدون خدمات. الكهوف أفضل إضاءة من 10 إلى 12. احضر قبل الساعة 9.',ru:'Морские пещеры и прыжки со скал рядом с Манакор. 20 мин ходьбы через сосновый лес. Никаких удобств. Пещеры лучше всего освещены с 10 до 12. Приходите до 9.'},wa:{es:'Hola! Info para Cala Varques el %d (%n personas). Cómo llegar?',en:'Hi! Info on Cala Varques for %d (%n people). How to get there?',de:'Hallo! Info Cala Varques am %d für %n?',fr:'Bonjour! Info Cala Varques le %d pour %n?',it:'Ciao! Info Cala Varques il %d per %n?',ar:'مرحبا! معلومات كالا فاركيس في %d لـ %n؟',ru:'Привет! Инфо Cala Varques на %d для %n?'}},
+
+  {id:'cala-tuent',cat:'beach',badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct',it:'Mag–Ott',ar:'مايو–أكتوبر',ru:'Май–Окт'},name:'Cala Tuent',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776613921/415250_96c2c490b0904c909cfc0a6d989319d3_mv2_j4i8yo.avif',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Tramuntana','Tranquila'],en:['Tramuntana','Quiet'],de:['Tramuntana','Ruhig'],fr:['Tramuntana','Calme'],it:['Tramuntana','Tranquilla'],ar:['ترامونتانا','هادئ'],ru:['Трамунтана','Тихий']},desc:{es:'Alternativa tranquila a Sa Calobra. Acceso por carretera MA-2141. Playa de guijarros con pinar. Lleva escarpines. Un pequeño restaurante cerca.',en:'Quiet alternative to crowded Sa Calobra. Access via MA-2141 mountain road. Pebble beach with pine backdrop. Wear water shoes. One small restaurant nearby.',de:'Ruhige Alternative zum überfüllten Sa Calobra. Zugang über die Bergstraße MA-2141. Kieselstrand mit Pinienkulisse. Wasserschuhe tragen. Ein kleines Restaurant in der Nähe.',fr:'Alternative tranquille à Sa Calobra bondée. Accès par la route de montagne MA-2141. Plage de galets avec toile de fond de pins. Portez des chaussures d\'eau. Un petit restaurant à proximité.',it:'Alternativa tranquilla all\'affollata Sa Calobra. Accesso tramite la strada di montagna MA-2141. Spiaggia di ciottoli con pineta. Indossa scarpe da scoglio. Un piccolo ristorante nelle vicinanze.',ar:'بديل هادئ عن سا كالوبرا المزدحمة. الوصول عبر طريق الجبل MA-2141. شاطئ حصوي مع خلفية من الصنوبر. ارتدِ أحذية مائية. مطعم صغير قريب.',ru:'Тихая альтернатива переполненной Са Калобра. Доступ по горной дороге MA-2141. Галечный пляж на фоне сосен. Носите аквашузы. Рядом небольшой ресторан.'},wa:{es:'Hola! Info Cala Tuent el %d para %n?',en:'Hi! Info Cala Tuent on %d for %n?',de:'Hallo! Info Cala Tuent am %d für %n?',fr:'Bonjour! Info Cala Tuent le %d pour %n?',it:'Ciao! Info Cala Tuent il %d per %n?',ar:'مرحبا! معلومات كالا توينت في %d لـ %n؟',ru:'Привет! Инфо Cala Tuent на %d для %n?'}},
+
+  {id:'cala-estreta',cat:'beach',badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct',it:'Mag–Ott',ar:'مايو–أكتوبر',ru:'Май–Окт'},name:'Cala Estreta',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776018265/3881517875_ac3bb3174d_z_ijowoo.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Snorkel','Silencio'],en:['Snorkel','Silence'],de:['Snorkel','Stille'],fr:['Snorkel','Silence'],it:['Snorkel','Silenzio'],ar:['غطس','هدوء'],ru:['Снорклинг','Тишина']},desc:{es:'Paraíso para snorkel cerca de Cala Mesquida. 30 min de caminata costera. Visibilidad cristalina, fauna marina excelente. Solo 4–5 personas entre semana.',en:'Snorkeler paradise near Cala Mesquida. 30-min coastal hike from car park. Crystal visibility, excellent marine life. Only 4–5 people on weekdays.',de:'Schnorchelparadies nahe Cala Mesquida. 30-min Küstenwanderung vom Parkplatz. Kristallklare Sicht, ausgezeichnete Meeresfauna. Werktags nur 4–5 Personen.',fr:'Paradis du snorkeling près de Cala Mesquida. Randonnée côtière de 30 min depuis le parking. Visibilité cristalline, excellente faune marine. Seulement 4–5 personnes en semaine.',it:'Paradiso dello snorkeling vicino a Cala Mesquida. Escursione costiera di 30 min dal parcheggio. Visibilità cristallina, fauna marina eccellente. Solo 4–5 persone nei giorni feriali.',ar:'جنة الغطس قرب كالا ميسكيدا. مشي ساحلي 30 دقيقة من الموقف. رؤية كريستالية، حياة بحرية ممتازة. 4-5 أشخاص فقط في أيام الأسبوع.',ru:'Рай для снорклинга рядом с Кала Мескида. 30-мин прогулка по побережью от парковки. Кристальная видимость, отличная морская фауна. В будни всего 4–5 человек.'},wa:{es:'Hola! Cala Estreta el %d para %n personas?',en:'Hi! Cala Estreta on %d for %n people?',de:'Hallo! Cala Estreta am %d für %n?',fr:'Bonjour! Cala Estreta le %d pour %n?',it:'Ciao! Cala Estreta il %d per %n?',ar:'مرحبا! كالا إستريتا في %d لـ %n؟',ru:'Привет! Cala Estreta на %d для %n?'}},
+
+  {id:'cala-mitjana',cat:'beach',badge:'season',bTxt:{es:'May–Oct',en:'May–Oct',de:'Mai–Okt',fr:'Mai–Oct',it:'Mag–Ott',ar:'مايو–أكتوبر',ru:'Май–Окт'},name:'Cala Mitjana',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776018261/IMG_6679_g4k8zz.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Kayak','Íntima'],en:['Kayak','Private'],de:['Kayak','Privat'],fr:['Kayak','Intime'],it:['Kayak','Intima'],ar:['كاياك','خاصة'],ru:['Каяк','Уединённый']},desc:{es:'Destino ultra-privado en kayak cerca de Felanitx. 25 min a pie o en kayak. Playa de 40m bajo pinos. A menudo completamente vacía. Perfecta para parejas.',en:'Ultra-private kayak destination near Felanitx. 25-min hike or kayak. Tiny 40m beach under pines. Often completely empty. Perfect for couples.',de:'Ultra-privates Kajak-Ziel nahe Felanitx. 25 Min zu Fuß oder Kajak. Winziger 40m Strand unter Pinien. Oft komplett leer. Perfekt für Paare.',fr:'Destination kayak ultra-privée près de Felanitx. 25 min à pied ou en kayak. Minuscule plage de 40m sous les pins. Souvent complètement vide. Parfait pour les couples.',it:'Destinazione kayak ultra-privata vicino a Felanitx. 25 min a piedi o in kayak. Minuscola spiaggia di 40m sotto i pini. Spesso completamente vuota. Perfetta per coppie.',ar:'وجهة كاياك شديدة الخصوصية قرب فيلانيتكس. 25 دقيقة سيراً أو بالكاياك. شاطئ صغير 40 متر تحت الصنوبر. غالباً فارغ تماماً. مثالي للأزواج.',ru:'Ультра-приватное место для каяка рядом с Фелаnitx. 25 мин пешком или на каяке. Крошечный 40м пляж под соснами. Часто совершенно пустой. Идеально для пар.'},wa:{es:'Hola! Info Cala Mitjana el %d para %n?',en:'Hi! Info Cala Mitjana on %d for %n?',de:'Hallo! Info Cala Mitjana am %d für %n?',fr:'Bonjour! Info Cala Mitjana le %d pour %n?',it:'Ciao! Info Cala Mitjana il %d per %n?',ar:'مرحبا! معلومات كالا ميتخانا في %d لـ %n؟',ru:'Привет! Инфо Cala Mitjana на %d для %n?'}},
+
+  /* ============ 5 MOUNTAIN SPOTS ============ */
+  {id:'gr221-soller-deia',cat:'mountain',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'GR-221 Sóller → Deià',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776019338/3038120Master_hvuxmi.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['UNESCO','4–5h'],en:['UNESCO','4–5h'],de:['UNESCO','4–5h'],fr:['UNESCO','4–5h'],it:['UNESCO','4–5h'],ar:['يونسكو','4-5 ساعات'],ru:['ЮНЕСКО','4–5ч']},desc:{es:'Ruta de Piedra en Seco, Patrimonio UNESCO. 4–5h de Sóller a Deià. Terrazas de piedra, olivares, vistas al mar. Dificultad moderada. Lleva 2L de agua, sin servicios en ruta.',en:'UNESCO World Heritage Dry Stone Route. 4–5h Sóller to Deià. Stone terraces, olive groves, coastal views. Moderate difficulty. Carry 2L water, no facilities on route.',de:'UNESCO-Welterbe Trockenmauer-Route. 4–5h Sóller nach Deià. Steinterrassen, Olivenhaine, Küstenblick. Mittlere Schwierigkeit. 2L Wasser, keine Einrichtungen auf der Strecke.',fr:'Route UNESCO de Pierre Sèche. 4–5h de Sóller à Deià. Terrasses de pierre, oliveraies, vues côtières. Difficulté modérée. 2L d\'eau, aucun service sur le parcours.',it:'Percorso UNESCO della Pietra a Secco. 4–5h da Sóller a Deià. Terrazze in pietra, uliveti, vista costiera. Difficoltà moderata. 2L acqua, nessun servizio sul percorso.',ar:'مسار الحجر الجاف، تراث اليونسكو. 4-5 ساعات من سولر إلى ديا. مدرجات حجرية، بساتين زيتون، إطلالات ساحلية. صعوبة متوسطة. 2 لتر ماء، بدون خدمات.',ru:'Маршрут сухой каменной кладки ЮНЕСКО. 4–5ч от Соллер до Дейя. Каменные террасы, оливковые рощи, виды на побережье. Средняя сложность. 2л воды, удобств нет.'},wa:{es:'Hola! Guía GR-221 Sóller–Deià el %d para %n?',en:'Hi! GR-221 Sóller–Deià guide on %d for %n?',de:'Hallo! GR-221 Sóller–Deià am %d für %n?',fr:'Bonjour! GR-221 Sóller–Deià le %d pour %n?',it:'Ciao! GR-221 Sóller–Deià il %d per %n?',ar:'مرحبا! GR-221 سولر-ديا في %d لـ %n؟',ru:'Привет! GR-221 Sóller–Deià на %d для %n?'}},
+
+  {id:'puig-massanella',cat:'mountain',badge:'open',bTxt:{es:'Permiso',en:'Permit',de:'Genehmigung',fr:'Permis',it:'Permesso',ar:'تصريح',ru:'Разрешение'},name:'Puig de Massanella',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776018955/dsc_0665_d6pby6.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['1364m','5–6h'],en:['1364m','5–6h'],de:['1364m','5–6h'],fr:['1364m','5–6h'],it:['1364m','5–6h'],ar:['1364م','5-6 ساعات'],ru:['1364м','5–6ч']},desc:{es:'Segunda cumbre más alta de Mallorca (1364m). 5–6h ida y vuelta. Desafiante. Permiso obligatorio vía Consell de Mallorca. Tiempo cambia rápido, tours guiados desde Sóller.',en:'Second highest peak in Mallorca (1364m). 5–6h round trip. Challenging. Permit required via Consell de Mallorca website. Weather changes fast. Guided tours from Sóller available.',de:'Zweithöchster Gipfel Mallorcas (1364m). 5–6h Rundweg. Anspruchsvoll. Genehmigung über Consell de Mallorca erforderlich. Wetter ändert sich schnell. Geführte Touren ab Sóller.',fr:'Deuxième plus haut sommet de Majorque (1364m). 5–6h aller-retour. Difficile. Permis obligatoire via Consell de Mallorca. Météo changeante. Visites guidées depuis Sóller.',it:'Seconda vetta più alta di Mallorca (1364m). 5–6h andata e ritorno. Impegnativo. Permesso obbligatorio via Consell de Mallorca. Meteo cambia rapidamente. Tour guidati da Sóller.',ar:'ثاني أعلى قمة في مايوركا (1364م). 5-6 ساعات ذهاباً وإياباً. تحدي. تصريح إلزامي عبر Consell de Mallorca. الطقس يتغير بسرعة. جولات مرشدة من سولر.',ru:'Вторая по высоте вершина Майорки (1364м). 5–6ч туда-обратно. Сложный маршрут. Разрешение обязательно через Consell de Mallorca. Погода быстро меняется. Гид-туры из Соллер.'},wa:{es:'Hola! Info Puig de Massanella + permisos el %d para %n?',en:'Hi! Puig de Massanella + permit info on %d for %n?',de:'Hallo! Puig de Massanella + Genehmigung am %d für %n?',fr:'Bonjour! Puig de Massanella + permis le %d pour %n?',it:'Ciao! Puig de Massanella + permesso il %d per %n?',ar:'مرحبا! Puig de Massanella + تصريح في %d لـ %n؟',ru:'Привет! Puig de Massanella + разрешение на %d для %n?'}},
+
+  {id:'torrent-pareis',cat:'mountain',badge:'season',bTxt:{es:'Jun–Sep',en:'Jun–Sep',de:'Jun–Sep',fr:'Jun–Sep',it:'Giu–Set',ar:'يونيو–سبتمبر',ru:'Июн–Сен'},name:'Torrent de Pareis',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776019045/torrent-de-pareis_e129743e_308572050_240610173537_1280x853_rvo92d.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Cañón','3–4h'],en:['Gorge','3–4h'],de:['Schlucht','3–4h'],fr:['Gorge','3–4h'],it:['Gola','3–4h'],ar:['وادي','3-4 ساعات'],ru:['Ущелье','3–4ч']},desc:{es:'Cañón dramático de 3km que termina en Sa Calobra. 3–4h, moderado-difícil. NUNCA intentes después de lluvia. Escarpines esenciales. Acceso restringido tras lluvia.',en:'Dramatic 3km gorge ending at Sa Calobra beach. 3–4h, moderate-challenging. NEVER attempt after rainfall. Water shoes essential. Access restricted after rain.',de:'Dramatische 3km Schlucht, die am Sa Calobra Strand endet. 3–4h, mittel-anspruchsvoll. NIE nach Regen versuchen. Wasserschuhe unverzichtbar. Zugang nach Regen eingeschränkt.',fr:'Gorge dramatique de 3km se terminant à la plage de Sa Calobra. 3–4h, modéré à difficile. N\'essayez JAMAIS après la pluie. Chaussures d\'eau essentielles.',it:'Gola drammatica di 3km che termina alla spiaggia di Sa Calobra. 3–4h, moderato-difficile. MAI tentare dopo la pioggia. Scarpe da scoglio essenziali.',ar:'وادي درامي 3 كم ينتهي في شاطئ سا كالوبرا. 3-4 ساعات، متوسط-صعب. لا تحاول أبداً بعد المطر. أحذية مائية أساسية.',ru:'Драматическое 3км ущелье, заканчивающееся на пляже Са Калобра. 3–4ч, средне-сложно. НИКОГДА не идите после дождя. Аквашузы обязательны.'},wa:{es:'Hola! Info Torrent de Pareis el %d para %n (condiciones)?',en:'Hi! Torrent de Pareis info on %d for %n (conditions)?',de:'Hallo! Torrent de Pareis am %d für %n (Bedingungen)?',fr:'Bonjour! Torrent de Pareis le %d pour %n (conditions)?',it:'Ciao! Torrent de Pareis il %d per %n (condizioni)?',ar:'مرحبا! Torrent de Pareis في %d لـ %n (الظروف)؟',ru:'Привет! Torrent de Pareis на %d для %n (условия)?'}},
+
+  {id:'sa-foradada',cat:'mountain',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Mirador Sa Foradada',img:'https://res.cloudinary.com/dqje367sj/image/upload/f_auto,q_auto/v1776019271/IMG_7163_wmrxat.heic',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Atardecer','45 min'],en:['Sunset','45 min'],de:['Sonnenuntergang','45 min'],fr:['Coucher de soleil','45 min'],it:['Tramonto','45 min'],ar:['غروب','45 دقيقة'],ru:['Закат','45 мин']},desc:{es:'Icónica roca con agujero cerca de Deià. Sendero de 45 min (fácil-moderado). Vistas 360°. Bar/restaurante arriba (reserva mesa de atardecer). Ve 1h antes del ocaso.',en:'Iconic hole-in-rock formation near Deià. 45-min path (easy-moderate). 360° views. Bar/restaurant on top (book sunset tables ahead). Go 1h before sunset for best light.',de:'Ikonische Felsformation mit Loch nahe Deià. 45-min Weg (leicht-mittel). 360° Aussicht. Bar/Restaurant oben (Sonnenuntergangstische vorbestellen). Geh 1h vor Sonnenuntergang.',fr:'Iconique formation rocheuse percée près de Deià. Sentier de 45 min (facile-modéré). Vues 360°. Bar/restaurant au sommet (réservez les tables au coucher du soleil).',it:'Iconica formazione rocciosa con foro vicino a Deià. Sentiero di 45 min (facile-moderato). Vista 360°. Bar/ristorante in cima (prenota tavoli al tramonto).',ar:'تكوين صخري أيقوني بفتحة قرب ديا. مسار 45 دقيقة (سهل-متوسط). إطلالة 360°. بار/مطعم في الأعلى (احجز طاولات الغروب).',ru:'Культовая скала с отверстием рядом с Дейя. Тропа 45 мин (легко-средне). Виды на 360°. Бар/ресторан наверху (бронируйте столики на закат).'},wa:{es:'Hola! Mesa Sa Foradada al atardecer el %d para %n?',en:'Hi! Sa Foradada sunset table on %d for %n?',de:'Hallo! Tisch Sa Foradada Sonnenuntergang am %d für %n?',fr:'Bonjour! Table Sa Foradada coucher de soleil le %d pour %n?',it:'Ciao! Tavolo Sa Foradada tramonto il %d per %n?',ar:'مرحبا! طاولة Sa Foradada غروب في %d لـ %n؟',ru:'Привет! Стол Sa Foradada закат на %d для %n?'}},
+
+  {id:'talaia-alcudia',cat:'mountain',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:"Talaia d'Alcúdia",img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776019081/Talaia-dAlcudia-2047-1-1140x760_yd66rm.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['445m','3–4h'],en:['445m','3–4h'],de:['445m','3–4h'],fr:['445m','3–4h'],it:['445m','3–4h'],ar:['445م','3-4 ساعات'],ru:['445м','3–4ч']},desc:{es:'Mirador más alto del norte de Mallorca (445m). Ruta circular de 3–4h, moderada. Mejor visibilidad por la mañana. Parking limitado, llega antes de las 10. Lleva prismáticos.',en:'Highest viewpoint in north Mallorca (445m). 3–4h loop, moderate. Best visibility in morning. Parking limited, arrive before 10am. Bring binoculars for birdwatching.',de:'Höchster Aussichtspunkt im Norden Mallorcas (445m). 3–4h Rundweg, mittel. Beste Sicht am Morgen. Begrenzte Parkplätze, vor 10 Uhr ankommen. Fernglas mitbringen.',fr:'Point de vue le plus haut du nord de Majorque (445m). Boucle de 3–4h, modérée. Meilleure visibilité le matin. Parking limité, arrivez avant 10h. Apportez des jumelles.',it:'Punto panoramico più alto del nord di Mallorca (445m). Anello di 3–4h, moderato. Migliore visibilità al mattino. Parcheggio limitato, arriva prima delle 10. Porta binocolo.',ar:'أعلى نقطة مشاهدة في شمال مايوركا (445م). حلقة 3-4 ساعات، متوسطة. أفضل رؤية في الصباح. موقف محدود، احضر قبل الساعة 10. أحضر مناظير.',ru:'Самая высокая смотровая на севере Майорки (445м). Круг 3–4ч, средней сложности. Лучшая видимость утром. Парковка ограничена, приезжайте до 10. Возьмите бинокль.'},wa:{es:'Hola! Talaia Alcúdia el %d para %n?',en:"Hi! Talaia d'Alcúdia on %d for %n?",de:'Hallo! Talaia d\'Alcúdia am %d für %n?',fr:'Bonjour! Talaia d\'Alcúdia le %d pour %n?',it:'Ciao! Talaia d\'Alcúdia il %d per %n?',ar:'مرحبا! Talaia d\'Alcúdia في %d لـ %n؟',ru:'Привет! Talaia d\'Alcúdia на %d для %n?'}},
+
+  /* ============ 5 SUNSET SPOTS (cat:free) ============ */
+  {id:'cap-formentor',cat:'free',feat:true,badge:'season',bTxt:{es:'Jun–Sep shuttle',en:'Jun–Sep shuttle',de:'Jun–Sep Shuttle',fr:'Jun–Sep navette',it:'Giu–Set navetta',ar:'يونيو–سبتمبر مكوك',ru:'Июн–Сен шаттл'},name:'Cap de Formentor',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776020189/FARO-FORMENTOR02_wmgozl.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Faro','Atardecer'],en:['Lighthouse','Sunset'],de:['Leuchtturm','Sonnenuntergang'],fr:['Phare','Coucher de soleil'],it:['Faro','Tramonto'],ar:['منارة','غروب'],ru:['Маяк','Закат']},desc:{es:'El atardecer definitivo de Mallorca. Punta norte de la isla. Jun–Sep shuttle obligatorio 11–20h (reserva online). Llega 30 min antes. Lleva chaqueta, hay viento.',en:'The ultimate Mallorcan sunset. Northern tip of island. Jun–Sep shuttle bus mandatory 11am–8pm (book online). Arrive 30 min before sunset. Bring jacket, it is windy.',de:'Der ultimative Mallorca-Sonnenuntergang. Nordspitze der Insel. Jun–Sep Shuttlebus obligatorisch 11–20 Uhr (online buchen). 30 Min vorher ankommen. Jacke mitbringen, windig.',fr:'Le coucher de soleil ultime de Majorque. Pointe nord de l\'île. Juin–sept navette obligatoire 11h–20h (réservation en ligne). Arrivez 30 min avant. Apportez une veste.',it:'Il tramonto definitivo di Mallorca. Punta nord dell\'isola. Giu–set navetta obbligatoria 11–20 (prenota online). Arriva 30 min prima. Porta giacca, c\'è vento.',ar:'الغروب الأفضل في مايوركا. طرف الجزيرة الشمالي. يونيو-سبتمبر الباص المكوكي إلزامي 11-20 (احجز عبر الإنترنت). احضر قبل 30 دقيقة. خذ سترة.',ru:'Идеальный закат Майорки. Северная оконечность острова. Июн–сен шаттл обязателен 11–20 (бронь онлайн). Приезжайте за 30 мин. Возьмите куртку, ветрено.'},wa:{es:'Hola! Info Cap de Formentor + shuttle el %d para %n?',en:'Hi! Cap de Formentor + shuttle info on %d for %n?',de:'Hallo! Cap de Formentor + Shuttle am %d für %n?',fr:'Bonjour! Cap de Formentor + navette le %d pour %n?',it:'Ciao! Cap de Formentor + navetta il %d per %n?',ar:'مرحبا! Cap de Formentor + مكوك في %d لـ %n؟',ru:'Привет! Cap de Formentor + шаттл на %d для %n?'}},
+
+  {id:'sant-elm-dragonera',cat:'free',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Sant Elm & Dragonera',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372685/25C5332F-2027-4A9D-A685-912D9C01EAF7_lh7dna.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Suroeste','Familiar'],en:['Southwest','Family'],de:['Südwesten','Familien'],fr:['Sud-ouest','Famille'],it:['Sud-ovest','Famiglia'],ar:['جنوب غرب','عائلي'],ru:['Юго-запад','Семейный']},desc:{es:'Atardecer sobre la isla deshabitada de Dragonera (parque natural). Esquina suroeste. Restaurantes frente al mar con menús de atardecer. Reserva mesa junto al mar.',en:'Sunset over uninhabited Dragonera Natural Park island. Southwest corner. Beachfront restaurants with sunset menus. Book seaside table in advance.',de:'Sonnenuntergang über der unbewohnten Insel Dragonera (Naturpark). Südwestecke. Strandrestaurants mit Sunset-Menüs. Tisch am Meer im Voraus buchen.',fr:'Coucher de soleil sur l\'île inhabitée de Dragonera (parc naturel). Coin sud-ouest. Restaurants en bord de mer avec menus coucher de soleil.',it:'Tramonto sull\'isola disabitata di Dragonera (parco naturale). Angolo sud-ovest. Ristoranti fronte mare con menù al tramonto.',ar:'غروب فوق جزيرة دراجونيرا غير المأهولة (محمية طبيعية). مطاعم على الشاطئ مع قوائم الغروب. احجز طاولة مسبقاً.',ru:'Закат над необитаемым островом Драгонера (природный парк). Рестораны у моря с закатными меню. Бронируйте столик заранее.'},wa:{es:'Hola! Mesa atardecer Sant Elm el %d para %n?',en:'Hi! Sant Elm sunset table on %d for %n?',de:'Hallo! Sant Elm Sonnenuntergangstisch am %d für %n?',fr:'Bonjour! Table coucher de soleil Sant Elm le %d pour %n?',it:'Ciao! Tavolo tramonto Sant Elm il %d per %n?',ar:'مرحبا! طاولة غروب Sant Elm في %d لـ %n؟',ru:'Привет! Закатный стол Sant Elm на %d для %n?'}},
+
+  {id:'cap-blanc',cat:'free',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Cap Blanc Lighthouse',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776021893/vertical-view-cap-blanc-lighthouse-southern-mallorca-sunrise-308329452_crbtkl.webp',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Acantilado','Privado'],en:['Cliff-top','Private'],de:['Klippe','Privat'],fr:['Falaise','Privé'],it:['Scogliera','Privato'],ar:['منحدر','خاص'],ru:['Обрыв','Уединённый']},desc:{es:'Intimidad en acantilado cerca de Cala Pi, costa sur. Acceso en coche + 10 min a pie. Sin servicios, lleva bebidas y snacks. Menos conocido que Formentor, a menudo lo tendrás para ti solo.',en:'Cliff-top intimacy near Cala Pi, south coast. Drive + 10-min walk. No facilities, bring drinks and snacks. Less known than Formentor, often have the spot to yourself.',de:'Intimität auf Klippen nahe Cala Pi, Südküste. Auto + 10 Min zu Fuß. Keine Einrichtungen, Getränke und Snacks mitbringen. Weniger bekannt als Formentor, oft allein vor Ort.',fr:'Intimité en haut des falaises près de Cala Pi, côte sud. Voiture + marche de 10 min. Aucun service, apportez boissons et snacks. Moins connu que Formentor.',it:'Intimità sulle scogliere vicino a Cala Pi, costa sud. Auto + 10 min a piedi. Nessun servizio, porta bevande e snack. Meno conosciuto di Formentor, spesso solo sul posto.',ar:'حميمية على المنحدرات قرب كالا بي. سيارة + 10 دقائق مشياً. بدون خدمات، أحضر مشروبات ووجبات خفيفة. أقل شهرة من فورمينتور.',ru:'Уединение на скалах рядом с Кала Пи. Машина + 10 мин пешком. Удобств нет, берите напитки и закуски. Менее известен, чем Форментор, часто вы одни.'},wa:{es:'Hola! Info Cap Blanc el %d para %n?',en:'Hi! Cap Blanc info on %d for %n?',de:'Hallo! Info Cap Blanc am %d für %n?',fr:'Bonjour! Info Cap Blanc le %d pour %n?',it:'Ciao! Info Cap Blanc il %d per %n?',ar:'مرحبا! معلومات Cap Blanc في %d لـ %n؟',ru:'Привет! Инфо Cap Blanc на %d для %n?'}},
+
+  {id:'portitxol-seu',cat:'free',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'La Seu & Portitxol',img:'https://res.cloudinary.com/dqje367sj/image/upload/f_auto,q_auto/v1776020309/IMG_3810_ptuv6q.heic',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Palma','Urbano'],en:['Palma','Urban'],de:['Palma','Urban'],fr:['Palma','Urbain'],it:['Palma','Urbano'],ar:['بالما','حضري'],ru:['Пальма','Городской']},desc:{es:'Elegancia urbana al atardecer en el paseo marítimo de Palma. Nueva iluminación de La Seu realza la hora dorada. Camina por el paseo del Molinar hasta los bares de Portitxol.',en:'Urban sunset elegance on Palma waterfront. New La Seu lighting enhances golden hour. Walk the Molinar promenade, stop at Portitxol bars. Yacht watching, cathedral silhouette.',de:'Urbane Sonnenuntergangseleganz an Palmas Uferpromenade. Neue Beleuchtung der Kathedrale La Seu hebt die goldene Stunde hervor. Molinar-Promenade, Halt an Portitxol-Bars.',fr:'Élégance urbaine au coucher du soleil sur le front de mer de Palma. Nouvel éclairage de la cathédrale La Seu. Marchez sur la promenade du Molinar, arrêt aux bars de Portitxol.',it:'Eleganza urbana al tramonto sul lungomare di Palma. Nuova illuminazione della cattedrale La Seu. Cammina sul lungomare Molinar, sosta ai bar di Portitxol.',ar:'أناقة حضرية عند الغروب على واجهة بالما البحرية. إضاءة جديدة لكاتدرائية La Seu. تمشى على كورنيش Molinar، توقف في بارات Portitxol.',ru:'Городская элегантность заката на набережной Пальмы. Новая подсветка собора La Seu. Пройдитесь по променаду Molinar, остановитесь в барах Portitxol.'},wa:{es:'Hola! Tour atardecer Palma+Portitxol el %d para %n?',en:'Hi! Palma+Portitxol sunset walk on %d for %n?',de:'Hallo! Palma+Portitxol Sunset am %d für %n?',fr:'Bonjour! Sunset Palma+Portitxol le %d pour %n?',it:'Ciao! Sunset Palma+Portitxol il %d per %n?',ar:'مرحبا! غروب Palma+Portitxol في %d لـ %n؟',ru:'Привет! Закат Palma+Portitxol на %d для %n?'}},
+
+  {id:'sa-foradada-sunset',cat:'free',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Sa Foradada Sunset Bar',img:'https://res.cloudinary.com/dqje367sj/image/upload/f_auto,q_auto/v1776020365/IMG_7153_yudvp9.heic',price:'€€',tags:{es:['Deià','Terraza'],en:['Deià','Rooftop'],de:['Deià','Dachterrasse'],fr:['Deià','Rooftop'],it:['Deià','Terrazza'],ar:['ديا','شرفة'],ru:['Дейя','Терраса']},desc:{es:'Atardecer a través de la roca cerca de Deià. Rooftop bar se llena a las 19h en verano, reserva con antelación. Camina, come, contempla el atardecer desde la terraza.',en:'Sunset through the rock near Deià. Rooftop bar fills by 7pm in summer, reserve ahead. Hike up, eat at restaurant, watch sunset from terrace.',de:'Sonnenuntergang durch den Felsen nahe Deià. Rooftop-Bar füllt sich ab 19 Uhr im Sommer, vorab reservieren. Hochwandern, essen, Sonnenuntergang von der Terrasse genießen.',fr:'Coucher de soleil à travers le rocher près de Deià. Rooftop bar plein dès 19h en été, réservez à l\'avance. Montez à pied, mangez, regardez le coucher depuis la terrasse.',it:'Tramonto attraverso la roccia vicino a Deià. Rooftop bar pieno dalle 19 in estate, prenota in anticipo. Sali a piedi, mangia, ammira il tramonto dalla terrazza.',ar:'غروب عبر الصخرة قرب ديا. بار السطح يمتلئ من الساعة 19 في الصيف، احجز مسبقاً. اصعد سيراً، كل، شاهد الغروب من الشرفة.',ru:'Закат сквозь скалу рядом с Дейя. Rooftop bar заполняется с 19 летом, бронируйте заранее. Поднимитесь пешком, поешьте, смотрите закат с террасы.'},wa:{es:'Hola! Reserva Sa Foradada rooftop el %d para %n?',en:'Hi! Sa Foradada rooftop reservation on %d for %n?',de:'Hallo! Sa Foradada Rooftop am %d für %n?',fr:'Bonjour! Sa Foradada rooftop le %d pour %n?',it:'Ciao! Sa Foradada rooftop il %d per %n?',ar:'مرحبا! Sa Foradada rooftop في %d لـ %n؟',ru:'Привет! Sa Foradada rooftop на %d для %n?'}},
+
+  /* ============ 5 PALMA CULTURE ============ */
+  {id:'la-seu',cat:'culture',feat:true,badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'La Seu Cathedral',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300268/52_tfltdz.jpg',price:{es:'10 €+',en:'10 €+',de:'10 €+',fr:'10 €+',it:'10 €+',ar:'10 €+',ru:'10 €+'},tags:{es:['Gótico','2–3h'],en:['Gothic','2–3h'],de:['Gotik','2–3h'],fr:['Gothique','2–3h'],it:['Gotico','2–3h'],ar:['قوطي','2-3 ساعات'],ru:['Готика','2–3ч']},desc:{es:'Obra maestra gótica. Lun–Sáb 10–18:15, Dom 10–15:15. Entradas skip-the-line esenciales. Nuevos tours rooftop disponibles. El reflejo al atardecer en Parc de la Mar es mágico.',en:'Gothic masterpiece. Mon–Sat 10am–6:15pm, Sun 10am–3:15pm. Skip-the-line tickets essential. New rooftop tours available. Sunset reflection in Parc de la Mar lake is magical.',de:'Gotisches Meisterwerk. Mo–Sa 10–18:15, So 10–15:15. Skip-the-Line-Tickets unverzichtbar. Neue Rooftop-Touren verfügbar. Sonnenuntergangs-Spiegelung im Parc de la Mar ist magisch.',fr:'Chef-d\'œuvre gothique. Lun–sam 10h–18h15, dim 10h–15h15. Billets coupe-file essentiels. Nouvelles visites rooftop disponibles.',it:'Capolavoro gotico. Lun–sab 10–18:15, dom 10–15:15. Biglietti salta-fila essenziali. Nuovi tour rooftop disponibili. Il riflesso al tramonto nel Parc de la Mar è magico.',ar:'تحفة قوطية. إثن-سبت 10-18:15، أحد 10-15:15. تذاكر تخطي الطابور أساسية. جولات السطح الجديدة متاحة.',ru:'Готический шедевр. Пн–сб 10–18:15, вс 10–15:15. Билеты без очереди обязательны. Доступны новые туры на крышу.'},wa:{es:'Hola! Entradas La Seu el %d para %n (skip-the-line)?',en:'Hi! La Seu tickets on %d for %n (skip-the-line)?',de:'Hallo! La Seu Tickets am %d für %n (skip-the-line)?',fr:'Bonjour! Billets La Seu le %d pour %n (coupe-file)?',it:'Ciao! Biglietti La Seu il %d per %n (salta-fila)?',ar:'مرحبا! تذاكر La Seu في %d لـ %n (تخطي الطابور)؟',ru:'Привет! Билеты La Seu на %d для %n (без очереди)?'}},
+
+  {id:'bellver',cat:'culture',badge:'open',bTxt:{es:'Abierto',en:'Open',de:'Geöffnet',fr:'Ouvert',it:'Aperto',ar:'مفتوح',ru:'Открыто'},name:'Bellver Castle',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776019577/a86c73a9-e6f5-4725-bd3f-a2d76fe918f3_iujksd.jpg',price:{es:'4 €',en:'4 €',de:'4 €',fr:'4 €',it:'4 €',ar:'4 €',ru:'4 €'},tags:{es:['Circular','Vistas 360°'],en:['Circular','360° views'],de:['Rund','360° Blick'],fr:['Circulaire','Vue 360°'],it:['Circolare','Vista 360°'],ar:['دائري','إطلالة 360°'],ru:['Круглый','Обзор 360°']},desc:{es:'Castillo circular único. Abr–Sep 10–19h, Oct–Mar 10–18h. Entrada gratis los domingos. Parque forestal perfecto para picnic. Atardecer desde las murallas.',en:'Unique circular castle. Apr–Sep 10am–7pm, Oct–Mar 10am–6pm. Free entry Sundays. Forest park perfect for picnics. Sunset from castle walls.',de:'Einzigartiges rundes Schloss. Apr–Sep 10–19 Uhr, Okt–Mär 10–18 Uhr. Sonntags Gratiseintritt. Waldpark perfekt für Picknicks. Sonnenuntergang von den Schlossmauern.',fr:'Château circulaire unique. Avr–sep 10h–19h, oct–mars 10h–18h. Entrée gratuite le dimanche. Parc forestier parfait pour pique-niques.',it:'Castello circolare unico. Apr–set 10–19, ott–mar 10–18. Ingresso gratuito la domenica. Parco forestale perfetto per picnic. Tramonto dalle mura del castello.',ar:'قلعة دائرية فريدة. أبر-سبت 10-19، أكت-مار 10-18. دخول مجاني الأحد. حديقة الغابة مثالية للنزهات.',ru:'Уникальный круглый замок. Апр–сен 10–19, окт–мар 10–18. Бесплатный вход по воскресеньям. Лесной парк идеален для пикника.'},wa:{es:'Hola! Info Bellver Castle el %d para %n?',en:'Hi! Bellver Castle info on %d for %n?',de:'Hallo! Info Bellver Castle am %d für %n?',fr:'Bonjour! Info Bellver Castle le %d pour %n?',it:'Ciao! Info Bellver Castle il %d per %n?',ar:'مرحبا! معلومات قلعة Bellver في %d لـ %n؟',ru:'Привет! Инфо Bellver Castle на %d для %n?'}},
+
+  {id:'cas-antic',cat:'culture',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Palma Old Town',img:'https://res.cloudinary.com/dqje367sj/image/upload/f_auto,q_auto/v1776019608/IMG_3848_rk25cs.heic',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Patios','Medieval'],en:['Patios','Medieval'],de:['Patios','Mittelalter'],fr:['Patios','Médiéval'],it:['Patii','Medievale'],ar:['أفنية','قروسطي'],ru:['Патио','Средневековье']},desc:{es:'Cas Antic: patios escondidos y calles medievales. Nueva ruta de patios (mapa gratis en oficina de turismo). Baños árabes, Plaça Major. Mañana mejor para fotos, tarde para cafés.',en:'Cas Antic: hidden patios and medieval streets. New patio route (free map at tourist office). Arab Baths, Plaça Major. Morning best for photos, afternoon for café culture.',de:'Cas Antic: versteckte Innenhöfe und mittelalterliche Gassen. Neue Innenhof-Route (kostenlose Karte im Tourismusbüro). Arabische Bäder, Plaça Major. Morgens für Fotos, nachmittags für Cafés.',fr:'Cas Antic: patios cachés et rues médiévales. Nouvelle route des patios (carte gratuite à l\'office de tourisme). Bains arabes, Plaça Major.',it:'Cas Antic: patii nascosti e strade medievali. Nuovo percorso dei patii (mappa gratuita all\'ufficio turistico). Bagni arabi, Plaça Major.',ar:'Cas Antic: أفنية مخفية وشوارع قروسطية. مسار الأفنية الجديد (خريطة مجانية في مكتب السياحة). الحمامات العربية، Plaça Major.',ru:'Cas Antic: скрытые патио и средневековые улочки. Новый маршрут патио (бесплатная карта в турофисе). Арабские бани, Plaça Major.'},wa:{es:'Hola! Tour casco antiguo Palma el %d para %n?',en:'Hi! Palma Old Town tour on %d for %n?',de:'Hallo! Altstadt Palma Tour am %d für %n?',fr:'Bonjour! Tour vieille ville Palma le %d pour %n?',it:'Ciao! Tour centro storico Palma il %d per %n?',ar:'مرحبا! جولة المدينة القديمة بالما في %d لـ %n؟',ru:'Привет! Тур Старого города Пальмы на %d для %n?'}},
+
+  {id:'santa-catalina',cat:'culture',badge:'open',bTxt:{es:'Todo el año',en:'Year-round',de:'Ganzjährig',fr:"Toute l'année",it:"Tutto l'anno",ar:'طوال العام',ru:'Круглый год'},name:'Santa Catalina Market',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776019927/santa-catalina-tardeo-9_sa2g5e.jpg',price:{es:'Gratis',en:'Free',de:'Kostenlos',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},tags:{es:['Mercado','Tapas'],en:['Market','Tapas'],de:['Markt','Tapas'],fr:['Marché','Tapas'],it:['Mercato','Tapas'],ar:['سوق','تاباس'],ru:['Рынок','Тапас']},desc:{es:'Barrio foodie de moda. Mercado renovado, nuevos bares de tapas en Carrer de Sant Magí. 10–12h para el mercado, vuelve a las 19h+ para tapeo. 2–3h.',en:'Trendy local food neighborhood. Market renovated, new tapas bars on Carrer de Sant Magí. Go 10am–12pm for market, return 7pm+ for tapas crawl. 2–3h.',de:'Angesagtes Foodie-Viertel. Renovierter Markt, neue Tapas-Bars in Carrer de Sant Magí. 10–12 Uhr für den Markt, ab 19 Uhr für Tapas-Tour. 2–3h.',fr:'Quartier foodie tendance. Marché rénové, nouveaux bars à tapas sur Carrer de Sant Magí. 10h–12h pour le marché, dès 19h pour la tournée des tapas.',it:'Quartiere foodie di tendenza. Mercato rinnovato, nuovi bar di tapas su Carrer de Sant Magí. 10–12 per il mercato, dalle 19 per il giro di tapas.',ar:'حي الطعام العصري. سوق متجدد، بارات تاباس جديدة في Carrer de Sant Magí. 10-12 للسوق، من 19 لجولة التاباس. 2-3 ساعات.',ru:'Модный гастрорайон. Обновлённый рынок, новые тапас-бары на Carrer de Sant Magí. 10–12 для рынка, с 19 для тапас-тура. 2–3ч.'},wa:{es:'Hola! Tour Santa Catalina market+tapas el %d para %n?',en:'Hi! Santa Catalina market+tapas tour on %d for %n?',de:'Hallo! Santa Catalina Markt+Tapas am %d für %n?',fr:'Bonjour! Santa Catalina marché+tapas le %d pour %n?',it:'Ciao! Santa Catalina mercato+tapas il %d per %n?',ar:'مرحبا! Santa Catalina سوق+تاباس في %d لـ %n؟',ru:'Привет! Santa Catalina рынок+тапас на %d для %n?'}},
+
+  {id:'almudaina',cat:'culture',badge:'open',bTxt:{es:'Cerrado lun',en:'Closed Mon',de:'Mo geschl.',fr:'Fermé lun',it:'Chiuso lun',ar:'مغلق الإثنين',ru:'Пн закрыто'},name:'La Almudaina Palace',img:'https://res.cloudinary.com/dqje367sj/image/upload/v1776019672/ef9dcbbb-971f-4808-b1e1-86a457909847-istock-1056455668_vh1mcr.jpg',price:{es:'7 €',en:'7 €',de:'7 €',fr:'7 €',it:'7 €',ar:'7 €',ru:'7 €'},tags:{es:['Real','Jardines'],en:['Royal','Gardens'],de:['Königlich','Gärten'],fr:['Royal','Jardins'],it:['Reale','Giardini'],ar:['ملكي','حدائق'],ru:['Королевский','Сады']},desc:{es:'Residencia real con vistas al mar. Abr–Sep 10–20h, Oct–Mar 10–18h. Cerrado lunes. Nueva exposición de jardines, audioguía incluida. Entrada combinada con La Seu ahorra 3€.',en:'Royal residence with sea views. Apr–Sep 10am–8pm, Oct–Mar 10am–6pm. Closed Mondays. New gardens exhibition, audio guide included. Combined ticket with La Seu saves €3.',de:'Königsresidenz mit Meerblick. Apr–Sep 10–20 Uhr, Okt–Mär 10–18 Uhr. Montags geschlossen. Neue Gartenausstellung, Audioguide inklusive. Kombiticket mit La Seu spart 3€.',fr:'Résidence royale avec vue mer. Avr–sep 10h–20h, oct–mars 10h–18h. Fermé le lundi. Nouvelle exposition des jardins, audioguide inclus. Billet combiné avec La Seu économise 3€.',it:'Residenza reale con vista mare. Apr–set 10–20, ott–mar 10–18. Chiuso lunedì. Nuova esposizione dei giardini, audioguida inclusa. Biglietto combinato con La Seu risparmia 3€.',ar:'إقامة ملكية بإطلالة بحرية. أبر-سبت 10-20، أكت-مار 10-18. مغلق الإثنين. معرض حدائق جديد، دليل صوتي مشمول. تذكرة مشتركة مع La Seu توفر 3€.',ru:'Королевская резиденция с видом на море. Апр–сен 10–20, окт–мар 10–18. Пн закрыто. Новая экспозиция садов, аудиогид включён. Комбо-билет с La Seu экономит 3€.'},wa:{es:'Hola! Almudaina+La Seu combo el %d para %n?',en:'Hi! Almudaina+La Seu combo on %d for %n?',de:'Hallo! Almudaina+La Seu Combo am %d für %n?',fr:'Bonjour! Combo Almudaina+La Seu le %d pour %n?',it:'Ciao! Combo Almudaina+La Seu il %d per %n?',ar:'مرحبا! Almudaina+La Seu كومبو في %d لـ %n؟',ru:'Привет! Almudaina+La Seu комбо на %d для %n?'}}
+];
+
+const collections=[
+  {id:'hidden-beaches',name:'Hidden Beaches',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300401/36_slsjr4.png',eyebrow:{es:'Colección',en:'Collection',de:'Kollektion',fr:'Collection',it:'Collezione',ar:'مجموعة',ru:'Коллекция'},desc:{es:'Calas escondidas de agua cristalina.',en:'Crystal-clear hidden coves.',de:'Versteckte Buchten.',fr:'Criques cachées.',it:'Cale nascoste.',ar:'خلجان مخفية بمياه صافية.',ru:'Скрытые бухты.'},cta:{es:'Descubrir calas',en:'Discover coves',de:'Buchten entdecken',fr:'Découvrir',it:'Scopri le cale',ar:'اكتشف الخلجان',ru:'Открыть бухты'}},
+  {id:'mountain',name:'Mountain Spots',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372350/IMG_0865_2_e1vrii.heic',eyebrow:{es:'Guía curada',en:'Curated guide',de:'Kuratiert',fr:'Guide curé',it:'Guida curata',ar:'دليل منسق',ru:'Курированный гид'},desc:{es:'Miradores en la Serra de Tramuntana.',en:'Viewpoints in Serra de Tramuntana.',de:'Aussichtspunkte Tramuntana.',fr:'Belvédères Tramuntana.',it:'Panorami sulla Tramuntana.',ar:'مناظر في سيرا دي ترامونتانا.',ru:'Смотровые площадки Трамунтана.'},cta:{es:'Explorar miradores',en:'Explore viewpoints',de:'Aussichtspunkte',fr:'Explorer',it:'Esplora',ar:'استكشاف',ru:'Смотровые'}},
+  {id:'sunset',name:'Sunset Spots',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774372685/25C5332F-2027-4A9D-A685-912D9C01EAF7_lh7dna.jpg',eyebrow:{es:'Selección',en:'Selection',de:'Auswahl',fr:'Sélection',it:'Selezione',ar:'اختيار',ru:'Подборка'},desc:{es:'Los mejores atardeceres de la isla.',en:'Best sunsets on the island.',de:'Beste Sonnenuntergänge.',fr:'Meilleurs couchers de soleil.',it:'I migliori tramonti.',ar:'أفضل غروب الشمس.',ru:'Лучшие закаты.'},cta:{es:'Ver atardeceres',en:'View sunsets',de:'Sonnenuntergänge',fr:'Couchers de soleil',it:'Tramonti',ar:'مشاهدة الغروب',ru:'Закаты'}},
+  {id:'palma',name:'Palma City',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300268/52_tfltdz.jpg',eyebrow:{es:'Guía urbana',en:'City guide',de:'Stadtführer',fr:'Guide urbain',it:'Guida urbana',ar:'دليل المدينة',ru:'Гид по городу'},desc:{es:'Cultura, compras y gastronomía en Palma.',en:'Culture, shopping & food in Palma.',de:'Kultur, Shopping, Gastronomie.',fr:'Culture, shopping, gastronomie.',it:'Cultura, shopping, gastronomia.',ar:'ثقافة وتسوق وطعام في بالما.',ru:'Культура, шоппинг, гастрономия.'},cta:{es:'Explorar Palma',en:'Explore Palma',de:'Palma erkunden',fr:'Explorer Palma',it:'Esplora Palma',ar:'استكشف بالما',ru:'Открыть Пальму'}},
+  {id:'restaurants',name:{es:'Restaurantes',en:'Restaurants',de:'Restaurants',fr:'Restaurants',it:'Ristoranti',ar:'مطاعم',ru:'Рестораны'},img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_640,h_800,c_fill,q_auto,f_auto/v1774300331/__-_2026-02-28T111918.026_syiynn.jpg',eyebrow:{es:'Recomendaciones',en:'Recommendations',de:'Empfehlungen',fr:'Recommandations',it:'Raccomandazioni',ar:'توصيات',ru:'Рекомендации'},desc:{es:'Selección curada de restaurantes.',en:'Curated restaurant selection.',de:'Kuratierte Restaurant-Auswahl.',fr:'Sélection curatée.',it:'Selezione curata di ristoranti.',ar:'مجموعة مختارة من المطاعم.',ru:'Кураторская подборка ресторанов.'},cta:{es:'Ver restaurantes',en:'View restaurants',de:'Restaurants',fr:'Voir restaurants',it:'Vedi ristoranti',ar:'عرض المطاعم',ru:'Рестораны'}}
+];
+
+const partners=[
+  {n:'MCP',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/44_ynjvv7.png'},
+  {n:'Sea Moments',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302017/45_t8pli3.png'},
+  {n:'Panama Jack',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/40_uhkdnr.png'},
+  {n:'Red Lion',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/41_aar27l.png'},
+  {n:'BCM',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/42_yb023k.png'},
+  {n:'Gringos',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302013/39_il5qvv.png'},
+  {n:'Social Club',img:'https://res.cloudinary.com/dxhef6dju/image/upload/w_120,h_120,c_fit,q_auto/v1774302014/43_vwzc9y.png'}
+];
+
+const pricingData=[
+  {title:{es:'Alquiler Barco (sin licencia)',en:'Boat Rental (no license)',de:'Bootsvermietung',fr:'Location Bateau',it:'Noleggio Barca',ar:'تأجير قارب',ru:'Аренда лодки'},sub:{es:'Ramón de Moncada 20, Santa Ponça · Max 5 pax · Dep. 200 €',en:'Ramón de Moncada 20, Santa Ponça · Max 5 pax · Dep. 200 €',de:'Ramón de Moncada 20, Santa Ponça · Max 5 · Anz. 200 €',fr:'Ramón de Moncada 20, Santa Ponça · Max 5 · Dép. 200 €',it:'Ramón de Moncada 20, Santa Ponça · Max 5 · Dep. 200 €',ar:'رامون دي مونكادا 20، سانتا بونسا · 5 أشخاص · وديعة 200 €',ru:'Рамон де Монкада 20, Санта Понса · Макс 5 · Залог 200 €'},rows:[['2h','130 €'],['3h','170 €'],['4h','200 €'],['5h','230 €'],['6h','260 €']],note:{es:'Incluye gasolina y snorkel. Sin licencia requerida.',en:'Gas & snorkel included. No license required.',de:'Benzin & Schnorchel inkl. Kein Schein nötig.',fr:'Essence & tuba inclus. Sans permis.',it:'Benzina e snorkel inclusi. Senza patente.',ar:'البنزين والغطس مشمولان. لا رخصة مطلوبة.',ru:'Бензин и снорклинг включены. Без лицензии.'}},
+  {title:{es:'Nightlife Magaluf',en:'Magaluf Nightlife',de:'Magaluf Nachtleben',fr:'Nightlife Magaluf',it:'Nightlife Magaluf',ar:'حياة ليلية ماغالوف',ru:'Ночная жизнь Магалуф'},sub:{es:'Por persona · +18',en:'Per person · +18',de:'Pro Person · +18',fr:'Par personne · +18',it:'A persona · +18',ar:'للشخص · +18',ru:'С человека · +18'},rows:[['BCM','35 €'],['MCP (3 clubs)','30 €'],['Social Club','25 €'],['Red Lion','30–40 €'],['Gringos Bingos','35–45 €'],['Panama Jack','15–20 €']],note:{es:'BCM: dep. 10€+25€, camiseta gratis, +10€ tras 00:00. MCP: dep. 20€+10€, shot <1AM.',en:'BCM: 10€ dep.+25€, free tee, +10€ after midnight. MCP: 20€+10€, free shot <1AM.',de:'BCM: 10€+25€, Shirt, +10€ nach 00. MCP: 20€+10€, Shot <1 Uhr.',fr:'BCM: 10€+25€, t-shirt, +10€ après minuit. MCP: 20€+10€, shot <1h.',it:'BCM: 10€+25€, t-shirt, +10€ dopo mezzanotte. MCP: 20€+10€, shot <1.',ar:'BCM: 10€+25€، قميص، +10€ بعد منتصف الليل.',ru:'BCM: 10€+25€, футболка, +10€ после 00. MCP: 20€+10€, шот <1.'}}
+];
+
+const L={
+  h_badge:{es:'Temporada 2025–2026',en:'2025–2026 Season',de:'Saison 2025–2026',fr:'Saison 2025–2026',it:'Stagione 2025–2026',ar:'موسم 2025–2026',ru:'Сезон 2025–2026'},
+  h_h1:{es:'Reserva Mallorca<br>como un <em>local</em>',en:'Book Mallorca<br>like a <em>local</em>',de:'Buche Mallorca<br>wie ein <em>Local</em>',fr:'Réservez Majorque<br>comme un <em>local</em>',it:'Prenota Mallorca<br>come un <em>local</em>',ar:'احجز مايوركا<br>مثل <em>المحليين</em>',ru:'Бронируй Майорку<br>как <em>местный</em>'},
+  h_p:{es:'Fiestas, excursiones, boat parties y los mejores locales. Sin intermediarios — reserva por WhatsApp y paga al llegar.',en:'Parties, excursions, boat trips and the best spots. No middlemen — book via WhatsApp, pay on arrival.',de:'Partys, Ausflüge, Bootstouren. Ohne Vermittler — per WhatsApp, vor Ort zahlen.',fr:'Fêtes, excursions, boat parties. Sans intermédiaire — WhatsApp, payez sur place.',it:'Feste, escursioni, boat party. Senza intermediari — prenota via WhatsApp, paga all\'arrivo.',ar:'حفلات، رحلات، جولات بحرية. بدون وسطاء — احجز عبر واتساب، ادفع عند الوصول.',ru:'Вечеринки, экскурсии, морские прогулки. Без посредников — бронируй в WhatsApp, плати на месте.'},
+  h_cta1:{es:'Ver todos los planes',en:'See all plans',de:'Alle Pläne',fr:'Voir les plans',it:'Vedi tutti i piani',ar:'عرض جميع الخطط',ru:'Все планы'},
+  h_cta2:{es:'Reservar ahora',en:'Book now',de:'Jetzt buchen',fr:'Réserver',it:'Prenota ora',ar:'احجز الآن',ru:'Забронировать'},
+  h_scroll:{es:'Scroll',en:'Scroll',de:'Scroll',fr:'Scroll',it:'Scroll',ar:'تمرير',ru:'Листай'},
+  t1:{es:'Experiencias',en:'Experiences',de:'Erlebnisse',fr:'Expériences',it:'Esperienze',ar:'تجارب',ru:'Впечатлений'},
+  t2:{es:'Valoración',en:'Rating',de:'Bewertung',fr:'Note',it:'Valutazione',ar:'تقييم',ru:'Рейтинг'},
+  t3:{es:'Respuesta WA',en:'WA Response',de:'WA Antwort',fr:'Réponse WA',it:'Risposta WA',ar:'رد واتساب',ru:'Ответ WA'},
+  t4:{es:'Comisiones',en:'Fees',de:'Gebühren',fr:'Frais',it:'Commissioni',ar:'عمولات',ru:'Комиссий'},
+  feat_t:{es:'Lo más <em>reservado</em>',en:'Most <em>booked</em>',de:'Am meisten <em>gebucht</em>',fr:'Les plus <em>réservés</em>',it:'I più <em>prenotati</em>',ar:'الأكثر <em>حجزاً</em>',ru:'Самые <em>популярные</em>'},
+  feat_s:{es:'Las experiencias que más repiten nuestros clientes',en:'Experiences our clients book again and again',de:'Erlebnisse die Kunden immer wieder buchen',fr:'Expériences préférées de nos clients',it:'Le esperienze più richieste dai nostri clienti',ar:'التجارب التي يحجزها عملاؤنا مراراً',ru:'Впечатления, которые клиенты бронируют снова'},
+  c_all:{es:'Todos',en:'All',de:'Alle',fr:'Tous',it:'Tutti',ar:'الكل',ru:'Все'},
+  c_water:{es:'Agua',en:'Water',de:'Wasser',fr:'Eau',it:'Acqua',ar:'مائية',ru:'Вода'},
+  c_beach:{es:'Playa & Día',en:'Beach & Day',de:'Strand & Tag',fr:'Plage & Jour',it:'Spiaggia',ar:'شاطئ',ru:'Пляж'},
+  c_night:{es:'Nightlife',en:'Nightlife',de:'Nightlife',fr:'Nightlife',it:'Nightlife',ar:'حياة ليلية',ru:'Ночная жизнь'},
+  c_food:{es:'Food',en:'Food',de:'Essen',fr:'Food',it:'Food',ar:'طعام',ru:'Еда'},
+  c_mountain:{es:'Montaña',en:'Mountain',de:'Berge',fr:'Montagne',it:'Montagna',ar:'جبال',ru:'Горы'},
+  c_culture:{es:'Cultura',en:'Culture',de:'Kultur',fr:'Culture',it:'Cultura',ar:'ثقافة',ru:'Культура'},
+  c_free:{es:'Gratis',en:'Free',de:'Gratis',fr:'Gratuit',it:'Gratis',ar:'مجاني',ru:'Бесплатно'},
+  v_info:{es:'Info',en:'Info',de:'Info',fr:'Info',it:'Info',ar:'معلومات',ru:'Инфо'},
+  grid_t:{es:'Todos los <em>planes</em>',en:'All <em>plans</em>',de:'Alle <em>Pläne</em>',fr:'Tous les <em>plans</em>',it:'Tutti i <em>piani</em>',ar:'جميع <em>الخطط</em>',ru:'Все <em>планы</em>'},
+  col_t:{es:'Descubre la <em>isla</em>',en:'Discover the <em>island</em>',de:'Entdecke die <em>Insel</em>',fr:'Découvrez l\'<em>île</em>',it:'Scopri l\'<em>isola</em>',ar:'اكتشف <em>الجزيرة</em>',ru:'Открой <em>остров</em>'},
+  col_s:{es:'Selecciones curadas para vivir Mallorca como nadie te la ha enseñado',en:'Curated selections to experience Mallorca like no one has shown you',de:'Kuratierte Auswahl für einzigartiges Mallorca',fr:'Sélections curatées pour vivre Majorque autrement',it:'Selezioni curate per vivere Mallorca come nessuno te l\'ha mostrata',ar:'مختارات منسقة لتجربة مايوركا كما لم يُريك أحد من قبل',ru:'Кураторские подборки для уникального опыта на Майорке'},
+  pr_t:{es:'Precios <em>detallados</em>',en:'Detailed <em>pricing</em>',de:'Detaillierte <em>Preise</em>',fr:'Prix <em>détaillés</em>',it:'Prezzi <em>dettagliati</em>',ar:'أسعار <em>تفصيلية</em>',ru:'Подробные <em>цены</em>'},
+  pr_s:{es:'Info transparente — sin sorpresas',en:'Transparent info — no surprises',de:'Transparente Info',fr:'Info transparente',it:'Info trasparente — nessuna sorpresa',ar:'معلومات شفافة — بدون مفاجآت',ru:'Прозрачная информация'},
+  part_t:{es:'Colaboradores oficiales',en:'Official partners',de:'Offizielle Partner',fr:'Partenaires officiels',it:'Partner ufficiali',ar:'شركاء رسميون',ru:'Официальные партнёры'},
+  foot:{es:'Reserva directa sin comisiones',en:'Direct booking, no fees',de:'Direktbuchung ohne Gebühren',fr:'Réservation directe sans frais',it:'Prenotazione diretta senza commissioni',ar:'حجز مباشر بدون عمولات',ru:'Прямое бронирование без комиссий'},
+  m_t:{es:'Reserva <em>rápida</em>',en:'Quick <em>booking</em>',de:'Schnell<em>buchung</em>',fr:'Réservation <em>rapide</em>',it:'Prenotazione <em>rapida</em>',ar:'حجز <em>سريع</em>',ru:'Быстрое <em>бронирование</em>'},
+  m_s:{es:'Rellena y te contactamos por WhatsApp',en:'Fill in and we contact you via WhatsApp',de:'Ausfüllen — WhatsApp in <1h',fr:'Remplissez — WhatsApp sous 1h',it:'Compila e ti contattiamo via WhatsApp',ar:'املأ البيانات وسنتواصل معك عبر واتساب',ru:'Заполните — свяжемся в WhatsApp'},
+  f_name:{es:'Nombre',en:'Name',de:'Name',fr:'Nom',it:'Nome',ar:'الاسم',ru:'Имя'},
+  f_act:{es:'Actividad',en:'Activity',de:'Aktivität',fr:'Activité',it:'Attività',ar:'النشاط',ru:'Активность'},
+  f_date:{es:'Fecha',en:'Date',de:'Datum',fr:'Date',it:'Data',ar:'التاريخ',ru:'Дата'},
+  f_pax:{es:'Personas',en:'Guests',de:'Personen',fr:'Personnes',it:'Persone',ar:'الأشخاص',ru:'Гостей'},
+  f_notes:{es:'Notas',en:'Notes',de:'Notizen',fr:'Notes',it:'Note',ar:'ملاحظات',ru:'Заметки'},
+  f_send:{es:'Enviar por WhatsApp',en:'Send via WhatsApp',de:'Per WhatsApp senden',fr:'Envoyer par WhatsApp',it:'Invia via WhatsApp',ar:'إرسال عبر واتساب',ru:'Отправить в WhatsApp'},
+  book:{es:'Reservar',en:'Book',de:'Buchen',fr:'Réserver',it:'Prenota',ar:'احجز',ru:'Забронировать'},
+  toast:{es:'Abriendo WhatsApp...',en:'Opening WhatsApp...',de:'WhatsApp öffnet...',fr:'WhatsApp...',it:'Apertura WhatsApp...',ar:'فتح واتساب...',ru:'Открываем WhatsApp...'},
+  qf_t:{es:'Monta tu <em>plan</em>',en:'Build your <em>plan</em>',de:'Stelle deinen <em>Plan</em> zusammen',fr:'Composez votre <em>plan</em>',it:'Crea il tuo <em>piano</em>',ar:'أنشئ <em>خطتك</em>',ru:'Составь свой <em>план</em>'},
+  qf_s:{es:'Selecciona experiencias, revisa el total y envía tu reserva',en:'Select experiences, review the total and send your booking',de:'Erlebnisse wählen, Preis prüfen, Buchung senden',fr:'Sélectionnez, vérifiez le total et envoyez',it:'Seleziona esperienze, controlla il totale e invia',ar:'اختر التجارب، راجع الإجمالي وأرسل حجزك',ru:'Выбирай впечатления, проверяй сумму, отправляй бронь'},
+  qf_sel:{es:'Selecciona experiencias',en:'Select experiences',de:'Erlebnisse wählen',fr:'Sélectionner',it:'Seleziona esperienze',ar:'اختر التجارب',ru:'Выбрать впечатления'},
+  qf_total:{es:'Total estimado',en:'Estimated total',de:'Geschätzter Preis',fr:'Total estimé',it:'Totale stimato',ar:'الإجمالي المقدر',ru:'Примерная сумма'},
+  qf_send:{es:'Enviar reserva por WhatsApp',en:'Send booking via WhatsApp',de:'Buchung per WhatsApp senden',fr:'Envoyer par WhatsApp',it:'Invia prenotazione via WhatsApp',ar:'إرسال الحجز عبر واتساب',ru:'Отправить бронь в WhatsApp'},
+  qf_tbc:{es:'A confirmar',en:'TBC',de:'Auf Anfrage',fr:'À confirmer',it:'Da confermare',ar:'للتأكيد',ru:'Уточняется'},
+  f_fullname:{es:'Nombre completo',en:'Full name',de:'Vollständiger Name',fr:'Nom complet',it:'Nome completo',ar:'الاسم الكامل',ru:'Полное имя'},
+  f_phone:{es:'Teléfono',en:'Phone',de:'Telefon',fr:'Téléphone',it:'Telefono',ar:'الهاتف',ru:'Телефон'},
+  js_sub:{es:'Selecciona tu tour y completa los datos',en:'Select your tour and fill in the details',de:'Tour wählen und Daten ausfüllen',fr:'Sélectionnez votre tour',it:'Seleziona il tour e compila i dati',ar:'اختر جولتك واملأ البيانات',ru:'Выберите тур и заполните данные'},
+  js_tour:{es:'Tour',en:'Tour',de:'Tour',fr:'Tour',it:'Tour',ar:'الجولة',ru:'Тур'},
+  js_skis:{es:'Jet Skis',en:'Jet Skis',de:'Jet Skis',fr:'Jet Skis',it:'Jet Ski',ar:'جت سكي',ru:'Гидроциклов'},
+  js_pickup:{es:'Punto de recogida',en:'Pick-up location',de:'Abholpunkt',fr:'Point de retrait',it:'Punto di ritiro',ar:'نقطة الالتقاط',ru:'Точка посадки'},
+  js_time:{es:'Hora deseada',en:'Desired time',de:'Gewünschte Zeit',fr:'Heure souhaitée',it:'Orario desiderato',ar:'الوقت المطلوب',ru:'Желаемое время'},
+  js_send:{es:'Reservar Jet Ski',en:'Book Jet Ski',de:'Jet Ski buchen',fr:'Réserver Jet Ski',it:'Prenota Jet Ski',ar:'احجز جت سكي',ru:'Забронировать Jet Ski'},
+  bcm_buy:{es:'Comprar entrada',en:'Buy ticket',de:'Ticket kaufen',fr:'Acheter billet',it:'Acquista biglietto',ar:'شراء تذكرة',ru:'Купить билет'}
+};
+
+/* === ENGINE === */
+function t(k){return L[k]?.[lang]||L[k]?.es||k}
+function loc(v){return typeof v==='object'?(v[lang]||v.es||''):v}
+function parsePrice(p){const s=typeof p==='object'?(p.es||''):String(p);const m=s.match(/(\d+)/);return m?parseInt(m[1]):0}
+
+/* === FIX: WhatsApp link uses CURRENT language === */
+function waLink(v){
+  const dateLbl={es:'[fecha]',en:'[date]',de:'[Datum]',fr:'[date]',it:'[data]',ar:'[التاريخ]',ru:'[дата]'}[lang]||'[date]';
+  // Always use the current lang for the WA message
+  let m = (v.wa && typeof v.wa === 'object') ? (v.wa[lang] || v.wa.en || v.wa.es || '') : (v.wa || '');
+  m=m.replace('%n','2').replace('%d',dateLbl);
+  return`https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+}
+
+function renderLangBtns(){
+  document.getElementById('langGrp').innerHTML=LANGS.map(l=>`<button class="lb${l===lang?' on':''}" data-lang="${l}">${l.toUpperCase()}</button>`).join('');
+  document.querySelectorAll('#langGrp .lb').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+}
+
+function renderCatBtns(){
+  const cats=['all','water','beach','mountain','night','culture','food','free'];
+  document.getElementById('catInner').innerHTML=cats.map(c=>`<button class="cat-btn${c===cat?' on':''}" data-cat="${c}">${t('c_'+c)}</button>`).join('');
+  document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',()=>setCat(b.dataset.cat)));
+}
+
+function renderFeatured(){
+  document.getElementById('featScroll').innerHTML=V.filter(v=>v.feat).map(v=>{
+    let href,tgt='target="_blank" rel="noopener"';
+    if(v.jetski){href='javascript:openJetSki()';tgt=''}
+    else if(v.bcm){href=BCM_TICKET_URL}
+    else if(v.id==='boat-party'){href=BOAT_PARTY_URL}
+    else{href=waLink(v)}
+    return`<a class="feat-card" href="${href}" ${tgt}>
+      <img src="${v.img}" alt="${loc(v.name)}" loading="lazy"><span class="feat-price">${loc(v.price)}</span>
+      <div class="feat-info"><span class="feat-tag">${loc(v.bTxt)}</span><h3>${loc(v.name)}</h3><p>${loc(v.desc)}</p></div>
+    </a>`
+  }).join('');
+}
+
+function renderVenues(){
+  const g=document.getElementById('vGrid');
+  const list=cat==='all'?V:V.filter(v=>v.cat===cat);
+  g.innerHTML=list.map((v,i)=>{
+    let actions;
+    if(v.bcm){
+      actions=`<a class="v-wa" href="${BCM_TICKET_URL}" target="_blank" rel="noopener">${t('bcm_buy')}</a><a class="v-map" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola, consulta sobre BCM VIP / mesas')}" target="_blank" rel="noopener" title="VIP">VIP</a>`;
+    }else if(v.id==='boat-party'){
+      actions=`<a class="v-wa" href="${BOAT_PARTY_URL}" target="_blank" rel="noopener">${t('bcm_buy')}</a>`;
+    }else if(v.jetski){
+      actions=`<a class="v-wa" href="javascript:openJetSki()">${t('book')}</a>`;
+    }else{
+      const priceStr=loc(v.price);
+      const isFree=(typeof priceStr==='string'&&(priceStr==='Free'||priceStr==='Gratis'||priceStr==='Kostenlos'||priceStr==='Gratuit'||priceStr==='مجاني'||priceStr==='Бесплатно'));
+      const ctaLabel=isFree?t('v_info'):t('book');
+      actions=`<a class="v-wa" href="${waLink(v)}" target="_blank" rel="noopener">${ctaLabel}</a>${v.map?`<a class="v-map" href="${v.map}" target="_blank">↗</a>`:''}`;
     }
-    
-    // ===== RENDER FUNCTIONS =====
-    function renderLangBtns(){
-      document.getElementById('langGrp').innerHTML = LANGS.map(l => 
-        `<button class="lang-btn${l===lang?' active':''}" data-lang="${l}" aria-pressed="${l===lang}">${l.toUpperCase()}</button>`
-      ).join('');
-      document.querySelectorAll('#langGrp .lang-btn').forEach(b => 
-        b.addEventListener('click', () => setLang(b.dataset.lang))
-      );
-    }
-    
-    function renderCatBtns(){
-      const cats = ['all','water','beach','mountain','night','culture','food','free'];
-      document.getElementById('catInner').innerHTML = cats.map(c => 
-        `<button class="cat-btn${c===cat?' active':''}" data-cat="${c}" role="tab" aria-selected="${c===cat}">${t('c_'+c)}</button>`
-      ).join('');
-      document.querySelectorAll('.cat-btn').forEach(b => 
-        b.addEventListener('click', () => setCat(b.dataset.cat))
-      );
-    }
-    
-    function renderFeatured(){
-      document.getElementById('featScroll').innerHTML = V.filter(v=>v.feat).map(v=>{
-        let href, attrs='';
-        if(v.jetski){href='javascript:openJetSki()'}
-        else if(v.bcm){href=BCM_TICKET_URL;attrs='target="_blank" rel="noopener"'}
-        else if(v.id==='boat-party'){href=BOAT_PARTY_URL;attrs='target="_blank" rel="noopener"'}
-        else{href=waLink(v);attrs='target="_blank" rel="noopener"'}
-        return `<a class="feat-card" href="${href}" ${attrs} role="listitem">
-          <img src="${v.img}" alt="${loc(v.name)}" loading="lazy" width="320" height="427">
-          <span class="feat-price">${loc(v.price)}</span>
-          <div class="feat-info">
-            <span class="feat-tag">${loc(v.bTxt)}</span>
-            <h3>${loc(v.name)}</h3>
-            <p>${loc(v.desc)}</p>
-          </div>
-        </a>`
-      }).join('');
-    }
-    
-    function renderVenues(){
-      const g = document.getElementById('vGrid');
-      const list = cat==='all' ? V : V.filter(v=>v.cat===cat);
-      g.innerHTML = list.map((v,i)=>{
-        let actions;
-        if(v.bcm){
-          actions = `<a class="v-wa" href="${BCM_TICKET_URL}" target="_blank" rel="noopener">${t('bcm_buy')}</a><a class="v-map" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola, consulta sobre BCM VIP / mesas')}" target="_blank" rel="noopener" title="VIP" aria-label="VIP inquiry">VIP</a>`;
-        }else if(v.id==='boat-party'){
-          actions = `<a class="v-wa" href="${BOAT_PARTY_URL}" target="_blank" rel="noopener">${t('bcm_buy')}</a>`;
-        }else if(v.jetski){
-          actions = `<button class="v-wa" onclick="openJetSki()" type="button">${t('book')}</button>`;
-        }else{
-          const priceStr = loc(v.price);
-          const isFree = typeof priceStr==='string' && (priceStr==='Free'||priceStr==='Gratis'||priceStr==='Kostenlos'||priceStr==='Gratuit'||priceStr==='مجاني'||priceStr==='Бесплатно');
-          const ctaLabel = isFree ? t('v_info') : t('book');
-          actions = `<a class="v-wa" href="${waLink(v)}" target="_blank" rel="noopener">${ctaLabel}</a>${v.map?`<a class="v-map" href="${v.map}" target="_blank" aria-label="View on map">↗</a>`:''}`;
-        }
-        return `<article class="v-card reveal" style="transition-delay:${i*30}ms" role="listitem">
-          <div class="v-img">
-            <img src="${v.img}" alt="${loc(v.name)}" loading="lazy" width="240" height="300">
-            <div class="v-img-overlay"><p>${loc(v.desc)}</p></div>
-            <span class="v-badge ${v.badge==='premium'?'b-premium':v.badge==='season'?'b-season':'b-open'}" aria-label="${loc(v.bTxt)}">${loc(v.bTxt)}</span>
-          </div>
-          <div class="v-body">
-            <div class="v-top"><h3>${loc(v.name)}</h3><span class="v-pr">${loc(v.price)}</span></div>
-            <div class="v-tags" aria-label="Tags">${(loc(v.tags)||[]).map(t=>`<span class="v-tag">${t}</span>`).join('')}</div>
-            <p class="v-desc">${loc(v.desc)}</p>
-            <div class="v-acts">${actions}</div>
-          </div>
-        </article>`
-      }).join('');
-      // Trigger reveal animations
-      requestAnimationFrame(() => {
-        g.querySelectorAll('.reveal').forEach((el,i) => {
-          setTimeout(() => el.classList.add('active'), i * 40);
-        });
-      });
-    }
-    
-    function renderCollections(){
-      document.getElementById('colGrid').innerHTML = collections.map(c => `
-        <a class="collection-card" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Me interesa '+loc(c.name))}" target="_blank" rel="noopener" role="listitem">
-          <img src="${c.img}" alt="${loc(c.name)}" loading="lazy" width="220" height="293">
-          <div class="col-overlay"></div>
-          <div class="col-info">
-            <div class="col-eyebrow">${loc(c.eyebrow)}</div>
-            <h3>${loc(c.name)}</h3>
-            <p>${loc(c.desc)}</p>
-            <span class="col-cta">${loc(c.cta)}</span>
-          </div>
-        </a>`).join('');
-    }
-    
-    function renderPricing(){
-      document.getElementById('pricingGrid').innerHTML = pricingData.map(p => 
-        `<article class="p-card glass">
-          <h4>${loc(p.title)}</h4>
-          <div class="p-sub">${loc(p.sub)}</div>
-          ${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}
-          <div class="p-note">${loc(p.note)}</div>
-        </article>`).join('')
-    }
-    
-    function renderPartners(){
-      document.getElementById('partnerRow').innerHTML = partners.map(p => 
-        `<div class="p-logo" title="${p.n}" role="listitem">
-          <img src="${p.img}" alt="${p.n}" width="48" height="48" loading="lazy">
-        </div>`).join('')
-    }
-    
-    function populateSelect(){
-      document.getElementById('fA').innerHTML = V.filter(v=>!v.jetski).map(v => 
-        `<option value="${v.id}">${loc(v.name)} — ${loc(v.price)}</option>`
-      ).join('');
-      renderCheckboxes();
-    }
-    
-    function renderCheckboxes(){
-      const items = V.filter(v=>!v.jetski);
-      let html = items.map(v => 
-        `<label class="cb-item${cart.includes(v.id)?' active':''}" tabindex="0" role="checkbox" aria-checked="${cart.includes(v.id)}" onclick="toggleCb('${v.id}')" onkeypress="if(event.key==='Enter'||event.key===' ')toggleCb('${v.id}')">
-          <span class="cb-ck">✓</span>
-          <span class="cb-lb">${loc(v.name)}<small>${loc(v.price)}</small></span>
-        </label>`
-      ).join('');
-      html += jetSkiTours.map(tr => 
-        `<label class="cb-item${cart.includes('js-'+tr.id)?' active':''}" tabindex="0" role="checkbox" aria-checked="${cart.includes('js-'+tr.id)}" onclick="toggleCb('js-${tr.id}')" onkeypress="if(event.key==='Enter'||event.key===' ')toggleCb('js-${tr.id}')">
-          <span class="cb-ck">✓</span>
-          <span class="cb-lb">${tr.name}<small>${tr.price} € · ${tr.dur}</small></span>
-        </label>`
-      ).join('');
-      document.getElementById('cbGrid').innerHTML = html;
-      updateTotal();
-    }
-    
-    function toggleCb(vid){
-      const i = cart.indexOf(vid);
-      if(i > -1) cart.splice(i,1); else cart.push(vid);
-      renderCheckboxes();
-    }
-    
-    function updateTotal(){
-      const el = document.getElementById('cartTotal'), amt = document.getElementById('totalAmt');
-      if(!cart.length){el.style.display='none';return}
-      el.style.display = 'flex';
-      let sum = 0, tbc = false;
-      cart.forEach(vid => {
-        if(vid.startsWith('js-')){
-          const tr = jetSkiTours.find(t=>t.id===vid.slice(3));
-          if(tr) sum += tr.price;
-        } else {
-          const v = V.find(x=>x.id===vid);
-          if(v){
-            if(v.bcm){sum+=35}
-            else if(v.id==='boat-party'){sum+=69}
-            else{
-              const n = parsePrice(v.price);
-              if(n>0) sum+=n; else tbc=true;
-            }
-          }
-        }
-      });
-      amt.textContent = sum>0 ? (tbc ? sum+' € +' : sum+' €') : t('qf_tbc');
-    }
-    
-    function applyI18n(){
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const k = el.getAttribute('data-i18n');
-        const v = t(k);
-        if(v) el.innerHTML = v;
-      });
-    }
-    
-    // ===== MODAL FUNCTIONS =====
-    function openJetSki(){
-      document.getElementById('jsModal').classList.add('active');
-      renderJsTours();
-      // Focus management
-      setTimeout(() => document.getElementById('jsName')?.focus(), 100);
-    }
-    
-    function renderJsTours(){
-      document.getElementById('jsTours').innerHTML = jetSkiTours.map(tr => `
-        <div class="jf-tour${tr.id===selTour?' active':''}" 
-             onclick="selTour='${tr.id}';renderJsTours()"
-             role="radio" 
-             aria-checked="${tr.id===selTour}"
-             tabindex="0"
-             onkeypress="if(event.key==='Enter'||event.key===' '){selTour='${tr.id}';renderJsTours()}">
-          <span class="jf-radio"></span>
-          <div class="jf-tinfo">
-            <div class="jf-tname">${tr.name}</div>
-            <div class="jf-tmeta">${tr.dur}</div>
-          </div>
-          <span class="jf-tprice">${tr.price} €</span>
-        </div>`).join('');
-    }
-    
-    function submitJetSki(e){
-      e.preventDefault();
-      const name = document.getElementById('jsName').value,
-            phone = document.getElementById('jsPhone').value,
-            pax = document.getElementById('jsPax').value,
-            skis = document.getElementById('jsSkis').value,
-            pickup = document.getElementById('jsPickup').value,
-            time = document.getElementById('jsTime').value,
-            notes = document.getElementById('jsNotes').value;
-      const tour = jetSkiTours.find(t=>t.id===selTour);
-      if(!name||!phone||!pickup||!time||!tour) return;
-      
-      let m = `${name}\n${phone}\n${pax} pax\n${skis} jet skis\n${tour.name}\n\nTransport desde:\n${pickup}\n${time}`;
-      if(notes) m += `\n${notes}`;
-      
-      showToast(t('toast'));
-      setTimeout(() => {
-        window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');
-        closeModal('jsModal');
-      }, 400);
-    }
-    
-    function openModal(vid){
-      document.getElementById('bkModal').classList.add('active');
-      if(vid) document.getElementById('fA').value = vid;
-      setTimeout(() => document.getElementById('fN')?.focus(), 100);
-    }
-    
-    function closeModal(id){
-      document.getElementById(id||'bkModal').classList.remove('active');
-    }
-    
-    function submitBooking(e){
-      e.preventDefault();
-      const n = document.getElementById('fN').value,
-            v = V.find(x=>x.id===document.getElementById('fA').value);
-      if(!v) return;
-      
-      if(v.bcm){window.open(BCM_TICKET_URL,'_blank');closeModal('bkModal');return}
-      if(v.id==='boat-party'){window.open(BOAT_PARTY_URL,'_blank');closeModal('bkModal');return}
-      if(v.jetski){openJetSki();closeModal('bkModal');return}
-      
-      const d = document.getElementById('fD').value,
-            p = document.getElementById('fP').value,
-            notes = document.getElementById('fNo').value;
-      if(!d){alert('Please select a date');return}
-      
-      let m = `RESERVA MallorcasLocal\n\nNombre: ${n}\nActividad: ${loc(v.name)}\nFecha: ${d}\nPersonas: ${p}`;
-      if(notes) m += `\nNotas: ${notes}`;
-      m += '\n\nConfirmais disponibilidad?';
-      
-      showToast(t('toast'));
-      setTimeout(() => {
-        window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');
-        closeModal('bkModal');
-      }, 400);
-    }
-    
-    // ===== QUICK FORM =====
-    function submitQuick(e){
-      e.preventDefault();
-      const n = document.getElementById('qN').value;
-      if(!n||!cart.length) return;
-      
-      const d = document.getElementById('qD').value,
-            p = document.getElementById('qP').value,
-            notes = document.getElementById('qNo').value;
-      if(!d){alert('Please select a date');return}
-      
-      const directLinks = cart.filter(vid=>vid==='bcm'||vid==='boat-party');
-      if(directLinks.length===1 && cart.length===1){
-        window.open(directLinks[0]==='bcm'?BCM_TICKET_URL:BOAT_PARTY_URL,'_blank');
-        return;
-      }
-      
-      let items = cart.map(vid => {
-        if(vid.startsWith('js-')){
-          const tr = jetSkiTours.find(t=>t.id===vid.slice(3));
-          return tr ? `- Jet Ski: ${tr.name}` : '';
-        }
-        const v = V.find(x=>x.id===vid);
-        return v ? `- ${loc(v.name)}` : '';
-      }).filter(Boolean).join('\n');
-      
-      let sum = cart.reduce((a,vid) => {
-        if(vid.startsWith('js-')){
-          const tr = jetSkiTours.find(t=>t.id===vid.slice(3));
-          return a + (tr?tr.price:0);
-        }
-        const v = V.find(x=>x.id===vid);
-        if(!v) return a;
-        if(v.bcm) return a+35;
-        if(v.id==='boat-party') return a+69;
-        return a + parsePrice(v.price);
-      }, 0);
-      
-      let m = `RESERVA MallorcasLocal\n\nNombre: ${n}\nFecha: ${d}\nPersonas: ${p}\n\nExperiencias:\n${items}\n\nTotal estimado: ${sum>0?sum+' €':'A confirmar'}`;
-      if(notes) m += `\nNotas: ${notes}`;
-      if(directLinks.length){
-        m += `\n\nImportante:\n- BCM ticket: ${directLinks.includes('bcm')?'Sí':'No'}\n- Boat Party deposit: ${directLinks.includes('boat-party')?'Sí':'No'}`;
-      }
-      m += '\n\nConfirmais disponibilidad?';
-      
-      showToast(t('toast'));
-      setTimeout(() => window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank'), 400);
-    }
-    
-    function showToast(msg){
-      const el = document.getElementById('toast');
-      el.textContent = msg;
-      el.classList.add('active');
-      setTimeout(() => el.classList.remove('active'), 2200);
-    }
-    
-    // ===== THEME & LANG =====
-    function setLang(l){
-      lang = l;
-      const isRtl = RTL_LANGS.includes(l);
-      document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
-      document.documentElement.lang = l;
-      
-      // Update theme color meta tag
-      const themeColor = document.querySelector('meta[name="theme-color"]');
-      if(themeColor){
-        themeColor.setAttribute('content', document.body.dataset.theme==='light' ? '#f7f6f2' : '#050505');
-      }
-      
-      renderLangBtns();
-      renderCatBtns();
-      applyI18n();
-      renderFeatured();
-      renderVenues();
-      renderCollections();
-      renderPricing();
-      populateSelect();
-    }
-    
-    function setCat(c){
-      cat = c;
-      renderCatBtns();
-      renderVenues();
-    }
-    
-    // ===== INIT =====
-    document.addEventListener('DOMContentLoaded', () => {
-      // Theme toggle
-      const themeBtn = document.getElementById('themeBtn');
-      const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-      document.documentElement.dataset.theme = savedTheme;
-      themeBtn?.addEventListener('click', () => {
-        const newTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = newTheme;
-        localStorage.setItem('theme', newTheme);
-      });
-      
-      // Header scroll effect
-      const topbar = document.querySelector('.topbar');
-      const onScroll = () => {
-        if(window.scrollY > 10) topbar?.classList.add('scrolled');
-        else topbar?.classList.remove('scrolled');
-      };
-      window.addEventListener('scroll', onScroll, {passive:true});
-      onScroll();
-      
-      // Reveal on scroll
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
-      
-      setTimeout(() => {
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-      }, 200);
-      
-      // Modal close on backdrop click
-      ['bkModal','jsModal'].forEach(id => {
-        const modal = document.getElementById(id);
-        modal?.addEventListener('click', (e) => {
-          if(e.target === modal) closeModal(id);
-        });
-      });
-      
-      // Keyboard navigation for modals
-      document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape'){
-          closeModal('bkModal');
-          closeModal('jsModal');
-        }
-      });
-      
-      // Form date min
-      const today = new Date().toISOString().split('T')[0];
-      ['fD','qD'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.min = today;
-      });
-      
-      // Initialize
-      setLang('en');
-      renderPartners();
-    });
-  </script>
+    return`<div class="v-card rv" style="transition-delay:${i*20}ms">
+      <div class="v-img"><img src="${v.img}" alt="${loc(v.name)}" loading="lazy"><div class="v-img-overlay"><p>${loc(v.desc)}</p></div><span class="v-badge ${v.badge==='premium'?'b-premium':v.badge==='season'?'b-season':'b-open'}">${loc(v.bTxt)}</span></div>
+      <div class="v-body"><div class="v-top"><h3>${loc(v.name)}</h3><span class="v-pr">${loc(v.price)}</span></div>
+      <div class="v-tags">${(loc(v.tags)||[]).map(t=>`<span class="v-tag">${t}</span>`).join('')}</div>
+      <p class="v-desc">${loc(v.desc)}</p>
+      <div class="v-acts">${actions}</div></div></div>`
+  }).join('');
+  requestAnimationFrame(()=>{g.querySelectorAll('.rv').forEach((el,i)=>{setTimeout(()=>el.classList.add('vis'),i*25)})});
+}
+
+function renderCollections(){
+  document.getElementById('colGrid').innerHTML=collections.map(c=>`
+    <a class="collection-card" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola! Me interesa '+loc(c.name))}" target="_blank" rel="noopener">
+      <img src="${c.img}" alt="${loc(c.name)}" loading="lazy"><div class="col-overlay"></div>
+      <div class="col-info"><div class="col-eyebrow">${loc(c.eyebrow)}</div><h3>${loc(c.name)}</h3><p>${loc(c.desc)}</p><span class="col-cta">${loc(c.cta)} →</span></div>
+    </a>`).join('');
+}
+
+function renderPricing(){
+  document.getElementById('pricingGrid').innerHTML=pricingData.map(p=>`<div class="p-card"><h4>${loc(p.title)}</h4><div class="p-sub">${loc(p.sub)}</div>${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}<div class="p-note">${loc(p.note)}</div></div>`).join('')
+}
+function renderPartners(){document.getElementById('partnerRow').innerHTML=partners.map(p=>`<div class="p-logo" title="${p.n}"><img src="${p.img}" alt="${p.n}"></div>`).join('')}
+
+function populateSelect(){
+  document.getElementById('fA').innerHTML=V.filter(v=>!v.jetski).map(v=>`<option value="${v.id}">${loc(v.name)} — ${loc(v.price)}</option>`).join('');
+  renderCheckboxes();
+}
+
+function renderCheckboxes(){
+  const items=V.filter(v=>!v.jetski);
+  let html=items.map(v=>`<div class="cb-item${cart.includes(v.id)?' sel':''}" onclick="toggleCb('${v.id}')"><span class="cb-ck">✓</span><span class="cb-lb">${loc(v.name)}<small>${loc(v.price)}</small></span></div>`).join('');
+  html+=jetSkiTours.map(tr=>`<div class="cb-item${cart.includes('js-'+tr.id)?' sel':''}" onclick="toggleCb('js-${tr.id}')"><span class="cb-ck">✓</span><span class="cb-lb">${tr.name}<small>${tr.price} €  ·  ${tr.dur}</small></span></div>`).join('');
+  document.getElementById('cbGrid').innerHTML=html;
+  updateTotal();
+}
+function toggleCb(vid){const i=cart.indexOf(vid);if(i>-1)cart.splice(i,1);else cart.push(vid);renderCheckboxes()}
+function updateTotal(){
+  const el=document.getElementById('cartTotal'),amt=document.getElementById('totalAmt');
+  if(!cart.length){el.style.display='none';return}el.style.display='flex';
+  let sum=0,tbc=false;
+  cart.forEach(vid=>{
+    if(vid.startsWith('js-')){const tr=jetSkiTours.find(t=>t.id===vid.slice(3));if(tr)sum+=tr.price}
+    else{const v=V.find(x=>x.id===vid);if(v){if(v.bcm){sum+=35}else if(v.id==='boat-party'){sum+=69}else{const n=parsePrice(v.price);if(n>0)sum+=n;else tbc=true}}}
+  });
+  amt.textContent=sum>0?(tbc?sum+' € +':sum+' €'):t('qf_tbc');
+}
+
+function applyI18n(){document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');const v=t(k);if(v)el.innerHTML=v})}
+
+/* === JET SKI === */
+function openJetSki(){document.getElementById('jsModal').classList.add('show');renderJsTours()}
+function renderJsTours(){
+  document.getElementById('jsTours').innerHTML=jetSkiTours.map(tr=>`
+    <div class="jf-tour${tr.id===selTour?' sel':''}" onclick="selTour='${tr.id}';renderJsTours()">
+      <span class="jf-radio"></span><div class="jf-tinfo"><div class="jf-tname">${tr.name}</div><div class="jf-tmeta">${tr.dur}</div></div><span class="jf-tprice">${tr.price} €</span>
+    </div>`).join('');
+}
+function submitJetSki(){
+  const name=document.getElementById('jsName').value,phone=document.getElementById('jsPhone').value;
+  const pax=document.getElementById('jsPax').value,skis=document.getElementById('jsSkis').value;
+  const pickup=document.getElementById('jsPickup').value,time=document.getElementById('jsTime').value;
+  const notes=document.getElementById('jsNotes').value;
+  const tour=jetSkiTours.find(t=>t.id===selTour);
+  if(!name||!phone||!pickup||!time||!tour)return;
+  let m=`${name}\n${phone}\n${pax} pax\n${skis} jet skis\n${tour.name}\n\nTransport desde:\n${pickup}\n${time}`;
+  if(notes)m+=`\n${notes}`;
+  showToast(t('toast'));
+  setTimeout(()=>{window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');closeModal('jsModal')},400);
+}
+
+/* === GENERIC MODAL === */
+function openModal(vid){document.getElementById('bkModal').classList.add('show');if(vid)document.getElementById('fA').value=vid}
+function closeModal(id){document.getElementById(id||'bkModal').classList.remove('show')}
+function submitBooking(e){
+  e.preventDefault();
+  const n=document.getElementById('fN').value,v=V.find(x=>x.id===document.getElementById('fA').value);
+  if(!v)return;
+  if(v.bcm){window.open(BCM_TICKET_URL,'_blank');closeModal('bkModal');return}
+  if(v.id==='boat-party'){window.open(BOAT_PARTY_URL,'_blank');closeModal('bkModal');return}
+  if(v.jetski){openJetSki();closeModal('bkModal');return}
+  const d=document.getElementById('fD').value,p=document.getElementById('fP').value,notes=document.getElementById('fNo').value;
+  if(!d){alert('Please select a date');return}
+  let m=`RESERVA MallorcasLocal\n\nNombre: ${n}\nActividad: ${loc(v.name)}\nFecha: ${d}\nPersonas: ${p}`;
+  if(notes)m+=`\nNotas: ${notes}`;m+='\n\nConfirmais disponibilidad?';
+  showToast(t('toast'));
+  setTimeout(()=>{window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank');closeModal('bkModal')},400);
+}
+
+/* === QUICK FORM === */
+function submitQuick(){
+  const n=document.getElementById('qN').value;
+  if(!n||!cart.length)return;
+  const d=document.getElementById('qD').value,p=document.getElementById('qP').value,notes=document.getElementById('qNo').value;
+  if(!d){alert('Please select a date');return}
+  const directLinks=cart.filter(vid=>vid==='bcm'||vid==='boat-party');
+  if(directLinks.length===1&&cart.length===1){window.open(directLinks[0]==='bcm'?BCM_TICKET_URL:BOAT_PARTY_URL,'_blank');return}
+  let items=cart.map(vid=>{
+    if(vid.startsWith('js-')){const tr=jetSkiTours.find(t=>t.id===vid.slice(3));return tr?`- Jet Ski: ${tr.name}`:''}
+    const v=V.find(x=>x.id===vid);return v?`- ${loc(v.name)}`:''
+  }).filter(Boolean).join('\n');
+  let sum=cart.reduce((a,vid)=>{
+    if(vid.startsWith('js-')){const tr=jetSkiTours.find(t=>t.id===vid.slice(3));return a+(tr?tr.price:0)}
+    const v=V.find(x=>x.id===vid);if(!v)return a;if(v.bcm)return a+35;if(v.id==='boat-party')return a+69;return a+parsePrice(v.price)
+  },0);
+  let m=`RESERVA MallorcasLocal\n\nNombre: ${n}\nFecha: ${d}\nPersonas: ${p}\n\nExperiencias:\n${items}\n\nTotal estimado: ${sum>0?sum+' euro':'A confirmar'}`;
+  if(notes)m+=`\nNotas: ${notes}`;
+  if(directLinks.length){m+=`\n\nImportante:\n- BCM ticket: ${directLinks.includes('bcm')?'Sí':'No'}\n- Boat Party deposit: ${directLinks.includes('boat-party')?'Sí':'No'}`}
+  m+='\n\nConfirmais disponibilidad?';
+  showToast(t('toast'));
+  setTimeout(()=>window.open(`https://wa.me/${WA}?text=${encodeURIComponent(m)}`,'_blank'),400);
+}
+
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
+
+function setLang(l){
+  lang=l;
+  const isRtl=RTL_LANGS.includes(l);
+  document.documentElement.dir=isRtl?'rtl':'ltr';
+  document.documentElement.lang=l;
+  renderLangBtns();renderCatBtns();applyI18n();renderFeatured();renderVenues();renderCollections();renderPricing();populateSelect();
+}
+function setCat(c){cat=c;renderCatBtns();renderVenues()}
+
+/* === INIT === */
+document.getElementById('themeBtn').addEventListener('click',()=>document.body.classList.toggle('lm'));
+document.getElementById('qfSend').addEventListener('click',submitQuick);
+document.getElementById('jsSend').addEventListener('click',submitJetSki);
+document.getElementById('bkModal').addEventListener('click',function(e){if(e.target===this)closeModal('bkModal')});
+document.getElementById('jsModal').addEventListener('click',function(e){if(e.target===this)closeModal('jsModal')});
+document.getElementById('fD').min=new Date().toISOString().split('T')[0];
+document.getElementById('qD').min=new Date().toISOString().split('T')[0];
+setLang('en');renderPartners();
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.06});
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>obs.observe(el)),200);
+</script>
 </body>
 </html>
