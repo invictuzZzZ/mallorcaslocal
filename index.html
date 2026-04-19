@@ -494,7 +494,7 @@ function renderCollections(){
     </a>`).join('');
 }
 
-function renderPricing(){
+function renderPricing(){X
   document.getElementById('pricingGrid').innerHTML=pricingData.map(p=>`<div class="p-card"><h4>${loc(p.title)}</h4><div class="p-sub">${loc(p.sub)}</div>${p.rows.map(r=>`<div class="p-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}<div class="p-note">${loc(p.note)}</div></div>`).join('')
 }
 function renderPartners(){document.getElementById('partnerRow').innerHTML=partners.map(p=>`<div class="p-logo" title="${p.n}"><img src="${p.img}" alt="${p.n}"></div>`).join('')}
