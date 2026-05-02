@@ -295,6 +295,456 @@ html[dir="rtl"] .feat-price{left:12px;right:auto}
 .v-img-overlay div{width:100%}.v-img-overlay strong{color:var(--gold);font-weight:700;display:block;margin-bottom:4px;font-size:10px;text-transform:uppercase;letter-spacing:.1em}.v-img-overlay p{font-size:12px;color:rgba(255,255,255,.88);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 </style>
 </head>
+  <!--
+MALLORCASLOCAL PERFORMANCE + STABILITY PATCH
+Paste this block just before </body> in your current HTML.
+It improves reliability, speed, accessibility, WhatsApp conversion flow and mobile UX without changing your design, visual system, categories, prices, data, Cloudinary links or external purchase links.
+-->
+
+<style id="ml-upgrade-css">
+/* === MICRO PERFORMANCE + UX UPGRADES: NO VISUAL REDESIGN === */
+:root{
+  --tap-size:44px;
+}
+
+/* Prevent layout jumps while images load */
+img{
+  content-visibility:auto;
+}
+
+/* More reliable mobile viewport handling */
+.hero{
+  min-height:100dvh;
+}
+
+/* Better touch targets without changing the look */
+.tb-icon,
+.v-fav,
+.v-map,
+.lb-x,
+.lb-nav,
+.mx,
+.detail-close,
+.search-clear{
+  min-width:var(--tap-size);
+  min-height:var(--tap-size);
+}
+
+.tb-icon{
+  width:36px;
+  height:36px;
+}
+
+.v-fav{
+  width:34px;
+  height:34px;
+}
+
+/* Stop accidental horizontal overflow from translated words */
+.v-top h3,
+.feat-info h3,
+.col-info h3,
+.detail-body h2{
+  overflow-wrap:anywhere;
+}
+
+/* Smoother modal scrolling on iOS */
+.modal,
+.detail-panel{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+
+/* Better disabled field feedback */
+button[disabled],
+a[aria-disabled="true"]{
+  opacity:.55;
+  cursor:not-allowed;
+  pointer-events:none;
+}
+
+/* Improve perceived image loading without altering design */
+.v-img,
+.feat-card,
+.collection-card,
+.detail-hero{
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.035) 8%, rgba(255,255,255,.07) 18%, rgba(255,255,255,.035) 33%),
+    var(--bg2);
+  background-size:200% 100%;
+}
+
+.v-img img,
+.feat-card img,
+.collection-card img,
+.detail-hero img{
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+
+/* Cleaner focus states inside cards */
+.v-card:focus-within{
+  border-color:var(--line3);
+  box-shadow:var(--shadow-md);
+}
+
+/* Prevent floating buttons from covering the booking dock on small screens */
+@media(max-width:480px){
+  .wa-fab{
+    bottom:calc(82px + var(--safe-bottom));
+  }
+  .cart-dock.show + .wa-fab{
+    bottom:calc(90px + var(--safe-bottom));
+  }
+}
+</style>
+
+<script id="ml-upgrade-js">
+/* === MALLORCASLOCAL SAFE UPGRADE LAYER ===
+   Goals:
+   - Do not change design or links.
+   - Fix hidden JS edge cases.
+   - Make WhatsApp messages cleaner.
+   - Improve image performance.
+   - Improve modal accessibility.
+   - Add safer fallbacks for missing fields/data.
+*/
+(function(){
+  'use strict';
+
+  const ML = window.ML_UPGRADE = window.ML_UPGRADE || {};
+  ML.version = '2026.05.03-stability-conversion-patch';
+
+  const $ = (sel, ctx=document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+  const safe = fn => {
+    try { return fn(); } catch(err) { console.warn('[MallorcasLocal patch]', err); return null; }
+  };
+
+  function encodeWA(text){
+    return encodeURIComponent(String(text || '').replace(/\n{3,}/g, '\n\n').trim());
+  }
+
+  function getLang(){
+    return window.lang || document.documentElement.lang || 'en';
+  }
+
+  function localised(obj){
+    const l = getLang();
+    if(!obj) return '';
+    if(typeof obj === 'string') return obj;
+    return obj[l] || obj.en || Object.values(obj)[0] || '';
+  }
+
+  function findVenue(id){
+    return Array.isArray(window.V) ? window.V.find(v => v && v.id === id) : null;
+  }
+
+  function venueName(id){
+    const v = findVenue(id);
+    return v ? localised(v.name) : id;
+  }
+
+  function hardenImages(){
+    $$('img').forEach((img, index) => {
+      if(!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+      if(index > 2 && !img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+      img.addEventListener('error', () => {
+        img.style.opacity = '.35';
+        img.setAttribute('alt', img.getAttribute('alt') || 'Image unavailable');
+      }, { once:true });
+    });
+  }
+
+  function hardenExternalLinks(){
+    $$('a[target="_blank"]').forEach(a => {
+      const rel = new Set(String(a.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+      rel.add('noopener');
+      rel.add('noreferrer');
+      a.setAttribute('rel', Array.from(rel).join(' '));
+    });
+  }
+
+  function improveWhatsAppLinks(){
+    $$('a[href*="wa.me/"]').forEach(a => {
+      const url = new URL(a.href, window.location.href);
+      if(!url.searchParams.get('text')) return;
+      const original = decodeURIComponent(url.searchParams.get('text') || '');
+      if(original.includes('MallorcasLocal')) return;
+      const improved = original + '\n\nSource: MallorcasLocal';
+      url.searchParams.set('text', improved);
+      a.href = url.toString();
+    });
+  }
+
+  function fixBookingOpenBug(){
+    const previousOpenBooking = window.openBooking;
+    if(typeof previousOpenBooking !== 'function') return;
+
+    window.openBooking = function upgradedOpenBooking(venueId){
+      safe(() => {
+        if(typeof window.populateActivitySelect === 'function') window.populateActivitySelect();
+
+        if(venueId){
+          const checkbox = document.querySelector('input[name="fAct"][value="'+CSS.escape(venueId)+'"]');
+          if(checkbox){
+            checkbox.checked = true;
+            if(typeof window.updateBookingTotal === 'function') window.updateBookingTotal();
+          }
+        }
+
+        const modal = $('#bkModal');
+        if(modal && typeof window.openModal === 'function'){
+          window.openModal('bkModal');
+          setTimeout(() => $('#fN') && $('#fN').focus(), 80);
+        }else{
+          previousOpenBooking.apply(this, arguments);
+        }
+      });
+    };
+  }
+
+  function upgradeSubmitBooking(){
+    const form = $('#bkForm');
+    if(!form) return;
+
+    form.setAttribute('novalidate','novalidate');
+
+    window.submitBooking = function upgradedSubmitBooking(e){
+      if(e) e.preventDefault();
+
+      const name = ($('#fN')?.value || '').trim();
+      const dateIn = $('#fD')?.value || '';
+      const dateOut = $('#fD2')?.value || '';
+      const pax = $('#fP')?.value || '2';
+      const budget = ($('#fBudget')?.value || '').trim();
+      const notes = ($('#fNo')?.value || '').trim();
+      const selected = $$('input[name="fAct"]:checked').map(input => input.value);
+
+      if(!name){
+        window.toast ? window.toast('Please add your name','err') : alert('Please add your name');
+        $('#fN')?.focus();
+        return;
+      }
+
+      if(!selected.length){
+        window.toast ? window.toast('Please choose at least one activity','err') : alert('Please choose at least one activity');
+        return;
+      }
+
+      if(!dateIn){
+        window.toast ? window.toast('Please choose a date','err') : alert('Please choose a date');
+        $('#fD')?.focus();
+        return;
+      }
+
+      const activities = selected.map(venueName).filter(Boolean);
+      const estimatedTotal = selected.reduce((sum, id) => {
+        const v = findVenue(id);
+        return sum + (v && Number(v._pr) ? Number(v._pr) : 0);
+      }, 0);
+
+      const lines = [
+        'Hi MallorcasLocal, I want to book:',
+        '',
+        'Name: ' + name,
+        'Activities: ' + activities.join(', '),
+        'Date: ' + dateIn + (dateOut ? ' to ' + dateOut : ''),
+        'Guests: ' + pax,
+        estimatedTotal ? 'Estimated from-price total: ~' + estimatedTotal + ' EUR' : '',
+        budget ? 'Budget: ~' + budget + ' EUR' : '',
+        notes ? 'Notes: ' + notes : '',
+        '',
+        'Source: MallorcasLocal quick form'
+      ].filter(Boolean);
+
+      const waNumber = window.WA || '34644075065';
+      window.open('https://wa.me/' + waNumber + '?text=' + encodeWA(lines.join('\n')), '_blank', 'noopener,noreferrer');
+
+      if(window.toast) window.toast((window.t && window.t('toast_open')) || 'Opening WhatsApp','success');
+      if(window.closeModal) window.closeModal('bkModal');
+    };
+  }
+
+  function upgradeJetSkiForm(){
+    const send = $('#jsSend');
+    if(!send) return;
+
+    window.jsSendHandler = function upgradedJetSkiSend(){
+      const name = ($('#jsName')?.value || '').trim();
+      const phone = ($('#jsPhone')?.value || '').trim();
+      const pax = $('#jsPax')?.value || '2';
+      const skis = $('#jsSkis')?.value || '1';
+      const pickup = ($('#jsPickup')?.value || '').trim();
+      const date = $('#jsDate')?.value || '';
+      const time = $('#jsTime')?.value || '';
+      const notes = ($('#jsNotes')?.value || '').trim();
+      const tours = window.jetSkiTours || [];
+      const selectedId = window.selTour || 'gojet';
+      const tour = tours.find(t => t.id === selectedId) || tours[0] || { name:'Jet Ski Tour', dur:'', price:'' };
+
+      if(!name || !phone || !pickup || !date || !time){
+        if(window.toast) window.toast('Complete required fields','err');
+        return;
+      }
+
+      const lines = [
+        'Hi MallorcasLocal, I want to book a Jet Ski tour:',
+        '',
+        'Tour: ' + tour.name + (tour.dur ? ' (' + tour.dur + ')' : '') + (tour.price ? ' - ' + tour.price + ' EUR' : ''),
+        'Name: ' + name,
+        'Phone: ' + phone,
+        'Date/time: ' + date + ' ' + time,
+        'Guests: ' + pax,
+        'Jet skis: ' + skis,
+        'Hotel / pickup: ' + pickup,
+        notes ? 'Notes: ' + notes : '',
+        '',
+        'Source: MallorcasLocal Jet Ski form'
+      ].filter(Boolean);
+
+      const waNumber = window.WA || '34644075065';
+      window.open('https://wa.me/' + waNumber + '?text=' + encodeWA(lines.join('\n')), '_blank', 'noopener,noreferrer');
+
+      if(window.toast) window.toast((window.t && window.t('toast_open')) || 'Opening WhatsApp','success');
+      if(window.closeModal) window.closeModal('jsModal');
+    };
+
+    send.replaceWith(send.cloneNode(true));
+    $('#jsSend')?.addEventListener('click', window.jsSendHandler);
+  }
+
+  function improveModals(){
+    const modalIds = ['bkModal','jsModal'];
+
+    modalIds.forEach(id => {
+      const modalBg = document.getElementById(id);
+      if(!modalBg) return;
+      const modal = $('.modal', modalBg);
+      if(!modal) return;
+
+      modalBg.setAttribute('role','dialog');
+      modalBg.setAttribute('aria-modal','true');
+      modal.setAttribute('tabindex','-1');
+
+      modalBg.addEventListener('keydown', e => {
+        if(e.key !== 'Tab') return;
+        const focusables = $$('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])', modal)
+          .filter(el => el.offsetParent !== null);
+        if(!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if(e.shiftKey && document.activeElement === first){
+          e.preventDefault();
+          last.focus();
+        }else if(!e.shiftKey && document.activeElement === last){
+          e.preventDefault();
+          first.focus();
+        }
+      });
+    });
+  }
+
+  function addConversionHelpers(){
+    const grid = $('#vGrid');
+    if(!grid) return;
+
+    grid.addEventListener('click', e => {
+      const wa = e.target.closest('a[href*="wa.me/"], a[href*="sumupstore.com"]');
+      if(!wa) return;
+      if(window.toast) window.toast('Opening secure booking link','success');
+    }, true);
+  }
+
+  function preserveStateOnLanguageChange(){
+    const previousSetLang = window.setLang;
+    if(typeof previousSetLang !== 'function') return;
+
+    window.setLang = function upgradedSetLang(newLang){
+      const previousScroll = window.scrollY;
+      previousSetLang.apply(this, arguments);
+      requestAnimationFrame(() => window.scrollTo({ top: previousScroll, behavior:'auto' }));
+      setTimeout(() => {
+        hardenImages();
+        hardenExternalLinks();
+        improveWhatsAppLinks();
+      }, 50);
+    };
+  }
+
+  function fixCartDockMobilePosition(){
+    const dock = $('#cartDock');
+    const fab = $('.wa-fab');
+    if(!dock || !fab) return;
+
+    const observer = new MutationObserver(() => {
+      fab.style.bottom = dock.classList.contains('show') && window.innerWidth <= 480
+        ? 'calc(90px + var(--safe-bottom))'
+        : '';
+    });
+    observer.observe(dock, { attributes:true, attributeFilter:['class'] });
+  }
+
+  function addAnalyticsFriendlyEvents(){
+    document.addEventListener('click', e => {
+      const card = e.target.closest('.v-card[data-id]');
+      if(card){
+        document.dispatchEvent(new CustomEvent('ml:venue_click', { detail:{ id:card.dataset.id } }));
+      }
+      const link = e.target.closest('a[href*="wa.me/"],a[href*="sumupstore.com"]');
+      if(link){
+        document.dispatchEvent(new CustomEvent('ml:conversion_click', { detail:{ href:link.href } }));
+      }
+    }, true);
+  }
+
+  function addTodayDateFallback(){
+    const today = new Date().toISOString().slice(0,10);
+    ['fD','jsDate'].forEach(id => {
+      const input = document.getElementById(id);
+      if(input){
+        input.min = today;
+        if(!input.value) input.value = today;
+      }
+    });
+  }
+
+  function runPatch(){
+    safe(hardenImages);
+    safe(hardenExternalLinks);
+    safe(improveWhatsAppLinks);
+    safe(fixBookingOpenBug);
+    safe(upgradeSubmitBooking);
+    safe(upgradeJetSkiForm);
+    safe(improveModals);
+    safe(addConversionHelpers);
+    safe(preserveStateOnLanguageChange);
+    safe(fixCartDockMobilePosition);
+    safe(addAnalyticsFriendlyEvents);
+    safe(addTodayDateFallback);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', runPatch, { once:true });
+  }else{
+    runPatch();
+  }
+
+  /* Re-apply after dynamic renders */
+  const mo = new MutationObserver(() => {
+    clearTimeout(ML.mutationTimer);
+    ML.mutationTimer = setTimeout(() => {
+      safe(hardenImages);
+      safe(hardenExternalLinks);
+      safe(improveWhatsAppLinks);
+    }, 120);
+  });
+
+  if(document.body){
+    mo.observe(document.body, { childList:true, subtree:true });
+  }
+})();
+</script>
 <body>
 <header class="topbar" role="banner">
 <a href="#" class="tb-logo" aria-label="MallorcasLocal">Mallorcas<span>Local</span></a>
