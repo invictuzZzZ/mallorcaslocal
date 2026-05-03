@@ -542,5 +542,929 @@ function initBackdropClose(){['bkModal','jsModal'].forEach(id=>{const m=document
 function init(){const savedLang=STORE.get('lang');if(savedLang&&LANGS.includes(savedLang))lang=savedLang;else{const nav=(navigator.language||'en').slice(0,2);if(LANGS.includes(nav))lang=nav}const savedFavs=STORE.get('favs');if(Array.isArray(savedFavs))favs=savedFavs;const savedCart=STORE.get('cart');if(Array.isArray(savedCart))cart=savedCart.map(id=>{const v=V.find(x=>x.id===id);return v?{id:v.id,name:loc(v.name),price:pickStr(v.price),_pr:v._pr||0,paid:!!v.paid}:null}).filter(Boolean);document.documentElement.lang=lang;document.documentElement.dir=RTL.includes(lang)?'rtl':'ltr';renderLangBtns();renderCatBtns();renderFeatured();renderVenues();renderVisualGallery();renderCollections();renderPricing();renderPartners();renderJetSkiTours();applyI18n();updateFavBadge();renderCartDock();initSearch();initFavToggle();initSortBtns();initTheme();initJsSend();initBackdropClose();initReveals();const today=new Date().toISOString().split('T')[0];const fd=document.getElementById('fD');if(fd){fd.min=today;fd.value=today}const jd=document.getElementById('jsDate');if(jd){jd.min=today;jd.value=today}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 </script>
+  <!-- =========================================================
+MALLORCASLOCAL — BEST ENHANCEMENT PATCH
+Paste this block right before </body>
+========================================================= -->
+
+<style id="ml-enhancement-patch">
+/* ---------- Premium polish + mobile fixes ---------- */
+:root{
+  --tap:44px;
+  --glass:rgba(255,255,255,.055);
+  --glass2:rgba(255,255,255,.085);
+}
+
+html{
+  scroll-padding-top:76px;
+}
+
+body{
+  text-rendering:optimizeLegibility;
+  overscroll-behavior-y:none;
+}
+
+a,button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+img{
+  content-visibility:auto;
+}
+
+.tb-icon,
+.v-fav,
+.v-map,
+.lb-x,
+.mx,
+.detail-close,
+.search-clear{
+  min-width:var(--tap);
+  min-height:var(--tap);
+}
+
+.tb-icon{
+  width:38px;
+  height:38px;
+}
+
+.v-fav{
+  width:38px;
+  height:38px;
+}
+
+.v-map{
+  width:42px;
+  height:42px;
+}
+
+.search-input::placeholder,
+.fi input::placeholder,
+.fi textarea::placeholder{
+  color:var(--text3);
+}
+
+.hero-content{
+  animation:mlHeroIn .8s var(--ease2) both;
+}
+
+@keyframes mlHeroIn{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:160px;
+  background:linear-gradient(to top,var(--bg),transparent);
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero-content,
+.hero-scroll{
+  z-index:2;
+}
+
+.trust{
+  position:relative;
+  z-index:3;
+}
+
+.trust-item{
+  padding:4px 6px;
+}
+
+.cat-nav{
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.cat-inner{
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:16px;
+}
+
+.cat-btn{
+  scroll-snap-align:start;
+}
+
+.v-card{
+  isolation:isolate;
+  will-change:transform;
+  transform:translateZ(0);
+}
+
+.v-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(135deg,rgba(201,169,110,.14),transparent 36%,rgba(255,255,255,.035));
+  opacity:0;
+  transition:opacity var(--ease);
+  pointer-events:none;
+  z-index:1;
+}
+
+.v-card:hover::before{
+  opacity:1;
+}
+
+.v-img{
+  background:
+    linear-gradient(105deg,rgba(255,255,255,.025),rgba(255,255,255,.075),rgba(255,255,255,.025)),
+    var(--bg2);
+  background-size:220% 100%;
+  animation:mlSkeleton 1.6s linear infinite;
+}
+
+@keyframes mlSkeleton{
+  from{background-position:220% 0}
+  to{background-position:-220% 0}
+}
+
+.v-img img{
+  backface-visibility:hidden;
+  animation:mlImageIn .35s ease both;
+}
+
+@keyframes mlImageIn{
+  from{opacity:.32;filter:blur(8px)}
+  to{opacity:1;filter:none}
+}
+
+.v-top h3,
+.feat-info h3,
+.col-info h3,
+.p-card h4,
+.detail-body h2{
+  overflow-wrap:anywhere;
+}
+
+.v-img-overlay p{
+  -webkit-line-clamp:4;
+}
+
+.v-tag.warn{
+  background:rgba(239,68,68,.1);
+  color:#fca5a5;
+  border-color:rgba(239,68,68,.25);
+  font-weight:700;
+}
+
+.audit-note{
+  max-width:1200px;
+  margin:20px auto 0;
+  padding:0 clamp(16px,4vw,40px);
+}
+
+.audit-note-inner{
+  border:1px solid var(--line2);
+  background:linear-gradient(180deg,rgba(201,169,110,.07),rgba(255,255,255,.015));
+  border-radius:var(--r2);
+  padding:14px 16px;
+  color:var(--text2);
+  font-size:12.5px;
+  line-height:1.55;
+}
+
+.audit-note-inner strong{
+  color:var(--gold);
+}
+
+.activity-wrap{
+  max-height:220px;
+  overflow-y:auto;
+  border:1px solid var(--line2);
+  border-radius:10px;
+  padding:6px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.activity-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 9px;
+  border-radius:8px;
+  font-size:12px;
+  cursor:pointer;
+  background:transparent;
+  border:1px solid var(--line);
+  transition:all .2s ease;
+}
+
+.activity-option:hover{
+  background:var(--glass);
+}
+
+.activity-option.on{
+  background:var(--golddim);
+  border-color:rgba(201,169,110,.35);
+}
+
+.activity-option input{
+  accent-color:var(--gold);
+  width:16px;
+  height:16px;
+}
+
+.activity-option span:nth-child(2){
+  flex:1;
+}
+
+.activity-option strong{
+  color:var(--gold);
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.ml-invalid{
+  border-color:rgba(239,68,68,.8)!important;
+  box-shadow:0 0 0 3px rgba(239,68,68,.12)!important;
+}
+
+.detail-disclaimer{
+  font-size:11.5px;
+  color:var(--text2);
+  line-height:1.55;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.035);
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:16px;
+}
+
+.detail-disclaimer strong{
+  color:var(--gold);
+}
+
+.detail-panel{
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+
+@media(max-width:599px){
+  .detail-actions{
+    position:sticky;
+    bottom:0;
+    z-index:8;
+    padding-top:10px;
+    padding-bottom:calc(10px + var(--safe-bottom));
+    background:linear-gradient(to top,var(--bg2) 74%,transparent);
+  }
+
+  .wa-fab{
+    bottom:calc(82px + var(--safe-bottom));
+  }
+
+  .hero{
+    min-height:100dvh;
+  }
+}
+
+@media(max-width:420px){
+  .topbar{
+    padding-inline:10px;
+  }
+
+  .tb-logo{
+    font-size:16px;
+  }
+
+  .lb{
+    font-size:8.5px;
+    padding:3px 4px;
+    min-width:21px;
+  }
+
+  .hero h1{
+    font-size:clamp(36px,12vw,52px);
+  }
+
+  .v-acts{
+    gap:4px;
+  }
+
+  .v-wa,
+  .v-add{
+    font-size:10.5px;
+    padding:9px 7px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-content,
+  .v-img,
+  .v-img img{
+    animation:none!important;
+  }
+}
+</style>
+
+<script id="ml-enhancement-patch">
+(function(){
+  "use strict";
+
+  const PATCH_WA = window.WA || "34644075065";
+
+  function safeText(value){
+    return String(value == null ? "" : value).replace(/\s+/g," ").trim();
+  }
+
+  function encodeWA(text){
+    return encodeURIComponent(String(text || "").replace(/\n{3,}/g,"\n\n").trim());
+  }
+
+  function currentLang(){
+    return window.lang || document.documentElement.lang || "en";
+  }
+
+  function getLocal(value){
+    try{
+      if(!value) return "";
+      if(typeof value === "string") return value;
+      const l = currentLang();
+      return value[l] || value.en || Object.values(value)[0] || "";
+    }catch(e){
+      return "";
+    }
+  }
+
+  function formatDateSmart(iso){
+    if(!iso) return "";
+    try{
+      const d = new Date(iso + "T00:00:00");
+      return d.toLocaleDateString(currentLang()==="en" ? "en-GB" : currentLang(), {
+        day:"numeric",
+        month:"short",
+        year:"numeric"
+      });
+    }catch(e){
+      return iso;
+    }
+  }
+
+  function patchAuditNote(){
+    if(document.querySelector(".audit-note")) return;
+    const trust = document.querySelector(".trust");
+    if(!trust) return;
+
+    const note = document.createElement("div");
+    note.className = "audit-note";
+    note.innerHTML = `
+      <div class="audit-note-inner">
+        <strong>Smart booking:</strong>
+        prices are shown as “from”, “deposit” or “on request” where final availability depends on date, sea conditions, supplier, access rules or group size.
+      </div>
+    `;
+    trust.insertAdjacentElement("afterend", note);
+  }
+
+  function patchActivityWrapClass(){
+    const wrap = document.getElementById("fAWrap");
+    if(wrap){
+      wrap.classList.add("activity-wrap");
+      wrap.removeAttribute("style");
+    }
+  }
+
+  function hardenExternalLinks(){
+    document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+      const rel = new Set(String(a.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
+      rel.add("noopener");
+      rel.add("noreferrer");
+      a.setAttribute("rel", Array.from(rel).join(" "));
+    });
+  }
+
+  function hardenImages(){
+    document.querySelectorAll("img").forEach((img,index)=>{
+      if(!img.hasAttribute("decoding")) img.setAttribute("decoding","async");
+      if(index > 2 && !img.hasAttribute("loading")) img.setAttribute("loading","lazy");
+      if(index <= 2 && !img.hasAttribute("fetchpriority")) img.setAttribute("fetchpriority","high");
+
+      if(!img.dataset.mlErrPatch){
+        img.dataset.mlErrPatch = "1";
+        img.addEventListener("error",()=>{
+          img.style.opacity = ".45";
+          img.style.filter = "grayscale(.35)";
+          if(!img.alt) img.alt = "Image unavailable";
+        },{once:true});
+      }
+    });
+  }
+
+  function validateInput(input){
+    if(!input) return true;
+    const invalid = input.hasAttribute("required") && !safeText(input.value);
+    input.classList.toggle("ml-invalid", invalid);
+    return !invalid;
+  }
+
+  function bindValidation(){
+    document.querySelectorAll(".fi input,.fi textarea,.fi select").forEach(input=>{
+      if(input.dataset.mlValidationPatch) return;
+      input.dataset.mlValidationPatch = "1";
+      input.addEventListener("input",()=>validateInput(input));
+      input.addEventListener("blur",()=>validateInput(input));
+    });
+  }
+
+  function notify(message,type){
+    if(typeof window.toast === "function"){
+      window.toast(message,type);
+      return;
+    }
+    console.log(message);
+  }
+
+  function findVenue(id){
+    return Array.isArray(window.V) ? window.V.find(v=>v.id===id) : null;
+  }
+
+  function selectedActivityIds(){
+    return Array.from(document.querySelectorAll('input[name="fAct"]:checked'))
+      .map(input=>input.value)
+      .filter(Boolean);
+  }
+
+  function selectedActivitySummary(ids){
+    return ids.map(id=>{
+      const v = findVenue(id);
+      if(!v) return id;
+      const name = getLocal(v.name);
+      const price = getLocal(v.price);
+      return `${name}${price ? " — " + price : ""}`;
+    }).join(", ");
+  }
+
+  function patchDates(){
+    const today = new Date().toISOString().slice(0,10);
+    ["fD","fD2","jsDate"].forEach(id=>{
+      const input = document.getElementById(id);
+      if(!input) return;
+      input.min = today;
+      if((id === "fD" || id === "jsDate") && !input.value) input.value = today;
+    });
+
+    const fD = document.getElementById("fD");
+    const fD2 = document.getElementById("fD2");
+    if(fD && fD2 && !fD.dataset.mlDatePatch){
+      fD.dataset.mlDatePatch = "1";
+      fD.addEventListener("change",()=>{
+        fD2.min = fD.value || today;
+        if(fD2.value && fD2.value < fD.value) fD2.value = fD.value;
+      });
+    }
+  }
+
+  /* ---------- Override broken / weak functions safely ---------- */
+
+  window.waLink = function(v){
+    const lines = [
+      "Hi MallorcasLocal, I am interested in this experience:",
+      "",
+      "Experience: " + getLocal(v && v.name),
+      "Location: " + getLocal(v && v.loc),
+      "Price shown: " + getLocal(v && v.price),
+      "",
+      "Please confirm availability, final price, meeting point and the best option.",
+      "Source: MallorcasLocal"
+    ];
+
+    return "https://wa.me/" + PATCH_WA + "?text=" + encodeWA(lines.join("\n"));
+  };
+
+  window.populateActivitySelect = function(){
+    const wrap = document.getElementById("fAWrap");
+    if(!wrap || !Array.isArray(window.V)) return;
+
+    patchActivityWrapClass();
+
+    const inCart = Array.isArray(window.cart) ? window.cart.map(c=>c.id) : [];
+    const bookable = window.V.filter(v => v.paid && !v.bcm && !v.bp);
+
+    wrap.innerHTML = bookable.map(v=>{
+      const checked = inCart.includes(v.id) ? "checked" : "";
+      const price = Number(v._pr || 0);
+      return `
+        <label class="activity-option ${checked ? "on" : ""}">
+          <input type="checkbox" name="fAct" value="${v.id}" data-pr="${price}" ${checked} onchange="updateBookingTotal()">
+          <span>${safeText(getLocal(v.name))}</span>
+          <strong>${price > 0 ? "from " + price + " EUR" : "on request"}</strong>
+        </label>
+      `;
+    }).join("");
+
+    window.updateBookingTotal();
+  };
+
+  window.updateBookingTotal = function(){
+    const checks = document.querySelectorAll('input[name="fAct"]:checked');
+    let total = 0;
+
+    checks.forEach(c=>{
+      total += Number(c.dataset.pr || 0);
+    });
+
+    document.querySelectorAll(".activity-option").forEach(label=>{
+      const input = label.querySelector("input");
+      label.classList.toggle("on", !!input && input.checked);
+    });
+
+    const el = document.getElementById("fATotal");
+    if(el){
+      if(!checks.length) el.textContent = "";
+      else if(total > 0) el.textContent = "~" + total + " EUR estimated from-price";
+      else el.textContent = "On request";
+    }
+  };
+
+  window.openBooking = function(vid){
+    patchActivityWrapClass();
+    window.populateActivitySelect();
+
+    if(vid){
+      const input = document.querySelector('input[name="fAct"][value="' + CSS.escape(vid) + '"]');
+      if(input){
+        input.checked = true;
+        window.updateBookingTotal();
+      }
+    }
+
+    if(!vid && Array.isArray(window.cart) && window.cart.length){
+      window.cart.forEach(item=>{
+        const input = document.querySelector('input[name="fAct"][value="' + CSS.escape(item.id) + '"]');
+        if(input) input.checked = true;
+      });
+      window.updateBookingTotal();
+    }
+
+    if(typeof window.openModal === "function"){
+      window.openModal("bkModal");
+    }else{
+      document.getElementById("bkModal")?.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    setTimeout(()=>document.getElementById("fN")?.focus(),100);
+  };
+
+  window.submitBooking = function(e){
+    e.preventDefault();
+
+    const nameInput = document.getElementById("fN");
+    const dateInput = document.getElementById("fD");
+    const paxInput = document.getElementById("fP");
+
+    const name = safeText(nameInput && nameInput.value);
+    const dateIn = dateInput && dateInput.value;
+    const dateOut = document.getElementById("fD2")?.value || "";
+    const pax = paxInput?.value || "2";
+    const budget = safeText(document.getElementById("fBudget")?.value);
+    const notes = safeText(document.getElementById("fNo")?.value);
+    const ids = selectedActivityIds();
+
+    let ok = true;
+    if(!validateInput(nameInput)) ok = false;
+    if(!validateInput(dateInput)) ok = false;
+    if(!ids.length){
+      ok = false;
+      notify("Please choose at least one activity","err");
+    }
+
+    if(!ok){
+      const firstInvalid = document.querySelector(".ml-invalid");
+      firstInvalid?.focus();
+      return;
+    }
+
+    const total = ids.reduce((sum,id)=>{
+      const v = findVenue(id);
+      return sum + Number(v && v._pr || 0);
+    },0);
+
+    const lines = [
+      "Hi MallorcasLocal, I want to make a booking:",
+      "",
+      "Name: " + name,
+      "Activities: " + selectedActivitySummary(ids),
+      "Date: " + formatDateSmart(dateIn) + (dateOut ? " to " + formatDateSmart(dateOut) : ""),
+      "Guests: " + pax,
+      total > 0 ? "Estimated from-price total: ~" + total + " EUR" : "",
+      budget ? "Budget: ~" + budget + " EUR" : "",
+      notes ? "Notes: " + notes : "",
+      "",
+      "Please confirm availability, final price, access or transport details and the best option.",
+      "Source: MallorcasLocal quick form"
+    ].filter(Boolean);
+
+    window.open("https://wa.me/" + PATCH_WA + "?text=" + encodeWA(lines.join("\n")), "_blank", "noopener,noreferrer");
+
+    notify("Opening WhatsApp","success");
+
+    if(typeof window.closeModal === "function") window.closeModal("bkModal");
+  };
+
+  window.jsSendHandler = function(){
+    const nameInput = document.getElementById("jsName");
+    const phoneInput = document.getElementById("jsPhone");
+    const pickupInput = document.getElementById("jsPickup");
+    const dateInput = document.getElementById("jsDate");
+    const timeInput = document.getElementById("jsTime");
+
+    const fields = [nameInput, phoneInput, pickupInput, dateInput, timeInput];
+    const valid = fields.every(validateInput);
+
+    if(!valid){
+      notify("Complete required fields","err");
+      fields.find(f=>f && f.classList.contains("ml-invalid"))?.focus();
+      return;
+    }
+
+    const tour = Array.isArray(window.jetSkiTours)
+      ? window.jetSkiTours.find(x=>x.id === window.selTour) || window.jetSkiTours[0]
+      : null;
+
+    const lines = [
+      "Hi MallorcasLocal, I want to book a Jet Ski tour:",
+      "",
+      "Tour: " + (tour ? `${tour.name} (${tour.dur}) — from ${tour.price} EUR` : "Jet Ski Tour"),
+      "Name: " + safeText(nameInput.value),
+      "Phone: " + safeText(phoneInput.value),
+      "Date/time: " + formatDateSmart(dateInput.value) + " " + safeText(timeInput.value),
+      "Guests: " + safeText(document.getElementById("jsPax")?.value || "2"),
+      "Jet skis: " + safeText(document.getElementById("jsSkis")?.value || "1"),
+      "Hotel / pickup area: " + safeText(pickupInput.value),
+      safeText(document.getElementById("jsNotes")?.value) ? "Notes: " + safeText(document.getElementById("jsNotes").value) : "",
+      "",
+      "Please confirm availability, exact departure point, pickup details and final price.",
+      "Source: MallorcasLocal Jet Ski form"
+    ].filter(Boolean);
+
+    window.open("https://wa.me/" + PATCH_WA + "?text=" + encodeWA(lines.join("\n")), "_blank", "noopener,noreferrer");
+
+    notify("Opening WhatsApp","success");
+
+    if(typeof window.closeModal === "function") window.closeModal("jsModal");
+  };
+
+  window.openDetail = function(id){
+    const v = findVenue(id);
+    if(!v) return;
+
+    const nm = getLocal(v.name);
+    const lc = getLocal(v.loc);
+    const pr = getLocal(v.price);
+    const desc = getLocal(v.desc);
+    const tags = getLocal(v.tags) || [];
+    const bTxt = getLocal(v.bTxt);
+    const bClass = v.badge === "premium" ? "b-premium" : v.badge === "season" ? "b-season" : "b-open";
+
+    const disclaimer = v.disclaimer
+      ? `<div class="detail-disclaimer"><strong>Note:</strong> ${safeText(v.disclaimer)}</div>`
+      : "";
+
+    const gallery = v.gallery && v.gallery.length > 1
+      ? `<div class="detail-gallery">${
+          v.gallery.map((g,i)=>`
+            <img src="${g.includes("cloudinary") ? g.replace("/upload/","/upload/w_120,h_120,c_fill,q_auto,f_auto/") : g}"
+                 alt=""
+                 loading="lazy"
+                 onclick="event.stopPropagation();lbOpen(V.find(x=>x.id==='${v.id}').gallery,${i})">
+          `).join("")
+        }</div>`
+      : "";
+
+    let actions = "";
+    if(v.bcm){
+      actions = `<a class="btn-gold" href="${window.BCM_URL}" target="_blank" rel="noopener noreferrer">Buy ticket</a>`;
+    }else if(v.bp){
+      actions = `<a class="btn-gold" href="${window.BP_URL}" target="_blank" rel="noopener noreferrer">Buy ticket</a>`;
+    }else if(v.jetski){
+      actions = `<button class="btn-gold" type="button" onclick="closeDetail();openJetSki(event)">Book</button>`;
+    }else if(v.paid){
+      actions = `<a class="btn-gold" href="${window.waLink(v)}" target="_blank" rel="noopener noreferrer">Book via WhatsApp</a>`;
+    }else{
+      actions = `<a class="btn-gold" href="${window.waLink(v)}" target="_blank" rel="noopener noreferrer">Ask local tips</a>`;
+    }
+
+    const inCart = Array.isArray(window.cart) && window.cart.some(c=>c.id === v.id);
+
+    actions += `<button class="btn-ghost" type="button" onclick="toggleCart('${v.id}',event)">${inCart ? "In plan" : "Add to plan"}</button>`;
+
+    const panel = document.getElementById("detailPanel");
+    if(!panel) return;
+
+    panel.innerHTML = `
+      <div class="detail-hero">
+        <img src="${v.img}" alt="${safeText(nm)}" loading="eager" decoding="async">
+        <button class="detail-close" type="button" onclick="closeDetail()" aria-label="Close">×</button>
+      </div>
+      <div class="detail-body">
+        <span class="detail-badge ${bClass}">${safeText(bTxt)}</span>
+        <h2>${safeText(nm)}</h2>
+        <div class="dl">${safeText(lc)}</div>
+        <div class="detail-price">${safeText(pr)}</div>
+        <p class="detail-desc">${safeText(desc)}</p>
+        ${disclaimer}
+        ${gallery}
+        <div class="detail-tags">
+          ${Array.isArray(tags) ? tags.map(tg=>`<span>${safeText(tg)}</span>`).join("") : ""}
+        </div>
+        <div class="detail-actions">${actions}</div>
+      </div>
+    `;
+
+    const bg = document.getElementById("detailBg");
+    bg.classList.add("show");
+    document.body.style.overflow = "hidden";
+
+    setTimeout(()=>{
+      panel.setAttribute("tabindex","-1");
+      panel.focus({preventScroll:true});
+    },80);
+
+    hardenExternalLinks();
+    hardenImages();
+  };
+
+  window.closeDetail = function(){
+    document.getElementById("detailBg")?.classList.remove("show");
+    document.body.style.overflow = "";
+  };
+
+  window.sendItinerary = function(){
+    if(!Array.isArray(window.cart) || !window.cart.length){
+      window.openBooking();
+      return;
+    }
+
+    const total = window.cart.reduce((sum,item)=>sum + Number(item._pr || 0),0);
+    const items = window.cart.map(item=>`${item.name} (${item.price})`).join(", ");
+
+    const lines = [
+      "Hi MallorcasLocal, I want help planning this itinerary:",
+      "",
+      "Selected experiences: " + items,
+      total > 0 ? "Estimated from-price total: ~" + total + " EUR" : "",
+      "",
+      "Please suggest the best order, timing, availability and transport/access details.",
+      "Source: MallorcasLocal itinerary dock"
+    ].filter(Boolean);
+
+    window.open("https://wa.me/" + PATCH_WA + "?text=" + encodeWA(lines.join("\n")), "_blank", "noopener,noreferrer");
+    notify("Opening WhatsApp","success");
+  };
+
+  function patchCartButton(){
+    const btn = document.querySelector(".cart-dock-btn");
+    if(btn){
+      btn.setAttribute("onclick","sendItinerary()");
+      btn.textContent = btn.textContent || "Send plan";
+    }
+  }
+
+  function patchJetSkiButtons(){
+    document.querySelectorAll(".v-card").forEach(card=>{
+      const id = card.dataset.id;
+      const v = findVenue(id);
+      if(!v || !v.jetski) return;
+
+      const actions = card.querySelector(".v-acts");
+      if(!actions) return;
+
+      const old = actions.querySelector(".v-wa");
+      if(!old) return;
+
+      if(old.tagName.toLowerCase() !== "button"){
+        const btn = document.createElement("button");
+        btn.className = old.className;
+        btn.type = "button";
+        btn.innerHTML = old.innerHTML;
+        btn.onclick = function(event){
+          event.stopPropagation();
+          window.openJetSki(event);
+        };
+        old.replaceWith(btn);
+      }
+    });
+  }
+
+  function patchKeyboardCards(){
+    document.querySelectorAll(".v-card[data-id]").forEach(card=>{
+      if(card.dataset.mlKeyboardPatch) return;
+      card.dataset.mlKeyboardPatch = "1";
+      card.setAttribute("tabindex","0");
+      card.addEventListener("keydown",e=>{
+        if(e.key === "Enter" || e.key === " "){
+          if(e.target.closest("a,button,input")) return;
+          e.preventDefault();
+          window.openDetail(card.dataset.id);
+        }
+      });
+    });
+  }
+
+  function patchSearchEsc(){
+    const input = document.getElementById("searchInput");
+    const clear = document.getElementById("searchClear");
+    if(!input || input.dataset.mlEscPatch) return;
+
+    input.dataset.mlEscPatch = "1";
+    input.addEventListener("keydown",e=>{
+      if(e.key === "Escape"){
+        input.value = "";
+        window.query = "";
+        clear?.classList.remove("show");
+        if(typeof window.renderVenues === "function") window.renderVenues();
+      }
+    });
+  }
+
+  function patchLightboxTouch(){
+    const lb = document.getElementById("lbBg");
+    if(!lb || lb.dataset.mlTouchPatch) return;
+    lb.dataset.mlTouchPatch = "1";
+
+    let startX = 0;
+    lb.addEventListener("touchstart",e=>{
+      startX = e.changedTouches[0].clientX;
+    },{passive:true});
+
+    lb.addEventListener("touchend",e=>{
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx) > 45 && typeof window.lbGo === "function"){
+        window.lbGo(dx > 0 ? -1 : 1);
+      }
+    },{passive:true});
+  }
+
+  function observeDynamicCards(){
+    if(window.__mlDynamicObserver) return;
+    window.__mlDynamicObserver = true;
+
+    const mo = new MutationObserver(()=>{
+      patchJetSkiButtons();
+      patchKeyboardCards();
+      hardenExternalLinks();
+      hardenImages();
+    });
+
+    mo.observe(document.body,{childList:true,subtree:true});
+  }
+
+  function runPatch(){
+    patchAuditNote();
+    patchActivityWrapClass();
+    patchDates();
+    patchCartButton();
+    patchSearchEsc();
+    patchLightboxTouch();
+    patchJetSkiButtons();
+    patchKeyboardCards();
+    hardenExternalLinks();
+    hardenImages();
+    bindValidation();
+    observeDynamicCards();
+
+    const jsSend = document.getElementById("jsSend");
+    if(jsSend && !jsSend.dataset.mlPatchedSend){
+      jsSend.dataset.mlPatchedSend = "1";
+      jsSend.addEventListener("click",window.jsSendHandler);
+    }
+
+    if(typeof window.renderVenues === "function"){
+      const originalRenderVenues = window.renderVenues;
+      if(!originalRenderVenues.__mlPatched){
+        const patched = function(){
+          originalRenderVenues.apply(this,arguments);
+          setTimeout(()=>{
+            patchJetSkiButtons();
+            patchKeyboardCards();
+            hardenExternalLinks();
+            hardenImages();
+          },0);
+        };
+        patched.__mlPatched = true;
+        window.renderVenues = patched;
+      }
+    }
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded",runPatch,{once:true});
+  }else{
+    runPatch();
+  }
+})();
+</script>
 </body>
 </html>
